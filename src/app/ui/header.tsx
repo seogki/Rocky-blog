@@ -21,7 +21,7 @@ export default function MyHeader() {
   return (
     <>
       <header className="bg-white h-16 w-full shadow-lg px-6 py-4 sticky top-0 z-10">
-        <div className="max-w-screen-2xl flex justify-start items-center m-auto">
+        <div className="max-w-screen-2xl flex justify-start items-center">
           {isBwSm && <MdMenu className="text-2xl mr-2" />}
           <h1 className="font-sans text-2xl font-bold">
             {" "}
@@ -29,7 +29,7 @@ export default function MyHeader() {
           </h1>
           {isAbLg && <HeaderTabs />}
           <MdSearch className="text-2xl mr-2 ml-auto lg:ml-24" />
-          {isBelowLg && <MdMoreVert className="text-2xl" />}
+          {isBwLg && <MdMoreVert className="text-2xl" />}
         </div>
       </header>
     </>

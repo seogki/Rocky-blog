@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="w-full h-screen flex flex-row flex-wrap justify-between">
           <MyHeader />
-          <main className="w-full h-full max-w-screen-2xl px-6 mx-auto mt-4 mb-12">
+          <main className="w-full h-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
             {children}
           </main>
           <MyFooter />
