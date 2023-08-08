@@ -19,6 +19,7 @@
         "name": "next"
       }
     ],
+    "types": ["react-responsive"],
     "paths": {
       "@/*": ["./src/*"]
     }
