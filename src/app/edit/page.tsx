@@ -11,12 +11,12 @@ const EditorBlock = dynamic(() => import("@/app/components/Editor"), {
 const Edit: NextPage = () => {
   const [data, setData] = useState<OutputData>();
   return (
-    <div className="w-full h-full mx-auto grid grid-cols-1 md:grid-cols-3">
-      <section></section>
+    <div className="w-full h-full mx-auto">
+      <input
+        placeholder="제목"
+        className="text-state-700 italic bold text-2xl"
+      />
       <EditorBlock data={data} onChange={setData} holder="editorjs-container" />
-      <aside>
-        <button>저장</button>
-      </aside>
     </div>
   );
 };

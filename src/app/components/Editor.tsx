@@ -20,6 +20,7 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
       const editor = new EditorJS({
         holder: holder,
         tools: EDITOR_TOOLS,
+        placeholder: "Please type anything...",
         data,
         async onChange(api, event) {
           const data = await api.saver.save();
@@ -37,7 +38,7 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
     };
   }, []);
 
-  return <div id={holder} className="prose max-w-full h-full" />;
+  return <div id={holder} className="prose max-w-full" />;
 };
 
 export default memo(EditorBlock);
