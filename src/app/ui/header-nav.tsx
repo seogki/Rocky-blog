@@ -1,10 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
 export default function HeaderNav() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const itemList = ["CSS", "JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "ETC"];
+
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
+
   return (
     <>
       <MdMenu
@@ -17,7 +25,7 @@ export default function HeaderNav() {
         className="w-full h-full fixed top-0 left-0 overflow-hidden"
       >
         <Transition.Child
-          className="fixed top-0 left-0 z-30 overflow-hidden"
+          className="w-full h-full fixed top-0 left-0 z-30 overflow-hidden"
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -25,10 +33,10 @@ export default function HeaderNav() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="h-screen w-screen bg-slate-700/50 overflow-hidden"></div>
+          <div className="w-full h-full bg-slate-700/50 overflow-hidden"></div>
         </Transition.Child>
         <Transition.Child
-          className="w-full fixed top-0 left-0 z-40 overflow-hidden"
+          className="w-full h-full fixed top-0 left-0 z-40 overflow-hidden"
           enter="transition ease-in-out duration-300 transform"
           enterFrom="-translate-x-full"
           enterTo="translate-x-0"
