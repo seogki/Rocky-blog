@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import MyHeader from "./ui/header";
 import MyFooter from "./ui/footer";
 import "@/style/globals.scss";
+import { ThemeProvider } from "./theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,15 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="w-full h-screen flex flex-row flex-wrap justify-between">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <MyHeader />
-          <main className="w-full h-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
+          <main className="w-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
             {children}
           </main>
           <MyFooter />
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,16 +1,18 @@
 # Rocky Blog
 
-## Personal blog based on Next.js for better learning
+## Personal blog based on Next.js for better learning and understanding
 
 ### 1. Used Stack 📝
 
 - next.js 13
 - tailwindcss
-- react-icon (mdi)
+- react-icon
 - typescript
-- react-testing-library (for Unit Test)
+- react-testing-library (for unit test)
+- headlessui/react (for simple transition)
+- next-theme (for dark mode)
 - scss
-- editorjs (for Editing Blog)
+- editorjs (for editing contents)
 
 ### 2. My Goal 🔥
 
@@ -21,4 +23,5 @@
 - optimize search engine
 - unit test as possible
 - e2e test maybe?
-- ci/cd deployment to aws using github action / aws s3, aws codedeploy, aws ec2 / docker with let's encrpyt https
+- ci/cd deployment to aws using github action / aws s3, aws codedeploy, aws ec2 maybe?
+- docker with let's encrypt https

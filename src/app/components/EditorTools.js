@@ -15,13 +15,13 @@ export const EDITOR_TOOLS = {
     class: List,
     inlineToolbar: true
   },
-  bulletList: {
-    class: List,
-    inlineToolbar: true,
-    config: {
-      defaultStyle: "unordered"
-    }
-  },
+  // bulletList: {
+  //   class: List,
+  //   inlineToolbar: true,
+  //   config: {
+  //     defaultStyle: "unordered"
+  //   }
+  // },
   raw: RawTool,
   embed: Embed,
   delimiter: Delimiter
