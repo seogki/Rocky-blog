@@ -9,7 +9,7 @@ const Home: NextPage = () => {
         {list.map((item, i) => (
           <div
             key={i}
-            className="shadow border-2 dark:bg-slate-500 rounded h-56"
+            className="shadow border-2 dark:border-gray-600 rounded h-56"
           >
             <div className="bg-gray-500 h-32 flex justify-center items-center">
               {item}

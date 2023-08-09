@@ -18,7 +18,7 @@ export default function MyHeader() {
           <div className="hidden lg:block lg:ml-auto">
             <HeaderTabs />
           </div>
-          <MdSearch className="text-2xl mr-3 ml-auto lg:ml-10" />
+          <MdSearch className="text-2xl mr-4 ml-auto lg:ml-10" />
           <ThemeModifier />
           <div className="block lg:hidden">
             <MdMoreVert className="text-2xl" />
