@@ -4,14 +4,18 @@ import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
 export default function HeaderNav() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const itemList = ["CSS", "JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "ETC"];
+  const itemList = ["JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "CSS", "ETC"];
 
   useEffect(() => {
-    document.body.classList.add("overflow-hidden");
+    if (isDrawerOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
-  }, []);
+  }, [isDrawerOpen]);
 
   return (
     <>

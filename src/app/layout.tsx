@@ -20,11 +20,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <MyHeader />
-          <main className="w-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
-            {children}
-          </main>
-          <MyFooter />
+          <div className="w-full h-full">
+            <MyHeader />
+            <main className="w-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
+              {children}
+            </main>
+            <MyFooter />
+          </div>
         </ThemeProvider>
       </body>
     </html>
