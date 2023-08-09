@@ -21,4 +21,4 @@
 - optimize search engine
 - unit test as possible
 - e2e test maybe?
-- ci/cd deployment to aws using github action / aws s3, aws codedeploy, aws ec2 / docker with let's encrpyt https
+- ci/cd deployment to aws using github action / aws s3, aws codedeploy, aws ec2 / docker with let's encrypt https
