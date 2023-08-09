@@ -2,11 +2,12 @@ import { MdSearch, MdMoreVert } from "react-icons/md";
 import HeaderTabs from "./header-tabs";
 import Link from "next/link";
 import HeaderNav from "./header-nav";
+import ThemeModifier from "../components/theme-modifier";
 
 export default function MyHeader() {
   return (
     <>
-      <header className="bg-white h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10">
+      <header className="bg-white dark:bg-slate-900 h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10">
         <div className="max-w-screen-xl flex justify-start items-center mx-auto">
           <div className="sm:hidden">
             <HeaderNav />
@@ -17,7 +18,8 @@ export default function MyHeader() {
           <div className="hidden lg:block lg:ml-auto">
             <HeaderTabs />
           </div>
-          <MdSearch className="text-2xl mr-2 ml-auto lg:ml-24" />
+          <MdSearch className="text-2xl mr-3 ml-auto lg:ml-10" />
+          <ThemeModifier />
           <div className="block lg:hidden">
             <MdMoreVert className="text-2xl" />
           </div>

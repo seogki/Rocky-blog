@@ -10,12 +10,9 @@ type Props = {
 };
 
 const EditorBlock = ({ data, onChange, holder }: Props) => {
-  //add a reference to editor
   const ref = useRef<EditorJS>();
 
-  //initialize editorjs
   useEffect(() => {
-    //initialize editor if we don't have a reference
     if (!ref.current) {
       const editor = new EditorJS({
         holder: holder,
@@ -30,12 +27,12 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
       ref.current = editor;
     }
 
-    //add a return function handle cleanup
     return () => {
       if (ref.current && ref.current.destroy) {
         ref.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div id={holder} className="prose max-w-full" />;

@@ -7,8 +7,11 @@ const Home: NextPage = () => {
     <>
       <div className="w-full gap-3 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
         {list.map((item, i) => (
-          <div key={i} className="card shadow border-2 rounded h-56">
-            <div className="bg-gray-500 text-white h-32 flex justify-center items-center">
+          <div
+            key={i}
+            className="shadow border-2 dark:bg-slate-500 rounded h-56"
+          >
+            <div className="bg-gray-500 h-32 flex justify-center items-center">
               {item}
             </div>
             <div className="text-lg pl-2">titles</div>

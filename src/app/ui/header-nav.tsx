@@ -4,6 +4,7 @@ import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
 export default function HeaderNav() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const itemList = ["CSS", "JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "ETC"];
   return (
     <>
       <MdMenu
@@ -24,7 +25,7 @@ export default function HeaderNav() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="h-screen w-screen bg-slate-700/50"></div>
+          <div className="h-screen w-screen bg-slate-700/50 overflow-hidden"></div>
         </Transition.Child>
         <Transition.Child
           className="w-full fixed top-0 left-0 z-40 overflow-hidden"
@@ -37,9 +38,17 @@ export default function HeaderNav() {
           onClick={() => setIsDrawerOpen((isDrawerOpen) => !isDrawerOpen)}
         >
           <nav
-            className="h-screen w-2/3 bg-white overflow-auto"
+            className="h-screen w-2/3 bg-white dark:bg-slate-900 overflow-auto"
             onClick={(e) => e.stopPropagation()}
-          ></nav>
+          >
+            <ul>
+              {itemList.map((item) => (
+                <li key={item} className="text-base py-4 px-4">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </nav>
         </Transition.Child>
       </Transition>
     </>
