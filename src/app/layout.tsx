@@ -4,6 +4,7 @@ import MyHeader from "./ui/header";
 import MyFooter from "./ui/footer";
 import "@/style/globals.scss";
 import { ThemeProvider } from "./theme-provider";
+import { Providers } from "./redux/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,13 +21,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="w-full h-full">
-            <MyHeader />
-            <main className="w-full max-w-screen-xl px-4 mx-auto mt-4 mb-12">
-              {children}
-            </main>
-            <MyFooter />
-          </div>
+          <Providers>
+            <div className="min-w-screen min-h-screen flex flex-col overflow-y-auto">
+              <MyHeader />
+              <div className="w-full h-full flex-auto mx-auto mt-4">
+                <main className="w-full px-4 h-[calc(100%-4rem)] min-h-[calc(100%-4rem)] max-w-screen-xl mx-auto">
+                  {children}
+                </main>
+              </div>
+              <MyFooter />
+            </div>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

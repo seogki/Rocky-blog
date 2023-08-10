@@ -8,6 +8,7 @@
 - tailwindcss
 - react-icon
 - typescript
+- redux-tool-kit (for state management)
 - react-testing-library (for unit test)
 - headlessui/react (for simple transition)
 - next-theme (for dark mode)

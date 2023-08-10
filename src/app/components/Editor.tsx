@@ -1,8 +1,9 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_TOOLS } from "./EditorTools";
 import { useTheme } from "next-themes";
 import styles from "./Editor.module.scss";
+import { useMount } from "../hooks/useMount";
 //props
 type Props = {
   data?: OutputData;
@@ -12,6 +13,7 @@ type Props = {
 
 const EditorBlock = ({ data, onChange, holder }: Props) => {
   const ref = useRef<EditorJS>();
+  const { isMount } = useMount();
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
     <div
       id={holder}
       className={`prose max-w-full dark:prose-invert ${
-        theme === "dark" && styles["dark-mode"]
+        isMount && theme === "dark" && styles["dark-mode"]
       }`}
     />
   );

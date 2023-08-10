@@ -3,3 +3,7 @@
   --color-bg-main: #1c1e24;
   --color-text-main: #737886;
 }
+
+.dark-mode::v-deep .ce-toolbar__plus {
+  color: white;
+}

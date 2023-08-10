@@ -1,46 +1,35 @@
 "use client";
 
 import { Transition } from "@headlessui/react";
-// import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdMoreVert } from "react-icons/md";
 import MenuTabs from "../components/menu-tabs";
+import useToggleScrollbar from "../hooks/useToggleScrollbar";
+import {
+  closeDrawer,
+  closeMore,
+  openMore
+} from "../redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 export default function HeaderMore() {
-  const [isMore, setIsMore] = useState(false);
-  //   const router = useRouter();
-  useEffect(() => {
-    if (isMore) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [isMore]);
-
-  //   useEffect(() => {
-  //     const handleRouteChange = (url: string, { shallow }: { shallow: any }) => {
-  //       console.log(
-  //         `App is changing to ${url} ${
-  //           shallow ? "with" : "without"
-  //         } shallow routing`
-  //       );
-  //     };
-
-  //     router.events.on("routeChangeStart", handleRouteChange);
-
-  //     return () => {
-  //       router.events.off("routeChangeStart", handleRouteChange);
-  //     };
-  //   }, [router]);
+  const { isMore, isDrawerOpen } = useAppSelector(
+    ({ headerReducer }) => headerReducer
+  );
+  const dispatch = useAppDispatch();
+  useToggleScrollbar(isMore);
 
   return (
     <>
       <MdMoreVert
         className="text-2xl"
-        onClick={() => setIsMore((isMore) => !isMore)}
+        onClick={() => {
+          if (isDrawerOpen) dispatch(closeDrawer());
+          setTimeout(() => {
+            if (isMore) dispatch(closeMore());
+            else dispatch(openMore());
+          }, 100);
+        }}
       />
       <Transition
         show={isMore}

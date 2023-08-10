@@ -1,15 +1,11 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { MdDarkMode } from "react-icons/md";
+import { useMount } from "../hooks/useMount";
 export default function ThemeModifier() {
   const { theme, setTheme } = useTheme();
-  const [isMount, setIsMount] = useState(false);
-
-  useEffect(() => {
-    setIsMount(true);
-  }, []);
+  const { isMount } = useMount();
 
   if (!isMount)
     return (

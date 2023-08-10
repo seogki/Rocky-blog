@@ -2,26 +2,31 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {
+  closeDrawer,
+  closeMore,
+  openDrawer
+} from "../redux/features/headerSlice";
+import useToggleScrollbar from "../hooks/useToggleScrollbar";
 export default function HeaderNav() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { isMore, isDrawerOpen } = useAppSelector(
+    ({ headerReducer }) => headerReducer
+  );
+  const dispatch = useAppDispatch();
+  useToggleScrollbar(isDrawerOpen);
   const itemList = ["JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "CSS", "ETC"];
-
-  useEffect(() => {
-    if (isDrawerOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [isDrawerOpen]);
 
   return (
     <>
       <MdMenu
         className="text-2xl mr-2"
-        onClick={() => setIsDrawerOpen((isDrawerOpen) => !isDrawerOpen)}
+        onClick={() => {
+          if (isMore) dispatch(closeMore());
+          setTimeout(() => {
+            dispatch(openDrawer());
+          }, 100);
+        }}
       />
 
       <Transition
@@ -47,10 +52,10 @@ export default function HeaderNav() {
           leave="transition ease-in-out duration-300 transform"
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
-          onClick={() => setIsDrawerOpen((isDrawerOpen) => !isDrawerOpen)}
+          onClick={() => dispatch(closeDrawer())}
         >
           <nav
-            className="h-screen w-2/3 bg-white dark:bg-slate-900 overflow-auto"
+            className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <ul>
