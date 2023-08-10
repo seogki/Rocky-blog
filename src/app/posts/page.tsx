@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 
 const Posts: NextPage = () => {
-  return <>posts</>;
+  return <div className="px-4">posts</div>;
 };
 
 export default Posts;

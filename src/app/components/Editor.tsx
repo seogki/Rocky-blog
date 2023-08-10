@@ -1,7 +1,9 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_TOOLS } from "./EditorTools";
-
+import { useTheme } from "next-themes";
+import styles from "./Editor.module.scss";
+import { useMount } from "../hooks/useMount";
 //props
 type Props = {
   data?: OutputData;
@@ -11,6 +13,8 @@ type Props = {
 
 const EditorBlock = ({ data, onChange, holder }: Props) => {
   const ref = useRef<EditorJS>();
+  const { isMount } = useMount();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (!ref.current) {
@@ -35,7 +39,14 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div id={holder} className="prose max-w-full" />;
+  return (
+    <div
+      id={holder}
+      className={`prose max-w-full dark:prose-invert ${
+        isMount && theme === "dark" && styles["dark-mode"]
+      }`}
+    />
+  );
 };
 
 export default memo(EditorBlock);
