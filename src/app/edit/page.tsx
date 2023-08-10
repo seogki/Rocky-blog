@@ -12,13 +12,13 @@ const EditorBlock = dynamic(() => import("@/app/components/Editor"), {
 const Edit: NextPage = () => {
   const [data, setData] = useState<OutputData>();
   return (
-    <div className="w-full h-full max-w-screen-sm sm:px-4 mx-auto flex flex-col">
+    <div className="w-full h-full max-w-screen-sm mx-auto flex flex-col px-4">
       <input
         placeholder="title..."
-        className="w-full text-slate-700 basis-8 sm:basis-16 mt-4 dark:text-white placeholder:italic bold border-0 outline-0 focus:outline-0 text-xl bg-transparent"
+        className="w-full text-slate-700 basis-8 mt-4 dark:text-white placeholder:italic bold border-0 outline-0 focus:outline-0 text-xl bg-transparent"
       />
       <div className="w-full border-b-2 my-2 border-gray-500"></div>
-      <div className="basis-full h-full w-full">
+      <div className="flex-auto h-full w-full">
         <EditorBlock
           data={data}
           onChange={setData}

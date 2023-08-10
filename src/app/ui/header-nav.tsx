@@ -23,9 +23,7 @@ export default function HeaderNav() {
         className="text-2xl mr-2"
         onClick={() => {
           if (isMore) dispatch(closeMore());
-          setTimeout(() => {
-            dispatch(openDrawer());
-          }, 100);
+          setTimeout(() => dispatch(openDrawer()), 50);
         }}
       />
 

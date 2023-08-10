@@ -5,7 +5,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-full gap-3 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
+      <div className="w-full px-4 gap-3 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
         {list.map((item, i) => (
           <div
             key={i}

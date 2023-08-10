@@ -1,7 +1,6 @@
 "use client";
 
 import { Transition } from "@headlessui/react";
-import { useEffect, useState } from "react";
 import { MdMoreVert } from "react-icons/md";
 import MenuTabs from "../components/menu-tabs";
 import useToggleScrollbar from "../hooks/useToggleScrollbar";
@@ -26,9 +25,12 @@ export default function HeaderMore() {
         onClick={() => {
           if (isDrawerOpen) dispatch(closeDrawer());
           setTimeout(() => {
-            if (isMore) dispatch(closeMore());
-            else dispatch(openMore());
-          }, 100);
+            if (isMore) {
+              dispatch(closeMore());
+            } else {
+              dispatch(openMore());
+            }
+          }, 50);
         }}
       />
       <Transition

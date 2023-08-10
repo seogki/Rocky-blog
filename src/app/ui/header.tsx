@@ -5,10 +5,12 @@ import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import ThemeModifier from "../components/theme-modifier";
 
-export default function MyHeader() {
+export default function MyHeader({ className }: { className?: string }) {
   return (
     <>
-      <header className="bg-white dark:bg-zinc-800 h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10">
+      <header
+        className={`${className} bg-white dark:bg-zinc-800 h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10`}
+      >
         <div className="max-w-screen-xl flex justify-start items-center mx-auto">
           <div className="sm:hidden">
             <HeaderNav />

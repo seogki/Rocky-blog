@@ -22,14 +22,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>
-            <div className="min-w-screen min-h-screen flex flex-col overflow-y-auto">
-              <MyHeader />
-              <div className="w-full h-full flex-auto mx-auto mt-4">
-                <main className="w-full px-4 h-[calc(100%-4rem)] min-h-[calc(100%-4rem)] max-w-screen-xl mx-auto">
+            <div className="w-screen h-screen flex flex-col">
+              <MyHeader className="flex-none" />
+              <div className="w-full mx-auto mt-4 flex-1">
+                <main className="w-full min-h-full h-auto max-w-screen-xl mx-auto">
                   {children}
                 </main>
+                <MyFooter className="flex-none" />
               </div>
-              <MyFooter />
             </div>
           </Providers>
         </ThemeProvider>
