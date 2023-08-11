@@ -33,7 +33,7 @@
 
 ---
 
-## 3.Folder Structure 📁
+## 3. Important Folder Structure 📁
 
 - src
   - app
