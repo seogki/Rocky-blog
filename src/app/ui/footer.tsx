@@ -2,7 +2,7 @@ export default function MyFooter({ className }: { className?: string }) {
   return (
     <>
       <footer
-        className={`${className} h-32 w-full px-6 mt-4 pt-2 border-t-2 border-gray-500 dark:border-0 dark:bg-gray-700`}
+        className={`${className} h-32 w-full px-6 mt-4 pt-2 border-t-2 border-gray-200 dark:border-gray-600`}
       >
         <div className="wrapper max-w-screen-xl"></div>
       </footer>

@@ -4,7 +4,7 @@ import { EDITOR_TOOLS } from "./EditorTools";
 import { useTheme } from "next-themes";
 import styles from "./Editor.module.scss";
 import { useMount } from "../hooks/useMount";
-//props
+
 type Props = {
   data?: OutputData;
   onChange(val: OutputData): void;
