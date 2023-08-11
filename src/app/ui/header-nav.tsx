@@ -9,13 +9,22 @@ import {
   openDrawer
 } from "../redux/features/headerSlice";
 import useToggleScrollbar from "../hooks/useToggleScrollbar";
-export default function HeaderNav() {
+import { Category } from "../interface/posts.interface";
+export default function HeaderNav({ list }: { list?: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
-  const itemList = ["JAVASCRIPT", "NEXT.JS", "REACT", "VUE", "CSS", "ETC"];
+  // const itemList = [
+  //   "JAVASCRIPT",
+  //   "NEXT JS",
+  //   "REACT",
+  //   "VUE",
+  //   "CSS",
+  //   "NEST JS",
+  //   "ETC"
+  // ];
 
   return (
     <>
@@ -57,11 +66,12 @@ export default function HeaderNav() {
             onClick={(e) => e.stopPropagation()}
           >
             <ul>
-              {itemList.map((item) => (
-                <li key={item} className="text-base py-4 px-4">
-                  {item}
-                </li>
-              ))}
+              {list &&
+                list.map(({ key, name }) => (
+                  <li key={key} className="text-base py-4 px-4">
+                    {name}
+                  </li>
+                ))}
             </ul>
           </nav>
         </Transition.Child>

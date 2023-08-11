@@ -7,7 +7,7 @@ export default function SaveButton({
 }) {
   return (
     <button
-      className={`w-32 p-2 rounded-md bg-blue-400 dark:bg-blue-700 ${className}`}
+      className={`${className} w-32 p-2 rounded-md bg-blue-400 dark:bg-blue-700`}
     >
       {children}
     </button>

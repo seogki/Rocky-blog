@@ -1,11 +1,18 @@
 import { MdSearch } from "react-icons/md";
 import MenuTabs from "../components/menu-tabs";
-import Link from "next/link";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import ThemeModifier from "../components/theme-modifier";
+import { Category } from "../interface/posts.interface";
+import HeaderTitle from "./header-title";
 
-export default function MyHeader({ className }: { className?: string }) {
+export default function MyHeader({
+  className,
+  list
+}: {
+  className?: string;
+  list?: Category[];
+}) {
   return (
     <>
       <header
@@ -13,10 +20,10 @@ export default function MyHeader({ className }: { className?: string }) {
       >
         <div className="max-w-screen-xl flex justify-start items-center mx-auto">
           <div className="sm:hidden">
-            <HeaderNav />
+            <HeaderNav list={list} />
           </div>
           <h1 className="font-sans text-2xl font-bold">
-            <Link href={"/"}>Rocky Blog</Link>
+            <HeaderTitle />
           </h1>
           <div className="hidden lg:block lg:ml-auto">
             <MenuTabs />
