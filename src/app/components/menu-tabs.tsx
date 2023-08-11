@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { closeDrawer, closeMore } from "../redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import MenuTab from "./menu-tab";
 
 export default function MenuTabs() {
   const { isMore, isDrawerOpen } = useAppSelector(
@@ -15,28 +16,20 @@ export default function MenuTabs() {
   };
 
   return (
-    <nav className="lg:ml-auto">
-      <ul className="flex flex-wrap flex-col lg:flex-row">
-        <li className="text-xl font-medium px-4 mr-2 py-4 lg:py-0 w-full lg:w-auto">
-          <Link href={"/posts"} onClick={() => closeAllOpener()}>
-            Posts
-          </Link>
-        </li>
-        <li className="text-xl font-medium px-4 mr-2 py-4 lg:py-0 w-full lg:w-auto">
-          <Link href={"/edit"} onClick={() => closeAllOpener()}>
-            Edit
-          </Link>
-        </li>
-        <li className="text-xl font-medium px-4 mr-2 py-4 lg:py-0 w-full lg:w-auto">
-          <Link href={"/setting"} onClick={() => closeAllOpener()}>
-            Setting
-          </Link>
-        </li>
-        <li className="text-xl font-medium px-4 mr-2 py-4 lg:py-0 w-full lg:w-auto">
-          <Link href={"/about"} onClick={() => closeAllOpener()}>
-            About
-          </Link>
-        </li>
+    <nav className="lg:ml-auto text-xl font-medium">
+      <ul className="flex flex-wrap flex-col lg:flex-row ">
+        <MenuTab onClick={closeAllOpener} link={"/posts"}>
+          Posts
+        </MenuTab>
+        <MenuTab onClick={closeAllOpener} link={"/edit"}>
+          Edit
+        </MenuTab>
+        <MenuTab onClick={closeAllOpener} link={"/about"}>
+          About
+        </MenuTab>
+        <MenuTab onClick={closeAllOpener} link={"/setting"}>
+          Setting
+        </MenuTab>
       </ul>
     </nav>
   );

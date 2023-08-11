@@ -34,8 +34,7 @@
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.2",
     "react-responsive": "^9.0.2",
-    "typescript": "5.1.6",
-    "ua-parser-js": "^1.0.35"
+    "typescript": "5.1.6"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

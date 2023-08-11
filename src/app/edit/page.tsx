@@ -11,6 +11,7 @@ const EditorBlock = dynamic(() => import("@/app/components/Editor"), {
 
 const Edit: NextPage = () => {
   const [data, setData] = useState<OutputData>();
+
   return (
     <div className="w-full h-full max-w-screen-sm mx-auto flex flex-col px-4">
       <input
@@ -26,8 +27,8 @@ const Edit: NextPage = () => {
         />
       </div>
       <div className="ml-auto flex flex-row basis-8 mb-8 mr-4">
-        <SaveButton>초기화</SaveButton>
-        <SaveButton className="ml-2">저장</SaveButton>
+        <SaveButton>reset</SaveButton>
+        <SaveButton className="ml-2">save</SaveButton>
       </div>
     </div>
   );
