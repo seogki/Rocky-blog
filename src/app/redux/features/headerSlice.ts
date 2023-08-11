@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Category } from "@/app/interface/posts.interface";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type HeaderState = {
   isMore: boolean;
