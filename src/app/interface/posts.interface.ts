@@ -6,6 +6,6 @@ export interface Post {
 }
 
 export interface Category {
-  key: number;
+  _id: string;
   name: string;
 }
