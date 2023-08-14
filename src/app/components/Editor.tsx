@@ -8,7 +8,7 @@ import { useMount } from "../hooks/useMount";
 type Props = {
   data?: OutputData;
   readOnly?: boolean;
-  onChange(val: OutputData): void;
+  onChange?: (val: OutputData) => void;
   holder: string;
 };
 

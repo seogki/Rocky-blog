@@ -28,6 +28,16 @@ export async function getPosts(): Promise<Array<Post>> {
   return res.json();
 }
 
+export async function getPost(): Promise<Post> {
+  const res = await fetch(`${BASE_URL}/post`, { cache: "no-store" });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 export async function savePost(payload: SavePostPayload): Promise<boolean> {
   const res = await Instance({
     method: "POST",

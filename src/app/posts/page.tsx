@@ -1,7 +1,17 @@
-import { NextPage } from "next";
+import { getCategories, getPosts } from "../api/posts";
+import EditorList from "../components/editor-list";
+import Navigation from "../components/navigation";
+import PostContainer from "../components/post-container";
 
-const Posts: NextPage = () => {
-  return <div className="px-4">posts</div>;
-};
-
-export default Posts;
+export default async function Posts() {
+  const categories = await getCategories();
+  return (
+    <>
+      {/* @ts-expect-error Async Server Component */}
+      <PostContainer>
+        {/* @ts-expect-error Async Server Component */}
+        <EditorList categories={categories}></EditorList>
+      </PostContainer>
+    </>
+  );
+}

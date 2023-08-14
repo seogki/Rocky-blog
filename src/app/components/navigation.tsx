@@ -1,4 +1,9 @@
+"use client";
+
+import Link from "next/link";
 import { Category } from "../interface/posts.interface";
+import { closeDrawer, closeMore } from "../redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 type Props = {
   className?: string;
@@ -7,12 +12,21 @@ type Props = {
 };
 
 export default function Navigation({ className, onClick, list }: Props) {
+  const { isDrawerOpen } = useAppSelector(({ headerReducer }) => headerReducer);
+  const dispatch = useAppDispatch();
+
+  const closeAllOpener = () => {
+    if (isDrawerOpen) dispatch(closeDrawer());
+  };
+
   return (
     <nav className={`${className}`} onClick={onClick}>
       <ul>
         {list?.map(({ _id, name }) => (
           <li key={_id} className="text-base py-4 px-4">
-            {name}
+            <Link href={`/posts/${name}`} onClick={() => closeAllOpener()}>
+              {name}
+            </Link>
           </li>
         ))}
       </ul>
