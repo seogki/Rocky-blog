@@ -10,6 +10,7 @@ import {
   closeMore,
   openDrawer
 } from "./redux/features/headerSlice";
+import Navigation from "./components/navigation";
 export default function HeaderNav({ list }: { list?: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
@@ -61,7 +62,13 @@ export default function HeaderNav({ list }: { list?: Category[] }) {
           leaveTo="-translate-x-full"
           onClick={() => dispatch(closeDrawer())}
         >
-          <nav
+          <Navigation
+            className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
+            list={list}
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          {/* <nav
             className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
@@ -72,7 +79,7 @@ export default function HeaderNav({ list }: { list?: Category[] }) {
                 </li>
               ))}
             </ul>
-          </nav>
+          </nav> */}
         </Transition.Child>
       </Transition>
     </>

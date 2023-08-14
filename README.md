@@ -43,7 +43,7 @@
     - edit
     - hooks
     - interface
-    - redux (local state management)
+    - redux-tool-kits, redux-saga (local state management, client api)
     - setting
   - assets
     - image
