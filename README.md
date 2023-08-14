@@ -45,7 +45,6 @@
     - interface
     - redux (local state management)
     - setting
-    - ui (one time only component)
   - assets
     - image
   - style (scss)

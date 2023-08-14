@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { closeDrawer, closeMore } from "../redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { closeDrawer, closeMore } from "./redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 export default function HeaderTitle() {
   const { isMore, isDrawerOpen } = useAppSelector(

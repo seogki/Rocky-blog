@@ -1,30 +1,14 @@
-import { getPosts } from "./api/posts";
-import { convertFormat } from "./utils/date";
+import { getCategories, getPosts } from "./api/posts";
+import EditorList from "./components/editor-list";
 
 export default async function Home() {
-  const list = await getPosts();
+  const posts = await getPosts();
+  const categories = await getCategories();
   return (
     <>
-      <ul className="w-full px-4 gap-4 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
-        {list.map(({ _id, title, description, createDate }) => (
-          <li
-            key={_id}
-            className="relative flex flex-col border-2 border-gray-200 dark:border-gray-600 rounded h-64"
-          >
-            <div className="text-xl font-bold bg-gray-500 h-36 flex justify-center items-center text-white">
-              <h3 className="mx-4 truncate">{title}</h3>
-            </div>
-            <div className="font-medium text-md pt-2 px-3 truncate">
-              {title}
-            </div>
-            <p className="font-light text-base mt-2 mx-3 line-clamp-2 leading-4 flex-auto text-gray-600 dark:text-gray-400">
-              {description}
-            </p>
-            <time className="ml-auto font-light text-sm my-2 mr-3 truncate text-gray-500">
-              {convertFormat(createDate)}
-            </time>
-          </li>
-        ))}
+      <h1 className="text-2xl font-bold w-full text-center p-2">Contents</h1>
+      <ul className="w-full mt-4 max-w-screen-sm px-2 mx-auto">
+        <EditorList posts={posts} categories={categories}></EditorList>
       </ul>
     </>
   );

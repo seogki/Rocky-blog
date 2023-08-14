@@ -11,7 +11,7 @@ const initialState = {
   isDrawerOpen: false
 } as HeaderState;
 
-export const header = createSlice({
+export const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
@@ -30,6 +30,7 @@ export const header = createSlice({
   }
 });
 
-export const { openDrawer, closeDrawer, openMore, closeMore } = header.actions;
+export const { openDrawer, closeDrawer, openMore, closeMore } =
+  headerSlice.actions;
 
-export default header.reducer;
+export default headerSlice.reducer;

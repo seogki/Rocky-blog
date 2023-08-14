@@ -7,11 +7,12 @@ import { useMount } from "../hooks/useMount";
 
 type Props = {
   data?: OutputData;
+  readOnly?: boolean;
   onChange(val: OutputData): void;
   holder: string;
 };
 
-const EditorBlock = ({ data, onChange, holder }: Props) => {
+const EditorBlock = ({ data, onChange, holder, readOnly = false }: Props) => {
   const ref = useRef<EditorJS>();
   const { isMount } = useMount();
   const { theme } = useTheme();
@@ -20,6 +21,7 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
     if (!ref.current) {
       const editor = new EditorJS({
         holder: holder,
+        readOnly,
         tools: EDITOR_TOOLS,
         placeholder: "Please type anything...",
         data,
