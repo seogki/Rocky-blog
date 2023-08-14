@@ -1,18 +1,13 @@
 import { MdSearch } from "react-icons/md";
-import MenuTabs from "../components/menu-tabs";
+import MenuTabs from "./components/menu-tabs";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
-import ThemeModifier from "../components/theme-modifier";
-import { Category } from "../interface/posts.interface";
+import ThemeModifier from "./components/theme-modifier";
 import HeaderTitle from "./header-title";
+import { getCategories } from "./api/posts";
 
-export default function MyHeader({
-  className,
-  list
-}: {
-  className?: string;
-  list?: Category[];
-}) {
+export default async function MyHeader({ className }: { className?: string }) {
+  const list = await getCategories();
   return (
     <>
       <header

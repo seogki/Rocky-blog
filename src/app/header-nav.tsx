@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Category } from "./interface/posts.interface";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import useToggleScrollbar from "./hooks/useToggleScrollbar";
 import {
   closeDrawer,
   closeMore,
   openDrawer
-} from "../redux/features/headerSlice";
-import useToggleScrollbar from "../hooks/useToggleScrollbar";
-import { Category } from "../interface/posts.interface";
+} from "./redux/features/headerSlice";
 export default function HeaderNav({ list }: { list?: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer

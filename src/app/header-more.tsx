@@ -2,14 +2,10 @@
 
 import { Transition } from "@headlessui/react";
 import { MdMoreVert } from "react-icons/md";
-import MenuTabs from "../components/menu-tabs";
-import useToggleScrollbar from "../hooks/useToggleScrollbar";
-import {
-  closeDrawer,
-  closeMore,
-  openMore
-} from "../redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import MenuTabs from "./components/menu-tabs";
+import useToggleScrollbar from "./hooks/useToggleScrollbar";
+import { closeDrawer, closeMore, openMore } from "./redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 export default function HeaderMore() {
   const { isMore, isDrawerOpen } = useAppSelector(
