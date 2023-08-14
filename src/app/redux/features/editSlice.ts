@@ -7,7 +7,7 @@ type EditState = {
 
 const initialState = {} as EditState;
 
-export const edit = createSlice({
+export const editSlice = createSlice({
   name: "edit",
   initialState,
   reducers: {
@@ -17,6 +17,6 @@ export const edit = createSlice({
   }
 });
 
-export const { setTagKey } = edit.actions;
+export const { setTagKey } = editSlice.actions;
 
-export default edit.reducer;
+export default editSlice.reducer;

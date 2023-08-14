@@ -66,12 +66,11 @@ export default function HeaderNav({ list }: { list?: Category[] }) {
             onClick={(e) => e.stopPropagation()}
           >
             <ul>
-              {list &&
-                list.map(({ key, name }) => (
-                  <li key={key} className="text-base py-4 px-4">
-                    {name}
-                  </li>
-                ))}
+              {list?.map(({ _id, name }) => (
+                <li key={_id} className="text-base py-4 px-4">
+                  {name}
+                </li>
+              ))}
             </ul>
           </nav>
         </Transition.Child>

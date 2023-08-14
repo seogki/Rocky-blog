@@ -1,18 +1,37 @@
-import { Category, Post } from "@/app/interface/posts.interface";
+import {
+  Category,
+  Post,
+  SavePostPayload
+} from "@/app/interface/posts.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type PostState = {
-  post?: Post;
+  isLoading: boolean;
+  error: any;
+  success: boolean;
+  post: Post;
 };
 
 const initialState = {} as PostState;
 
-export const post = createSlice({
+export const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {}
+  reducers: {
+    savePost: (state, { payload }: PayloadAction<SavePostPayload>) => {
+      state.isLoading = true;
+    },
+    savePostSuccess: (state, { payload }: PayloadAction<boolean>) => {
+      state.success = payload;
+      state.isLoading = false;
+    },
+    savePostFailure: (state, { payload }: PayloadAction<any>) => {
+      state.error = payload;
+      state.isLoading = false;
+    }
+  }
 });
 
-export const {} = post.actions;
+export const { savePost, savePostFailure, savePostSuccess } = postSlice.actions;
 
-export default post.reducer;
+export default postSlice.reducer;
