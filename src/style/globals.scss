@@ -4,23 +4,31 @@
 
 :root {
   --background: white;
-  --foreground: #27272a;
+  --foreground: #121212;
+}
+
+textarea {
+  resize: none;
 }
 
 [data-theme="dark"] {
-  --background: #27272a;
+  --background: #121212;
   --foreground: white;
 }
 
 html {
+  @apply w-full;
   @apply h-full;
 }
 body {
+  @apply w-full;
   @apply h-full;
 }
 div#__next {
+  @apply w-full;
   @apply h-full;
 }
-main {
-  @apply h-full;
-}
+// main {
+//   @apply w-full;
+//   @apply h-full;
+// }

@@ -6,7 +6,7 @@ import EditorContainer from "./editor-container";
 const CategoryTagList = async () => {
   const list = await getCategories();
   return (
-    <div className="w-full flex flex-wrap">
+    <div className="w-full flex flex-wrap mx-auto">
       {list.map(({ _id, name }) => (
         <CategoryTagItem key={_id} tag={_id} name={name} />
       ))}
@@ -16,7 +16,7 @@ const CategoryTagList = async () => {
 
 const Edit = () => {
   return (
-    <div className="w-full h-full max-w-screen-sm mx-auto flex flex-col px-4">
+    <div className="w-full h-full max-w-screen-sm mx-auto flex flex-col relative">
       {/* @ts-expect-error Async Server Component */}
       <CategoryTagList />
       <EditorContainer />

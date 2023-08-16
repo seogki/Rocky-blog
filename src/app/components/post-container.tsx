@@ -3,28 +3,26 @@ import Navigation from "../components/navigation";
 
 type Props = {
   children?: React.JSX.Element | string;
-  title: string;
+  title?: string;
 };
 
-export default async function PostContainer({
-  children,
-  title = "Contents"
-}: Props) {
-  const posts = await getPosts();
+export default async function PostContainer({ children, title }: Props) {
   const categories = await getCategories();
   return (
     <>
-      <div className="w-full h-full max-w-screen-xl flex flex-col sm:flex-row mx-auto justify-center sm:justify-start content-start">
+      <div className="w-full h-full flex flex-col sm:flex-row mx-auto justify-start content-start">
         <Navigation
           list={categories}
-          className="hidden sm:block basis-2/12 sm:ml-4"
+          className="hidden sm:block sm:basis-2/12"
         />
-        <ul className="max-w-screen-md px-1 w-full basis-full mx-auto sm:mx-0">
-          <h1 className="text-2xl font-bold w-full text-center p-2 mb-2">
-            {title}
-          </h1>
+        <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
+          {title && (
+            <h1 className="text-xl sm:text-lg font-bold text-center mb-2">
+              {title}
+            </h1>
+          )}
           {children}
-        </ul>
+        </section>
       </div>
     </>
   );

@@ -13,11 +13,11 @@ export default function MenuTab({
 }) {
   return (
     <>
-      <li className={`${className} w-full lg:w-auto my-4 lg:my-0`}>
+      <li className={`${className && className} w-full lg:w-auto my-4 lg:my-0`}>
         <Link
           href={link}
           onClick={() => onClick()}
-          className="px-4 mr-0 lg:mr-4 py-4 lg:py-0 "
+          className="px-4 mr-0 lg:mr-2 py-4 lg:py-0 "
         >
           {children}
         </Link>

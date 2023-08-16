@@ -9,7 +9,7 @@ export default function SaveButton({
 }) {
   return (
     <button
-      className={`${className} w-32 p-2 rounded-md `}
+      className={`${className} w-32 p-2 rounded-md bg-gray-600 text-white`}
       onClick={() => onClick && onClick()}
     >
       {children}

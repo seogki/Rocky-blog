@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
-import { closeDrawer, closeMore } from "../redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { closeDrawer, closeMore } from "../../redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import MenuTab from "./menu-tab";
 
 export default function MenuTabs() {
@@ -16,8 +15,8 @@ export default function MenuTabs() {
   };
 
   return (
-    <nav className="lg:ml-auto text-xl font-medium">
-      <ul className="flex flex-wrap flex-col lg:flex-row ">
+    <nav className="text-base lg:text-sm font-medium lg:ml-auto">
+      <ul className="flex flex-wrap flex-col lg:flex-row">
         <MenuTab onClick={closeAllOpener} link={"/posts"}>
           Posts
         </MenuTab>
