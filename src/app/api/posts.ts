@@ -17,8 +17,20 @@ export async function getCategories(): Promise<Array<Category>> {
 }
 
 export async function getPosts(): Promise<Array<Post>> {
-  const res = await fetch(`${BASE_URL}/posts`, {
-    next: { revalidate: 10 }
+  const res = await fetch(`${BASE_URL}/posts`, { cache: "no-store" });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export async function getPostsByCategoryId(
+  categoryId = "RECENT"
+): Promise<Array<Post>> {
+  const res = await fetch(`${BASE_URL}/posts/${categoryId}`, {
+    next: { revalidate: 0 }
   });
 
   if (!res.ok) {
@@ -28,8 +40,14 @@ export async function getPosts(): Promise<Array<Post>> {
   return res.json();
 }
 
-export async function getPost(): Promise<Post> {
-  const res = await fetch(`${BASE_URL}/post`, { cache: "no-store" });
+export async function getPost(_id: string): Promise<Post> {
+  const res = await fetch(
+    `${BASE_URL}/post?` +
+      new URLSearchParams({
+        _id
+      }),
+    { cache: "no-store" }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

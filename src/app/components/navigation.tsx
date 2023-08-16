@@ -22,8 +22,13 @@ export default function Navigation({ className, onClick, list }: Props) {
   return (
     <nav className={`${className}`} onClick={onClick}>
       <ul>
+        <li className="text-sm py-4 px-4">
+          <Link href={`/posts/RECENT`} onClick={() => closeAllOpener()}>
+            RECENT
+          </Link>
+        </li>
         {list?.map(({ _id, name }) => (
-          <li key={_id} className="text-base py-4 px-4">
+          <li key={_id} className="text-sm py-4 px-4">
             <Link href={`/posts/${name}`} onClick={() => closeAllOpener()}>
               {name}
             </Link>

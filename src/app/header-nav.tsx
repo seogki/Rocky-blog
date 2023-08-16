@@ -67,19 +67,6 @@ export default function HeaderNav({ list }: { list?: Category[] }) {
             list={list}
             onClick={(e) => e.stopPropagation()}
           />
-
-          {/* <nav
-            className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ul>
-              {list?.map(({ _id, name }) => (
-                <li key={_id} className="text-base py-4 px-4">
-                  {name}
-                </li>
-              ))}
-            </ul>
-          </nav> */}
         </Transition.Child>
       </Transition>
     </>

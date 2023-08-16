@@ -2,8 +2,8 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_TOOLS } from "./EditorTools";
 import { useTheme } from "next-themes";
-import styles from "./Editor.module.scss";
-import { useMount } from "../hooks/useMount";
+import "./Editor.scss";
+import { useMount } from "../../hooks/useMount";
 
 type Props = {
   data?: OutputData;
@@ -26,6 +26,7 @@ const EditorBlock = ({ data, onChange, holder, readOnly = false }: Props) => {
         placeholder: "Please type anything...",
         data,
         async onChange(api, event) {
+          if (!onChange) return;
           const data = await api.saver.save();
           onChange(data);
         }
@@ -45,7 +46,7 @@ const EditorBlock = ({ data, onChange, holder, readOnly = false }: Props) => {
     <div
       id={holder}
       className={`prose max-w-full dark:prose-invert ${
-        isMount && theme === "dark" && styles["dark-mode"]
+        isMount && theme === "dark" && "editor-dark-mode"
       }`}
     />
   );

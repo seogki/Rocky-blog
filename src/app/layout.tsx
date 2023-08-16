@@ -22,15 +22,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReduxProvider>
-            <div className="w-screen h-screen flex flex-col">
+            <div className="w-full h-full">
               {/* @ts-expect-error Async Server Component */}
-              <MyHeader className="flex-none" />
-              <div className="w-full mx-auto mt-4 flex-1">
-                <main className="w-full min-h-full h-full max-w-screen-xl mx-auto">
-                  {children}
-                </main>
-                <MyFooter className="flex-none" />
-              </div>
+              <MyHeader />
+              <main className="w-full h-[calc(100%-4rem)] p-4 pb-6 overflow-auto max-w-screen-xl mx-auto relative">
+                {children}
+              </main>
             </div>
           </ReduxProvider>
         </ThemeProvider>

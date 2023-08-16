@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/components/EditorTools.js"
+    "src/app/components/EditorTools.js",
+    "src/app/components/editor/custom-header.js"
   ],
   "exclude": ["node_modules"]
 }

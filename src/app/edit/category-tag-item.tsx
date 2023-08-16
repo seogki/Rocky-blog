@@ -17,7 +17,7 @@ export default function CategoryTagItem({
     <div
       key={tag}
       className={`${
-        tagKey === tag ? "bg-amber-300 text-black" : "bg-amber-600 text-white"
+        tagKey === tag ? "bg-sky-500 text-white" : "bg-gray-600 text-white"
       } py-2 px-4 rounded-2xl m-2 text-sm`}
       onClick={() => dispatch(setTagKey(tag))}
     >
