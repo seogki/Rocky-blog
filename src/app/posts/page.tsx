@@ -7,7 +7,7 @@ export default async function Posts() {
   return (
     <>
       {/* @ts-expect-error Async Server Component */}
-      <PostContainer title={"Recent"}>
+      <PostContainer title={"RECENT"}>
         {/* @ts-expect-error Async Server Component */}
         <EditorList></EditorList>
       </PostContainer>

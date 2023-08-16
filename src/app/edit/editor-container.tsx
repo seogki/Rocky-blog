@@ -63,9 +63,9 @@ export default function EditorContainer() {
       <textarea
         placeholder="Please add title..."
         value={title}
-        rows={3}
+        rows={2}
         onChange={(e) => setTitle(e.target.value)}
-        className="block text-slate-700 mt-4 basis-28 flex-none dark:text-white placeholder:italic
+        className="block text-slate-700 mt-4 basis-14 flex-none dark:text-white placeholder:italic
          bold border-0 outline-0 focus:outline-0 text-xl bg-transparent"
       />
       <div className="w-full border-b-2 my-2 border-gray-500"></div>
