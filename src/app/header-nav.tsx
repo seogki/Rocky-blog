@@ -11,21 +11,12 @@ import {
   openDrawer
 } from "./redux/features/headerSlice";
 import NavigationList from "./components/navigation-list";
-export default function HeaderNav({ list }: { list?: Category[] }) {
+export default function HeaderNav({ list }: { list?: string[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
-  // const itemList = [
-  //   "JAVASCRIPT",
-  //   "NEXT JS",
-  //   "REACT",
-  //   "VUE",
-  //   "CSS",
-  //   "NEST JS",
-  //   "ETC"
-  // ];
 
   return (
     <>

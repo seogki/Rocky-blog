@@ -1,4 +1,4 @@
-import { getCategories, getPosts } from "../../api/posts";
+import { getCategories } from "@/app/data";
 import Navigation from "../navigation-list";
 
 type Props = {

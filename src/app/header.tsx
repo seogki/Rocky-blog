@@ -4,7 +4,7 @@ import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import ThemeModifier from "./components/theme-modifier";
 import HeaderTitle from "./header-title";
-import { getCategories } from "./api/posts";
+import { getCategories } from "./data";
 
 export default async function MyHeader({ className }: { className?: string }) {
   const list = await getCategories();

@@ -28,6 +28,7 @@ export default function RootLayout({
               <main className="w-full h-[calc(100%-4rem)] p-4 pb-6 max-w-screen-xl mx-auto relative">
                 {children}
               </main>
+              <MyFooter />
             </div>
           </ReduxProvider>
         </ThemeProvider>

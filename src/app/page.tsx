@@ -1,6 +1,6 @@
-import { getCategories, getPosts } from "./api/posts";
 import PostList from "./components/post/post-list";
 import PostContainer from "./components/post/post-container";
+import { getCategories } from "./data";
 
 export default async function Home() {
   return (

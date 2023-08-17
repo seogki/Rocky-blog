@@ -1,4 +1,3 @@
-import { getCategories, getPosts } from "../api/posts";
 import PostList from "../components/post/post-list";
 import Navigation from "../components/navigation-list";
 import PostContainer from "../components/post/post-container";

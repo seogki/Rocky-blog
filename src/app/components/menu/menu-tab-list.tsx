@@ -23,9 +23,6 @@ export default function MenuTabList() {
         <MenuTab onClick={closeAllOpener} link={"/about"}>
           About
         </MenuTab>
-        <MenuTab onClick={closeAllOpener} link={"/setting"}>
-          Setting
-        </MenuTab>
       </ul>
     </nav>
   );

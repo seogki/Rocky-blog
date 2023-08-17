@@ -2,6 +2,9 @@
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
+  experimental: {
+    mdxRs: true
+  },
   env: {
     jest: true
   },
@@ -15,4 +18,6 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+const withMDX = require("@next/mdx")();
+
+module.exports = withMDX(nextConfig);
