@@ -9,7 +9,7 @@ type Props = {
   categories?: Category[];
 };
 
-export default async function EditorList({ categories, posts }: Props) {
+export default async function PostList({ categories, posts }: Props) {
   const myPosts = posts || (await getPosts());
   const myCategories = categories || (await getCategories());
 

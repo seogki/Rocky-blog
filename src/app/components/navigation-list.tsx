@@ -11,7 +11,7 @@ type Props = {
   list?: Category[];
 };
 
-export default function Navigation({ className, onClick, list }: Props) {
+export default function NavigationList({ className, onClick, list }: Props) {
   const { isDrawerOpen } = useAppSelector(({ headerReducer }) => headerReducer);
   const dispatch = useAppDispatch();
 

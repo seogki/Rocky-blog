@@ -4,6 +4,8 @@ export interface Post {
   _id: string;
   title: string;
   description: string;
+  html: string;
+  temporary: boolean;
   categoryId: string;
   createDate: string;
 }
@@ -17,4 +19,6 @@ export interface SavePostPayload {
   categoryId?: string;
   title: string;
   description: string;
+  html: string;
+  temporary: boolean;
 }

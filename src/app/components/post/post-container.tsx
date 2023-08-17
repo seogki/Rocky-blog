@@ -1,5 +1,5 @@
-import { getCategories, getPosts } from "../api/posts";
-import Navigation from "../components/navigation";
+import { getCategories, getPosts } from "../../api/posts";
+import Navigation from "../navigation-list";
 
 type Props = {
   children?: React.JSX.Element | string;

@@ -1,8 +1,7 @@
 import { getCategories, getPost, getPostsByCategoryId } from "@/app/api/posts";
-import EditorList from "@/app/components/editor/editor-list";
-import PostContainer from "@/app/components/post-container";
+import PostList from "@/app/components/post/post-list";
+import PostContainer from "@/app/components/post/post-container";
 import { OutputData } from "@editorjs/editorjs";
-import EditorWrapper from "./editor-wrapper";
 
 type Props = {
   params: {
@@ -27,22 +26,42 @@ export default async function PostCategory({ params, searchParams }: Props) {
         {/* @ts-expect-error Async Server Component */}
         <PostContainer title={name}>
           {/* @ts-expect-error Async Server Component */}
-          <EditorList posts={posts} categories={categories} />
+          <PostList posts={posts} categories={categories} />
         </PostContainer>
       </>
     );
   }
 
   const data = await getPost(_id);
-  const { title, description } = data;
+  const { title, description, temporary, html } = data;
   const editorData = JSON.parse(description) as OutputData;
 
   return (
     <>
       {/* @ts-expect-error Async Server Component */}
       <PostContainer title={title}>
-        <EditorWrapper data={editorData} />
+        {/* <EditorTemporaryRenderer data={editorData} /> */}
       </PostContainer>
     </>
   );
+
+  // if (temporary) {
+  //   return (
+  //     <>
+  //       {/* @ts-expect-error Async Server Component */}
+  //       <PostContainer title={title}>
+  //         <EditorTemporaryRenderer data={editorData} />
+  //       </PostContainer>
+  //     </>
+  //   );
+  // } else {
+  //   return (
+  //     <>
+  //       {/* @ts-expect-error Async Server Component */}
+  //       <PostContainer title={title}>
+  //         <EditorMainRenderer data={editorData} />
+  //       </PostContainer>
+  //     </>
+  //   );
+  // }
 }

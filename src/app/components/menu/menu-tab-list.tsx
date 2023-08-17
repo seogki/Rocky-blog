@@ -3,7 +3,7 @@ import { closeDrawer, closeMore } from "../../redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import MenuTab from "./menu-tab";
 
-export default function MenuTabs() {
+export default function MenuTabList() {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
@@ -19,9 +19,6 @@ export default function MenuTabs() {
       <ul className="flex flex-wrap flex-col lg:flex-row">
         <MenuTab onClick={closeAllOpener} link={"/posts"}>
           Posts
-        </MenuTab>
-        <MenuTab onClick={closeAllOpener} link={"/edit"}>
-          Edit
         </MenuTab>
         <MenuTab onClick={closeAllOpener} link={"/about"}>
           About

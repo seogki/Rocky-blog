@@ -9,13 +9,13 @@ export default function ThemeModifier() {
 
   if (!isMount)
     return (
-      <MdDarkMode className="cursor-pointer mr-3 text-black/50 dark:text-white/50" />
+      <MdDarkMode className="ml-auto cursor-pointer mr-3 text-black/50 dark:text-white/50" />
     );
 
   return (
     <>
       <MdDarkMode
-        className="cursor-pointer mr-3"
+        className="ml-auto cursor-pointer mr-3"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       />
     </>
