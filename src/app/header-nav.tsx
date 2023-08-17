@@ -10,22 +10,13 @@ import {
   closeMore,
   openDrawer
 } from "./redux/features/headerSlice";
-import Navigation from "./components/navigation";
-export default function HeaderNav({ list }: { list?: Category[] }) {
+import NavigationList from "./components/navigation-list";
+export default function HeaderNav({ list }: { list?: string[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
-  // const itemList = [
-  //   "JAVASCRIPT",
-  //   "NEXT JS",
-  //   "REACT",
-  //   "VUE",
-  //   "CSS",
-  //   "NEST JS",
-  //   "ETC"
-  // ];
 
   return (
     <>
@@ -62,7 +53,7 @@ export default function HeaderNav({ list }: { list?: Category[] }) {
           leaveTo="-translate-x-full"
           onClick={() => dispatch(closeDrawer())}
         >
-          <Navigation
+          <NavigationList
             className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
             list={list}
             onClick={(e) => e.stopPropagation()}

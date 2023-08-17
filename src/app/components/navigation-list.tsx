@@ -8,10 +8,10 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 type Props = {
   className?: string;
   onClick?: React.MouseEventHandler;
-  list?: Category[];
+  list?: string[];
 };
 
-export default function Navigation({ className, onClick, list }: Props) {
+export default function NavigationList({ className, onClick, list }: Props) {
   const { isDrawerOpen } = useAppSelector(({ headerReducer }) => headerReducer);
   const dispatch = useAppDispatch();
 
@@ -27,10 +27,10 @@ export default function Navigation({ className, onClick, list }: Props) {
             RECENT
           </Link>
         </li>
-        {list?.map(({ _id, name }) => (
-          <li key={_id} className="text-sm py-4 px-4">
-            <Link href={`/posts/${name}`} onClick={() => closeAllOpener()}>
-              {name}
+        {list?.map((item, idx) => (
+          <li key={idx} className="text-sm py-4 px-4">
+            <Link href={`/posts/${item}`} onClick={() => closeAllOpener()}>
+              {item}
             </Link>
           </li>
         ))}

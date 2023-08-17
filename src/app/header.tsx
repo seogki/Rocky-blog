@@ -1,10 +1,10 @@
 import { MdSearch } from "react-icons/md";
-import MenuTabs from "./components/menu/menu-tabs";
+import MenuTabList from "./components/menu/menu-tab-list";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import ThemeModifier from "./components/theme-modifier";
 import HeaderTitle from "./header-title";
-import { getCategories } from "./api/posts";
+import { getCategories } from "./data";
 
 export default async function MyHeader({ className }: { className?: string }) {
   const list = await getCategories();
@@ -21,9 +21,9 @@ export default async function MyHeader({ className }: { className?: string }) {
             <HeaderTitle />
           </div>
           <div className="hidden lg:block lg:ml-auto">
-            <MenuTabs />
+            <MenuTabList />
           </div>
-          <MdSearch className="cursor-pointer mr-3 ml-auto lg:ml-10" />
+          {/* <MdSearch className="cursor-pointer mr-3 ml-auto lg:ml-10" /> */}
           <ThemeModifier />
           <div className="block lg:hidden">
             <HeaderMore />

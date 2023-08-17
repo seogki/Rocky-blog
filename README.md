@@ -15,7 +15,6 @@
 - headlessui/react (for simple transition)
 - next-theme (for dark mode)
 - scss
-- editorjs (for editing contents)
 
 ---
 
@@ -43,7 +42,7 @@
     - edit
     - hooks
     - interface
-    - redux-tool-kits, redux-saga (local state management, client api)
+    - redux-tool-kits, redux-saga (local state management)
     - setting
   - assets
     - image

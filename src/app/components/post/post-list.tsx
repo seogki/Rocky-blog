@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getCategories, getPosts } from "../../api/posts";
+// import { getCategories, getPosts } from "../../api/posts";
 import { Category, Post } from "../../interface/posts.interface";
 import { convertFormat } from "../../utils/date";
 
@@ -9,16 +9,10 @@ type Props = {
   categories?: Category[];
 };
 
-export default async function EditorList({ categories, posts }: Props) {
-  const myPosts = posts || (await getPosts());
-  const myCategories = categories || (await getCategories());
-
-  const getCategoryNameById = (id: string) =>
-    myCategories.find((item) => item._id === id)?.name || "ALL";
-
+export default async function PostList({ categories, posts }: Props) {
   return (
     <>
-      {myPosts.map(({ _id, title, categoryId, createDate }) => (
+      {/* {myPosts.map(({ _id, title, categoryId, createDate }) => (
         <div
           key={_id}
           className="w-full pt-4 pb-2 mb-2 [&:not(:first-of-type)]:border-t-2 border-gray-200 dark:border-gray-700"
@@ -41,7 +35,7 @@ export default async function EditorList({ categories, posts }: Props) {
             </div>
           </Link>
         </div>
-      ))}
+      ))} */}
     </>
   );
 }
