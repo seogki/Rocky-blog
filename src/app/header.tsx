@@ -7,15 +7,15 @@ import HeaderTitle from "./header-title";
 import { getCategories } from "./data";
 
 export default async function MyHeader({ className }: { className?: string }) {
-  const list = await getCategories();
+  const categories = await getCategories();
   return (
     <>
       <header
-        className={`${className} bg-white dark:bg-zinc-800 h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10 text-xl md:text-lg`}
+        className={`${className} h-16 w-full shadow-lg px-4 py-4 sticky top-0 z-10 text-xl md:text-lg`}
       >
         <div className="max-w-screen-xl flex justify-start items-center mx-auto">
           <div className="sm:hidden">
-            <HeaderNav list={list} />
+            <HeaderNav categories={categories} />
           </div>
           <div className="font-sans font-bold">
             <HeaderTitle />

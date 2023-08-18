@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: white;
-  --foreground: #121212;
-}
-
 textarea {
   resize: none !important;
 }
 
-[data-theme="dark"] {
-  --background: #121212;
-  --foreground: white;
+@layer base {
+  body {
+    @apply dark:bg-zinc-900 bg-white;
+  }
+
+  header {
+    @apply dark:bg-zinc-800/60 bg-white/60;
+  }
 }
 
 html {
