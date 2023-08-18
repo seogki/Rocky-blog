@@ -3,21 +3,32 @@
 import { useTheme } from "next-themes";
 import { MdDarkMode } from "react-icons/md";
 import { useMount } from "../hooks/useMount";
+import { FaSpinner } from "react-icons/fa6";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 export default function ThemeModifier() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
   const { isMount } = useMount();
 
   if (!isMount)
     return (
-      <MdDarkMode className="ml-auto lg:ml-2 cursor-pointer mr-3 text-black/50 dark:text-white/50" />
+      <FaSpinner className="animate-spin ml-auto lg:ml-2 cursor-pointer mr-3 text-black/50 dark:text-white/50" />
     );
+
+  const currentTheme = theme === "system" ? systemTheme : theme || "dark";
 
   return (
     <>
-      <MdDarkMode
-        className="ml-auto lg:ml-2 cursor-pointer mr-3"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      />
+      {currentTheme === "dark" ? (
+        <BsFillMoonFill
+          className="ml-auto lg:ml-2 cursor-pointer mr-3"
+          onClick={() => setTheme("light")}
+        />
+      ) : (
+        <BsFillSunFill
+          className="ml-auto lg:ml-2 cursor-pointer mr-3"
+          onClick={() => setTheme("dark")}
+        />
+      )}
     </>
   );
 }

@@ -25,7 +25,7 @@ export default function RootLayout({
             <div className="w-full h-full overflow-auto">
               {/* @ts-expect-error Async Server Component */}
               <MyHeader />
-              <main className="w-full min-h-[calc(100%-4rem)] p-4 pb-6 max-w-screen-xl mx-auto relative">
+              <main className="w-full min-h-[calc(100%-4rem)] p-4 pb-8 max-w-screen-xl mx-auto relative">
                 {children}
               </main>
               <MyFooter />

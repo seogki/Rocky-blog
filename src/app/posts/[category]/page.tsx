@@ -1,8 +1,4 @@
 import PostContainer from "@/app/components/post/post-container";
-import { getPostsByCategoryName } from "@/app/data";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
-import Link from "next/link";
 import PostList from "@/app/components/post/post-list";
 
 type Props = {

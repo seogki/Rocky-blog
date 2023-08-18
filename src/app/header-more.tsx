@@ -39,7 +39,7 @@ export default function HeaderMore() {
         leaveFrom="translate-y-0"
         leaveTo="translate-y-full"
       >
-        <div className="bg-white dark:bg-zinc-800 w-full h-full">
+        <div className="dark:bg-zinc-800 bg-white w-full h-full">
           <MenuTabs />
         </div>
       </Transition>
