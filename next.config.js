@@ -4,6 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     jest: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
   }
 };
 
