@@ -11,7 +11,7 @@ import {
   openDrawer
 } from "./redux/features/headerSlice";
 import NavigationList from "./components/navigation-list";
-export default function HeaderNav({ list }: { list?: string[] }) {
+export default function HeaderNav({ categories }: { categories: string[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
@@ -54,8 +54,9 @@ export default function HeaderNav({ list }: { list?: string[] }) {
           onClick={() => dispatch(closeDrawer())}
         >
           <NavigationList
+            defaultPath={categories[0]}
             className="h-screen w-2/3 bg-white dark:bg-zinc-800 overflow-auto"
-            list={list}
+            list={categories}
             onClick={(e) => e.stopPropagation()}
           />
         </Transition.Child>

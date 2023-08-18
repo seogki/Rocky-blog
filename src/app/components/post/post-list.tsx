@@ -1,3 +1,4 @@
+import { getPostsByCategoryName } from "@/app/data";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // import { getCategories, getPosts } from "../../api/posts";
@@ -5,37 +6,35 @@ import { Category, Post } from "../../interface/posts.interface";
 import { convertFormat } from "../../utils/date";
 
 type Props = {
-  posts?: Post[];
-  categories?: Category[];
+  category: string;
 };
 
-export default async function PostList({ categories, posts }: Props) {
+export default async function PostList({ category }: Props) {
+  const posts = await getPostsByCategoryName(category);
+
   return (
     <>
-      {/* {myPosts.map(({ _id, title, categoryId, createDate }) => (
-        <div
-          key={_id}
-          className="w-full pt-4 pb-2 mb-2 [&:not(:first-of-type)]:border-t-2 border-gray-200 dark:border-gray-700"
-        >
+      <div className="flex flex-col w-full h-full">
+        {posts.map((post) => (
           <Link
-            href={{
-              pathname: `/posts/${getCategoryNameById(categoryId)}}`,
-              query: { _id }
-            }}
-            className="w-full flex flex-col"
+            key={post!.slug}
+            href={`/posts/${category}/` + post!.slug}
+            passHref
           >
-            <h2 className="text-base sm:text-lg font-medium line-clamp-2 text-gray-700 dark:text-gray-300">
-              {title}
-            </h2>
-            <div className="wrapper font-light ml-auto text-sm text-right mt-4 sm:mt-6 mr-2">
-              <b className="text-sky-600 dark:text-sky-400 mr-2">
-                {getCategoryNameById(categoryId)}
-              </b>
-              <time className="text-gray-500">{convertFormat(createDate)}</time>
+            <div className="w-full h-auto p-4 my-4 flex flex-col justify-between align-middle border-2 rounded-lg">
+              <div className="text-xl font-medium dark:text-zinc-100 text-zinc:800">
+                <h2>{post!.title}</h2>
+              </div>
+              <div className="text-lg font-normal dark:text-zinc-200 text-zinc-700">
+                <p>{post!.description}</p>
+              </div>
+              <div className="ml-auto text-base font-light dark:text-zinc-300 text-zinc-600">
+                <time>{post!.date}</time>
+              </div>
             </div>
           </Link>
-        </div>
-      ))} */}
+        ))}
+      </div>
     </>
   );
 }
