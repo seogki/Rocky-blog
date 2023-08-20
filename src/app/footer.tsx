@@ -1,5 +1,5 @@
 import { BsGithub } from "react-icons/bs";
-
+import { BiLogoGmail } from "react-icons/bi";
 export default function MyFooter({ className }: { className?: string }) {
   return (
     <>
@@ -12,6 +12,13 @@ export default function MyFooter({ className }: { className?: string }) {
             className="text-xl h-max w-auto p-4"
           >
             <BsGithub></BsGithub>
+          </a>
+
+          <a
+            href="mailto:skhmailweb@gmail.com"
+            className="text-xl h-max w-auto p-4"
+          >
+            <BiLogoGmail></BiLogoGmail>
           </a>
         </div>
       </footer>

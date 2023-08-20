@@ -1,0 +1,239 @@
+---
+title: (MARKDOWN) basic mdx with remark-gfm plugin syntax
+date: "18th August 2023"
+description: basic markdown syntax that we can use
+---
+
+## Heading
+
+Heading is commonly used to define something important or give attention to reader we can use it by adding hash(#)<br/><br/>
+Everytime # increases smaller the size of text it is
+
+```
+hash from 1 ~ 6
+# 1 hash Biggest
+## 2 hash
+### 3 hash
+#### 4 hash
+##### 5 hash
+###### 6 hash Smallest
+####### 7 doesn't work
+```
+ 
+#### Heading Result
+
+# 1 hash Biggest
+
+## 2 hash
+
+### 3 hash
+
+#### 4 hash
+
+##### 5 hash
+
+###### 6 hash Smallest
+
+## Ordered List
+
+Ordered list is define by number with a dot
+
+even though we define list unorderly, it does not order itself<br/>
+please make sure that the number is ordered
+
+```
+1. one
+2. two
+3. three
+
+1. one
+3. three
+2. two
+```
+
+#### Ordered List Result
+
+1. one
+2. two
+3. three
+
+## Unordered List
+
+Unordered List is define by -
+
+```
+- parent
+    - child
+        - descendent
+```
+
+#### Unordered List Result
+
+- parent
+  - child
+    - descendent
+
+## Check List
+
+Check List is define by -`[ ] for uncheck [x] for check`
+
+```
+* [x] finish
+* [ ] todo
+
+```
+
+#### Check List Result
+
+* [x] finish
+* [ ] todo
+
+## Next Line
+
+```
+<br/>
+
+test<br/>test<br/><br/>test
+
+```
+
+#### Next Line Result
+
+test<br/>test<br/><br/>test
+
+## Code Block
+
+Code Block usually opens by tripple grave \`\`\` and close by tripple grave \`\`\`
+
+````js
+```(open tripple grave)
+
+<html lang="en" suppressHydrationWarning>
+    <body className={inter.className}>
+        <div>
+            <MyHeader />
+            <main>
+                {children}
+            </main>
+            <MyFooter />
+        </div>
+    </body>
+</html>
+
+```(close tripple grave)
+````
+
+## Delimeter
+
+Delimeter is define by `<hr/>` `---`
+
+```
+between any contents
+
+---
+
+<hr/>
+```
+
+#### Delimeter Result
+
+contents
+
+<hr />
+
+---
+
+## URL Link / Email Link
+
+Link is define by `[name](link)`
+
+```
+URL Link
+[Google](https://google.com)
+
+```
+
+#### Link Result
+
+Link: [Google](https://google.com)<br/>
+
+## Text Type
+
+Text Type of Strong, em, strike
+
+```
+
+I am _Seogki Hong_ (emphasis)
+
+I am **Seogki Hong** (strong)
+
+I am ~Seogki Hong~ (strike)
+I am ~~Seogki Hong~~ (strike)
+
+```
+
+#### Text Type Result
+
+I am _Seogki Hong_ (emphasis)
+
+I am **Seogki Hong** (strong)
+
+I am ~Seogki Hong~ (strike)
+
+I am ~~Seogki Hong~~ (strike)
+
+
+## Image
+
+Image is define by `![image name](/path/image.jpg|png) or image tag (<img/>)`
+
+```
+default
+![Sample](./image.jpg)
+
+more advanced by Img Tag
+
+normal
+![Sample](<img src="./image.png", height="500px", width="500px">)
+
+left
+![Sample](<img align="left" src="./image.png", height="500px", width="500px">)
+
+right
+![Sample](<img align="right" src="./image.png", height="500px", width="500px">)
+
+center
+![Sample](
+    <p align="center">
+        <img align="right" src="./image.png", height="500px", width="500px">
+    </p>
+)
+```
+
+#### Image Result
+
+![Sample](./sample-image.jpg)
+
+
+
+## Table
+
+Table is define by combination of `|`, `:`, `-`
+
+```
+| a | b  |  c |  d  |
+| - | :- | -: | :-: | 
+| 1 | 2  |  3 |  4  |
+```
+
+| a | b  |  c |  d  |
+| - | :- | -: | :-: |
+| 1 | 2  |  3 |  4  |
+
+
+
+## reference
+
+(https://gist.github.com/ihoneymon/652be052a0727ad59601)<br/>
+(https://mdxjs.com/docs/what-is-mdx/#mdx-syntax)
+
