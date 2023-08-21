@@ -6,17 +6,43 @@ import { Post } from "../interface/posts.interface";
 const matter = require("gray-matter");
 
 export const getCategories = cache(async (): Promise<string[]> => {
-  const categories = await fs.readdir("src/app/data/posts");
+  const filePath = path.resolve(process.cwd(), "src", "posts");
+  const categories = await fs.readdir(filePath);
   return categories;
 });
 
 export const getPostsByCategoryName = cache(async (categoryName: string) => {
-  const posts = await fs.readdir(`src/app/data/posts/${categoryName}`);
+  const filePath = path.resolve(
+    process.cwd(),
+    "src",
+    "posts",
+    `${categoryName}`
+  );
+
+  const posts = await fs.readdir(filePath);
+
   return Promise.all(
     posts
       .filter((file) => path.extname(file) === ".mdx")
       .map(async (file) => {
-        const filePath = `src/app/data/posts/${categoryName}/${file}`;
+        // const filePath = `src/app/data/posts/${categoryName}/${file}`;
+        const filePath = path.resolve(
+          process.cwd(),
+          "src",
+          "posts",
+          `${categoryName}`,
+          `${file}`
+        );
+        // console.debug(
+        //   __dirname,
+        //   path.resolve(
+        //     process.cwd(),
+        //     "src",
+        //     "posts",
+        //     `${categoryName}`,
+        //     `${file}`
+        //   )
+        // );
         const postContent = await fs.readFile(filePath, "utf8");
         const { data, content } = matter(postContent);
 

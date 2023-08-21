@@ -1,6 +1,16 @@
 import PostList from "./components/post/post-list";
 import PostContainer from "./components/post/post-container";
 import { getCategories } from "./data";
+import { Metadata } from "next";
+
+export const generateMetadata = async (): Promise<Metadata> => {
+  const categories = await getCategories();
+
+  return {
+    title: `Rocky Blog - Posts [${categories[0]}]`,
+    description: `Rocky Blog - Posts [${categories[0]}]`
+  };
+};
 
 export default async function Home() {
   const categories = await getCategories();
