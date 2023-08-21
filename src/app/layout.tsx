@@ -9,10 +9,10 @@ import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "Rocky Blog",
-//   description: "Rocky Blog Main"
-// };
+export const metadata: Metadata = {
+  title: "Rocky Blog",
+  description: "Rocky Blog Main"
+};
 
 export default function RootLayout({
   children
