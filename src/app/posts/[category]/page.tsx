@@ -1,6 +1,8 @@
 import PostContainer from "@/app/components/post/post-container";
 import PostList from "@/app/components/post/post-list";
+import PostListSkeleton from "@/app/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 type Props = {
   params: {
@@ -26,8 +28,10 @@ export default async function Posts({ params }: Props) {
     <>
       {/* @ts-expect-error Async Server Component */}
       <PostContainer title={category}>
-        {/* @ts-expect-error Async Server Component */}
-        <PostList category={category} />
+        <Suspense fallback={<PostListSkeleton />}>
+          {/* @ts-expect-error Async Server Component */}
+          <PostList category={category} />
+        </Suspense>
       </PostContainer>
     </>
   );

@@ -29,7 +29,7 @@ const NavLink = ({ children, onClick, href, path }: LinkProps) => {
         }`}
         onClick={onClick}
       >
-        <Link href={href} scroll={false}>
+        <Link href={href}>
           <p className="pr-1">{children}</p>
         </Link>
       </li>

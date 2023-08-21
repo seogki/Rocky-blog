@@ -6,18 +6,13 @@ import { Post } from "../interface/posts.interface";
 const matter = require("gray-matter");
 
 export const getCategories = cache(async (): Promise<string[]> => {
-  const filePath = path.resolve(process.cwd(), "src", "posts");
+  const filePath = path.join(process.cwd(), "src", "posts");
   const categories = await fs.readdir(filePath);
   return categories;
 });
 
 export const getPostsByCategoryName = cache(async (categoryName: string) => {
-  const filePath = path.resolve(
-    process.cwd(),
-    "src",
-    "posts",
-    `${categoryName}`
-  );
+  const filePath = path.join(process.cwd(), "src", "posts", categoryName);
 
   const posts = await fs.readdir(filePath);
 
@@ -25,24 +20,16 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
     posts
       .filter((file) => path.extname(file) === ".mdx")
       .map(async (file) => {
-        // const filePath = `src/app/data/posts/${categoryName}/${file}`;
-        const filePath = path.resolve(
+        const filePath = path.join(
           process.cwd(),
           "src",
           "posts",
-          `${categoryName}`,
-          `${file}`
+          categoryName,
+          file
         );
-        // console.debug(
-        //   __dirname,
-        //   path.resolve(
-        //     process.cwd(),
-        //     "src",
-        //     "posts",
-        //     `${categoryName}`,
-        //     `${file}`
-        //   )
-        // );
+
+        // console.debug(filePath);
+
         const postContent = await fs.readFile(filePath, "utf8");
         const { data, content } = matter(postContent);
 
@@ -53,16 +40,16 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
         return {
           ...data,
           body: content,
-          slug: file.replace(".mbx", "")
+          slug: file.replace(".mdx", "")
         } as Post;
       })
   );
 });
 
-export const getPost = async (slug: string, categoryName: string) => {
+export const getPost = cache(async (slug: string, categoryName: string) => {
   const posts = await getPostsByCategoryName(categoryName);
 
   if (posts.length < 1) return;
 
   return posts.find((post) => post?.slug === slug);
-};
+});

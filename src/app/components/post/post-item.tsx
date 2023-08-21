@@ -19,6 +19,10 @@ export default async function PostItem({ category, post }: Props) {
     parseFrontmatter: false
   };
 
+  if (!post || post === null) {
+    return <></>;
+  }
+
   return (
     <>
       <article className="prose max-w-screen-md dark:prose-invert mx-auto post-article break-all">
@@ -29,14 +33,14 @@ export default async function PostItem({ category, post }: Props) {
             </>
           }
         >
-          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post?.title}`}</h1>
+          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post.title}`}</h1>
           {/* @ts-expect-error Server Component */}
-          <MDXRemote source={post?.body} options={options} />
+          <MDXRemote source={post.body} options={options} />
         </Suspense>
       </article>
-      <aside className="hidden lg:block absolute right-0 top-0">
+      {/* <aside className="hidden lg:block absolute right-0 top-0">
         lg일때만 show
-      </aside>
+      </aside> */}
     </>
   );
 }

@@ -17,7 +17,6 @@ export default function MenuTab({
         <Link
           href={link}
           onClick={() => onClick()}
-          scroll={false}
           className="px-4 mr-0 lg:mr-2 py-4 lg:py-0 "
         >
           {children}

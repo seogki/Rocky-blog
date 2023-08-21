@@ -16,9 +16,16 @@ export const generateMetadata = async ({
 
   const post = await getPost(slug, category);
 
+  if (!post || post === null) {
+    return {
+      title: "Rocky Blog - Post",
+      description: "Rocky Blog"
+    };
+  }
+
   return {
-    title: `[${category}] ${post?.title}`,
-    description: post?.description
+    title: `[${category}] ${post.title}`,
+    description: post.description
   };
 };
 
