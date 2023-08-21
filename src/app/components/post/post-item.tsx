@@ -1,22 +1,16 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPost } from "@/app/data";
-// import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 import { Suspense } from "react";
 import Loading from "../loading";
-// const rehypePrism = require("@mapbox/rehype-prism");
+import { Post } from "@/app/interface/posts.interface";
+import remarkMdxImages from "remark-mdx-images";
 type Props = {
-  params: {
-    category: string;
-    slug: string;
-  };
+  category: string;
+  post: Post;
 };
 
-export default async function PostItem({ params }: Props) {
-  const { category, slug } = params;
-
-  const post = await getPost(slug, category);
-
+export default async function PostItem({ category, post }: Props) {
   const options = {
     // made available to the arguments of any custom mdx component
     scope: {},
@@ -34,7 +28,7 @@ export default async function PostItem({ params }: Props) {
   return (
     <>
       <article className="prose max-w-screen-md dark:prose-invert mx-auto">
-        <h1 className="text-center mt-4 lg:mt-8">{post!.title}</h1>
+        <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post?.title}`}</h1>
         <Suspense
           fallback={
             <>
@@ -43,7 +37,7 @@ export default async function PostItem({ params }: Props) {
           }
         >
           {/* @ts-expect-error Server Component */}
-          <MDXRemote source={post!.body} options={options} />
+          <MDXRemote source={post?.body} options={options} />
         </Suspense>
       </article>
     </>

@@ -17,7 +17,7 @@ export default function HeaderTitle() {
 
   return (
     <>
-      <Link href={"/"} onClick={() => closeAllOpener()}>
+      <Link href={"/"} scroll={false} onClick={() => closeAllOpener()}>
         Rocky Blog
       </Link>
     </>

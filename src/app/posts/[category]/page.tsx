@@ -1,9 +1,21 @@
 import PostContainer from "@/app/components/post/post-container";
 import PostList from "@/app/components/post/post-list";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     category: string;
+  };
+};
+
+export const generateMetadata = async ({
+  params
+}: Props): Promise<Metadata> => {
+  const { category } = params;
+
+  return {
+    title: `post - ${category}`,
+    description: `post - ${category} list`
   };
 };
 
