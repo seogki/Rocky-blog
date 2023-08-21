@@ -5,12 +5,14 @@ import MyFooter from "./footer";
 import "@/style/globals.scss";
 import { ThemeProvider } from "./theme-provider";
 import { ReduxProvider } from "./redux/redux-provider";
+import { Analytics } from "@vercel/analytics/react";
+
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Rocky Blog",
-  description: "Rocky Blog Main"
-};
+// export const metadata: Metadata = {
+//   title: "Rocky Blog",
+//   description: "Rocky Blog Main"
+// };
 
 export default function RootLayout({
   children
@@ -32,6 +34,7 @@ export default function RootLayout({
             </div>
           </ReduxProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

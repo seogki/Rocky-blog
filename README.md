@@ -27,23 +27,21 @@
 - optimize search engine
 - unit test as possible
 - e2e test maybe?
-- ci/cd deployment to aws using github action / aws s3, aws codedeploy, aws ec2 maybe?
-- docker with let's encrypt https
+- vercel deployment
 
 ---
 
 ## 3. Important Folder Structure 📁
 
+- public
+  - posts (static images which will be using in mdx)
 - src
   - app
-    - about
-    - api (fetch api)
     - components (reusable component)
-    - edit
     - hooks
+    - posts
     - interface
-    - redux-tool-kits, redux-saga (local state management)
-    - setting
+    - redux-tool-kits (local state management)
   - assets
     - image
   - style (scss)

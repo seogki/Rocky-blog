@@ -1,0 +1,58 @@
+---
+title: deploy nextjs 13 to vercel
+date: "21th August 2023"
+description: how to deploy nextjs 13 website to vercel through github
+---
+
+## Introduction
+
+this article shows how to deploy nextjs 13 website to vercel through github, and it is pretty easy
+since vercel is made by the creator of nextjs
+
+
+#### First thing you need to do
+
+1. github account
+2. your developed website by nextjs 13 
+3. vercel account as hobby
+
+
+<br/>
+## 1. Register your git repository in vercel
+
+When you create vercel account and starting to initialize, you will find a place where you can add your github
+account, once you choose specific repository that you wants to deploy, you can see **import** section below
+
+![regist](./deploy-nextjs-13-to-vercel-github/vercel-git-regist.png)
+<br/>
+## 2. Configure you deployment build setting
+
+After pressing import, you can configure your deployment build setting
+
+![buildSetting1](./deploy-nextjs-13-to-vercel-github/vercel-build-1.png)
+
+
+- project name: your project Name
+- Framework preset : for us it is Next.js
+- Root Directory : your root directory
+- Build and Output Settings : commands for building and deployment
+    - i have left everything handle by vercel
+    - ![buildSetting2](./deploy-nextjs-13-to-vercel-github/vercel-build-2.png)
+- Environment Variables : your env
+
+#### that's it !! for simple deployment 😊
+<br/>
+## 3. Check Your website
+
+when deployment is done, vercel give you a vercel domain, that you can check
+
+![detail](./deploy-nextjs-13-to-vercel-github/vercel-deploy-detail.png)
+
+
+#### Tips 🙋‍♂️
+
+
+By registering repository to vercel, not only they deploy main branch, they also make a deployment of develop branch
+, in that way you can test your website before actually deploying to main branch, which is very useful
+
+![build3](./deploy-nextjs-13-to-vercel-github/vercel-dev-main.png)

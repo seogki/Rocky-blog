@@ -14,8 +14,8 @@ export const generateMetadata = async ({
   const { category } = params;
 
   return {
-    title: `post - ${category}`,
-    description: `post - ${category} list`
+    title: `Rocky Blog - Posts [${category}]`,
+    description: `Rocky Blog - Posts [${category}]`
   };
 };
 
