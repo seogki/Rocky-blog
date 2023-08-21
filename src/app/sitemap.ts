@@ -1,14 +1,33 @@
 import { MetadataRoute } from "next";
+import { getCategories, getPostsByCategoryName } from "./data";
+import { stringToDate } from "./utils/date";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const categories = await getCategories();
+  const baseUrl = "https://rocky-blog.vercel.app";
+
+  const sitemapList = [
     {
-      url: "https://rocky-blog.vercel.app",
+      url: baseUrl,
       lastModified: new Date()
     },
     {
-      url: "https://rocky-blog.vercel.app/posts",
+      url: `${baseUrl}/posts`,
       lastModified: new Date()
     }
   ];
+
+  for await (const category of categories) {
+    const posts = await getPostsByCategoryName(category);
+    for (const post of posts) {
+      if (!post || post === null) continue;
+
+      sitemapList.push({
+        url: `${baseUrl}/posts/${category}/${post.slug}`,
+        lastModified: stringToDate(post.date, "DD/MM/YYYY")
+      });
+    }
+  }
+
+  return sitemapList;
 }
