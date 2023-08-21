@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { Transition } from "@headlessui/react";
-import { Category } from "./interface/posts.interface";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import useToggleScrollbar from "./hooks/useToggleScrollbar";
 import {

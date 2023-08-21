@@ -1,4 +1,3 @@
-import { Category } from "@/app/interface/posts.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type HeaderState = {

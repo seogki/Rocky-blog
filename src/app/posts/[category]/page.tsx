@@ -3,10 +3,11 @@ import PostList from "@/app/components/post/post-list";
 import PostListSkeleton from "@/app/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: {
-    category: string;
+    category?: string;
   };
 };
 
@@ -23,6 +24,8 @@ export const generateMetadata = async ({
 
 export default async function Posts({ params }: Props) {
   const { category } = params;
+
+  if (!category) return notFound();
 
   return (
     <>

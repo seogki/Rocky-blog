@@ -1,3 +1,4 @@
+import { type MDXRemoteSerializeResult } from "next-mdx-remote";
 export interface Post {
   slug: string;
   title: string;
@@ -6,13 +7,13 @@ export interface Post {
   body: any;
 }
 
-export interface PostBody {
+export type Frontmatter = {
   title: string;
-  date: string;
   description: string;
-}
+  date: string;
+};
 
-export interface Category {
-  _id: string;
-  name: string;
-}
+export type PostV2<TFrontmatter> = {
+  serialized: MDXRemoteSerializeResult;
+  frontmatter: TFrontmatter;
+};

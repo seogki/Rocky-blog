@@ -1,45 +1,35 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
+"use client";
+
+// import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote";
 import { Suspense } from "react";
 import Loading from "../loading";
 import Image from "next/image";
-import { Post } from "@/app/interface/posts.interface";
+import { Frontmatter, Post, PostV2 } from "@/app/interface/posts.interface";
 type Props = {
   category: string;
-  post: Post;
+  data: PostV2<Frontmatter>;
 };
 
-export default async function PostItem({ category, post }: Props) {
+export default function PostItem({ category, data }: Props) {
   const ResponsiveImage = (props: any) => (
-    <Image
-      alt={props.alt}
-      sizes="100%"
-      style={{ width: "100%", height: "auto" }}
-      {...props}
-    />
+    <p className="test">
+      <Image
+        alt={props.alt}
+        sizes="100%"
+        style={{ width: "100%", height: "auto" }}
+        {...props}
+      />
+    </p>
   );
 
   const components = {
-    img: ResponsiveImage
+    Image: ResponsiveImage
   };
-
-  const options = {
-    scope: {},
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [],
-      format: "mdx"
-    },
-    parseFrontmatter: true
-  };
-
-  if (!post || post === null) {
-    return <></>;
-  }
 
   return (
     <>
-      <article className="prose max-w-screen-md dark:prose-invert mx-auto post-article">
+      <article className="prose max-w-screen-md dark:prose-invert mx-auto post-article break-words">
         <Suspense
           fallback={
             <>
@@ -47,13 +37,10 @@ export default async function PostItem({ category, post }: Props) {
             </>
           }
         >
-          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post.title}`}</h1>
-          {/* @ts-expect-error Server Component */}
-          <MDXRemote
-            source={post.body}
-            components={{ ...components }}
-            {...options}
-          />
+          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${data.frontmatter.title}`}</h1>
+          <h3 className="text-right mt-2 text-base">{data.frontmatter.date}</h3>
+          {/* <MDXRemote source={post.body} {...options} /> */}
+          <MDXRemote {...data.serialized} components={components} />
         </Suspense>
       </article>
       {/* <aside className="hidden lg:block absolute right-0 top-0">

@@ -1,7 +1,9 @@
-import fs from "fs/promises";
+import { promises as fs } from "fs";
+import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
+import remarkGfm from "remark-gfm";
 import { cache } from "react";
-import { Post } from "../interface/posts.interface";
+import { Frontmatter, Post } from "../interface/posts.interface";
 
 const matter = require("gray-matter");
 
@@ -46,10 +48,38 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
   );
 });
 
-export const getPost = cache(async (slug: string, categoryName: string) => {
+export const getPost = async (slug: string, categoryName: string) => {
   const posts = await getPostsByCategoryName(categoryName);
 
   if (posts.length < 1) return;
 
   return posts.find((post) => post?.slug === slug);
-});
+};
+
+export const getPostV2 = async (slug: string, categoryName: string) => {
+  const filePath = path.join(
+    process.cwd(),
+    "src",
+    "posts",
+    categoryName,
+    `${slug}.mdx`
+  );
+
+  const raw = await fs.readFile(filePath, "utf-8");
+
+  // Serialize the MDX content and parse the frontmatter
+  const serialized = await serialize(raw, {
+    mdxOptions: {
+      // remarkPlugins: [remarkGfm],
+      development: false
+    },
+    parseFrontmatter: true
+  });
+
+  const frontmatter = serialized.frontmatter as Frontmatter;
+
+  return {
+    frontmatter,
+    serialized
+  };
+};

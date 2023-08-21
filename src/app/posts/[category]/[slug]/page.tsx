@@ -1,6 +1,7 @@
 import PostItem from "@/app/components/post/post-item";
-import { getPost } from "@/app/data";
+import { getPost, getPostV2 } from "@/app/data";
 import { Metadata } from "next";
+import path from "path";
 
 type Props = {
   params: {
@@ -32,12 +33,11 @@ export const generateMetadata = async ({
 export default async function Posts({ params }: Props) {
   const { category, slug } = params;
 
-  const post = await getPost(slug, category);
+  const data = await getPostV2(slug, category);
 
   return (
     <>
-      {/* @ts-expect-error Async Server Component */}
-      <PostItem category={category} post={post} />
+      <PostItem category={category} data={data} />
     </>
   );
 }
