@@ -1,4 +1,5 @@
 import { getPostsByCategoryName } from "@/app/data";
+import { convertFormat } from "@/app/utils/date";
 import Link from "next/link";
 
 type Props = {
@@ -25,7 +26,7 @@ export default async function PostList({ category }: Props) {
                 <p>{post!.description}</p>
               </div>
               <div className="ml-auto text-sm font-light mt-2 dark:text-zinc-300 text-zinc-600">
-                <time>{post!.date}</time>
+                <time>{convertFormat(post!.date, "DD/MM/YYYY")}</time>
               </div>
             </div>
           </Link>

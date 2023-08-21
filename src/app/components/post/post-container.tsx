@@ -1,6 +1,5 @@
 import { getCategories } from "@/app/data";
 import Navigation from "../navigation-list";
-import PostList from "./post-list";
 
 type Props = {
   children?: React.JSX.Element | string;

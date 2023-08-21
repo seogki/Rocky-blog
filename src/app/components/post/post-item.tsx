@@ -34,6 +34,9 @@ export default async function PostItem({ category, post }: Props) {
           <MDXRemote source={post?.body} options={options} />
         </Suspense>
       </article>
+      <aside className="hidden lg:block absolute right-0 top-0">
+        lg일때만 show
+      </aside>
     </>
   );
 }
