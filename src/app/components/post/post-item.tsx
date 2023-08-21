@@ -40,7 +40,7 @@ export default function PostItem({ category, data }: Props) {
           <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${data.frontmatter.title}`}</h1>
           <h3 className="text-right mt-2 text-base">{data.frontmatter.date}</h3>
           {/* <MDXRemote source={post.body} {...options} /> */}
-          <MDXRemote {...data.serialized} components={components} />
+          <MDXRemote {...data.serialized} components={...components} lazy />
         </Suspense>
       </article>
       {/* <aside className="hidden lg:block absolute right-0 top-0">
