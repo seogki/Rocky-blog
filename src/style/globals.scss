@@ -14,6 +14,12 @@ textarea {
   header {
     @apply dark:bg-zinc-800/60 bg-white/60;
   }
+
+  .post-article {
+    a {
+      @apply break-all;
+    }
+  }
 }
 
 html {
@@ -28,7 +34,3 @@ div#__next {
   @apply w-full;
   @apply h-full;
 }
-// main {
-//   @apply w-full;
-//   @apply h-full;
-// }
