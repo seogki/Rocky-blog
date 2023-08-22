@@ -1,7 +1,7 @@
+import { MdxCustomComponent } from "@/app/components/mdx-custom-component";
 import PostItem from "@/app/components/post/post-item";
-import { getPost, getPostV2 } from "@/app/data";
+import { getPost } from "@/app/data";
 import { Metadata } from "next";
-import path from "path";
 
 type Props = {
   params: {
@@ -15,7 +15,9 @@ export const generateMetadata = async ({
 }: Props): Promise<Metadata> => {
   const { category, slug } = params;
 
-  const post = await getPost(slug, category);
+  const { components } = MdxCustomComponent();
+
+  const post = await getPost(slug, category, components);
 
   if (!post || post === null) {
     return {
@@ -33,11 +35,13 @@ export const generateMetadata = async ({
 export default async function Posts({ params }: Props) {
   const { category, slug } = params;
 
-  const data = await getPostV2(slug, category);
+  const { components } = MdxCustomComponent();
+
+  const post = await getPost(slug, category, components);
 
   return (
     <>
-      <PostItem category={category} data={data} />
+      <PostItem category={category} post={post} />
     </>
   );
 }

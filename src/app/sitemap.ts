@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { MdxCustomComponent } from "./components/mdx-custom-component";
 import { getCategories, getPostsByCategoryName } from "./data";
 import { stringToDate } from "./utils/date";
 
@@ -18,7 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   for await (const category of categories) {
-    const posts = await getPostsByCategoryName(category);
+    const { components } = MdxCustomComponent();
+    const posts = await getPostsByCategoryName(category, components);
     for (const post of posts) {
       if (!post || post === null) continue;
 

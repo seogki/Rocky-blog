@@ -1,31 +1,15 @@
-"use client";
-
-// import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXRemote } from "next-mdx-remote";
 import { Suspense } from "react";
 import Loading from "../loading";
-import Image from "next/image";
-import { Frontmatter, Post, PostV2 } from "@/app/interface/posts.interface";
+import { Post } from "@/app/interface/posts.interface";
 type Props = {
   category: string;
-  data: PostV2<Frontmatter>;
+  post: Post | null | undefined;
 };
 
-export default function PostItem({ category, data }: Props) {
-  const ResponsiveImage = (props: any) => (
-    <p className="test">
-      <Image
-        alt={props.alt}
-        sizes="100%"
-        style={{ width: "100%", height: "auto" }}
-        {...props}
-      />
-    </p>
-  );
-
-  const components = {
-    Image: ResponsiveImage
-  };
+export default function PostItem({ category, post }: Props) {
+  if (!post || post === null) {
+    return <></>;
+  }
 
   return (
     <>
@@ -37,10 +21,9 @@ export default function PostItem({ category, data }: Props) {
             </>
           }
         >
-          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${data.frontmatter.title}`}</h1>
-          <h3 className="text-right mt-2 text-base">{data.frontmatter.date}</h3>
-          {/* <MDXRemote source={post.body} {...options} /> */}
-          <MDXRemote {...data.serialized} components={...components} lazy />
+          <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post.title}`}</h1>
+          <time className="text-right mt-2 text-base">{post.date}</time>
+          {post.body}
         </Suspense>
       </article>
       {/* <aside className="hidden lg:block absolute right-0 top-0">

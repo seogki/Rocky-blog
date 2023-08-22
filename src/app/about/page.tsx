@@ -1,6 +1,12 @@
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import Image from "next/image";
 // import myPic from "@/assets/image/me.jpg";
+
+export const metadata: Metadata = {
+  title: "Rocky Blog - About",
+  description: "Rocky Blog about"
+};
+
 const About: NextPage = () => {
   return (
     <div className="w-full mx-auto max-w-screen-md">

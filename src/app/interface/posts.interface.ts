@@ -12,8 +12,3 @@ export type Frontmatter = {
   description: string;
   date: string;
 };
-
-export type PostV2<TFrontmatter> = {
-  serialized: MDXRemoteSerializeResult;
-  frontmatter: TFrontmatter;
-};
