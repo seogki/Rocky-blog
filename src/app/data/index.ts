@@ -4,6 +4,7 @@ import path from "path";
 import remarkGfm from "remark-gfm";
 import { cache } from "react";
 import { Frontmatter, Post } from "../interface/posts.interface";
+import rehypeHighlight from "rehype-highlight";
 
 export const getCategories = cache(async (): Promise<string[]> => {
   const filePath = path.join(process.cwd(), "src", "posts");
@@ -34,7 +35,8 @@ export const getPostsByCategoryName = cache(
           const { content, frontmatter } = await compileMDX<Frontmatter>({
             options: {
               mdxOptions: {
-                remarkPlugins: [remarkGfm]
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeHighlight]
               },
               parseFrontmatter: true
             },

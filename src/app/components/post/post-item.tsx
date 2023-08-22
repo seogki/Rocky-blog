@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Loading from "../loading";
+
 import { Post } from "@/app/interface/posts.interface";
 type Props = {
   category: string;
@@ -13,6 +14,10 @@ export default function PostItem({ category, post }: Props) {
 
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
+      ></link>
       <article className="prose max-w-screen-md dark:prose-invert mx-auto post-article break-words">
         <Suspense
           fallback={
