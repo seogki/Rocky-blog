@@ -1,66 +1,65 @@
-import fs from "fs/promises";
+import { promises as fs } from "fs";
+import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
+import remarkGfm from "remark-gfm";
 import { cache } from "react";
-import { Post } from "../interface/posts.interface";
-
-const matter = require("gray-matter");
+import { Frontmatter, Post } from "../interface/posts.interface";
+import rehypeHighlight from "rehype-highlight";
 
 export const getCategories = cache(async (): Promise<string[]> => {
-  const filePath = path.resolve(process.cwd(), "src", "posts");
+  const filePath = path.join(process.cwd(), "src", "posts");
   const categories = await fs.readdir(filePath);
   return categories;
 });
 
-export const getPostsByCategoryName = cache(async (categoryName: string) => {
-  const filePath = path.resolve(
-    process.cwd(),
-    "src",
-    "posts",
-    `${categoryName}`
-  );
+export const getPostsByCategoryName = cache(
+  async (categoryName: string, components: any) => {
+    const filePath = path.join(process.cwd(), "src", "posts", categoryName);
 
-  const posts = await fs.readdir(filePath);
+    const posts = await fs.readdir(filePath);
 
-  return Promise.all(
-    posts
-      .filter((file) => path.extname(file) === ".mdx")
-      .map(async (file) => {
-        // const filePath = `src/app/data/posts/${categoryName}/${file}`;
-        const filePath = path.resolve(
-          process.cwd(),
-          "src",
-          "posts",
-          `${categoryName}`,
-          `${file}`
-        );
-        // console.debug(
-        //   __dirname,
-        //   path.resolve(
-        //     process.cwd(),
-        //     "src",
-        //     "posts",
-        //     `${categoryName}`,
-        //     `${file}`
-        //   )
-        // );
-        const postContent = await fs.readFile(filePath, "utf8");
-        const { data, content } = matter(postContent);
+    return Promise.all(
+      posts
+        .filter((file) => path.extname(file) === ".mdx")
+        .map(async (file) => {
+          const filePath = path.join(
+            process.cwd(),
+            "src",
+            "posts",
+            categoryName,
+            file
+          );
 
-        if (data.published === false) {
-          return null;
-        }
+          const source = await fs.readFile(filePath, "utf8");
 
-        return {
-          ...data,
-          body: content,
-          slug: file.replace(".mbx", "")
-        } as Post;
-      })
-  );
-});
+          const { content, frontmatter } = await compileMDX<Frontmatter>({
+            options: {
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeHighlight]
+              },
+              parseFrontmatter: true
+            },
+            components: { ...components, ...{} },
+            source
+          });
 
-export const getPost = async (slug: string, categoryName: string) => {
-  const posts = await getPostsByCategoryName(categoryName);
+          return {
+            ...frontmatter,
+            body: content,
+            slug: file.replace(".mdx", "")
+          } as Post;
+        })
+    );
+  }
+);
+
+export const getPost = async (
+  slug: string,
+  categoryName: string,
+  components: any
+) => {
+  const posts = await getPostsByCategoryName(categoryName, components);
 
   if (posts.length < 1) return;
 
