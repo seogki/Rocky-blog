@@ -15,9 +15,7 @@ export const generateMetadata = async ({
 }: Props): Promise<Metadata> => {
   const { category, slug } = params;
 
-  const { components } = MdxCustomComponent();
-
-  const post = await getPost(slug, category, components);
+  const post = await getPost(slug, category);
 
   if (!post || post === null) {
     return {
@@ -35,9 +33,7 @@ export const generateMetadata = async ({
 export default async function Posts({ params }: Props) {
   const { category, slug } = params;
 
-  const { components } = MdxCustomComponent();
-
-  const post = await getPost(slug, category, components);
+  const post = await getPost(slug, category);
 
   return (
     <>

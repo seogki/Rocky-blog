@@ -5,12 +5,10 @@ import { Metadata } from "next";
 import PostListSkeleton from "./components/skeleton/post-list-skeleton";
 import { Suspense } from "react";
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const categories = await getCategories();
-
+export const generateMetadata = (): Metadata => {
   return {
-    title: `Rocky Blog - Posts [${categories[0]}]`,
-    description: `Rocky Blog - Posts [${categories[0]}]`
+    title: `Rocky Blog - Posts [RECENT]`,
+    description: `Rocky Blog - Posts [RECENT]`
   };
 };
 
@@ -19,10 +17,10 @@ export default async function Home() {
   return (
     <>
       {/* @ts-expect-error Async Server Component */}
-      <PostContainer title={categories[0]}>
+      <PostContainer title={"RECENT"}>
         <Suspense fallback={<PostListSkeleton />}>
           {/* @ts-expect-error Async Server Component */}
-          <PostList category={categories[0]}></PostList>
+          <PostList category={"RECENT"}></PostList>
         </Suspense>
       </PostContainer>
     </>

@@ -19,8 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   for await (const category of categories) {
-    const { components } = MdxCustomComponent();
-    const posts = await getPostsByCategoryName(category, components);
+    const posts = await getPostsByCategoryName(category);
     for (const post of posts) {
       if (!post || post === null) continue;
 

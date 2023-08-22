@@ -1,6 +1,9 @@
+const advancedFormat = require("dayjs/plugin/advancedFormat");
 import dayjs from "dayjs";
 
-export function convertFormat(str: string, format = "DD/mm/YYYY HH:mm:ss") {
+dayjs.extend(advancedFormat);
+
+export function convertFormat(str: string, format = "Do MM.YYYY") {
   return dayjs(str).format(format);
 }
 

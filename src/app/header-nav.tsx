@@ -54,7 +54,6 @@ export default function HeaderNav({ categories }: { categories: string[] }) {
           onClick={() => dispatch(closeDrawer())}
         >
           <NavigationList
-            defaultPath={path !== "" ? path : categories[0]}
             className="h-screen w-2/3 dark:bg-zinc-800 bg-white overflow-auto"
             list={categories}
             onClick={(e) => e.stopPropagation()}

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Loading from "../loading";
 
 import { Post } from "@/app/interface/posts.interface";
+import { convertFormat } from "@/app/utils/date";
 type Props = {
   category: string;
   post: Post | null | undefined;
@@ -27,7 +28,9 @@ export default function PostItem({ category, post }: Props) {
           }
         >
           <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post.title}`}</h1>
-          <time className="text-right mt-2 text-base">{post.date}</time>
+          <h3 className="ml-auto text-right mt-2 text-base">
+            <time>{convertFormat(post.date)}</time>
+          </h3>
           {post.body}
         </Suspense>
       </article>

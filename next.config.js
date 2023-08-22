@@ -5,9 +5,6 @@ const nextConfig = {
   env: {
     jest: true
   },
-  experimental: {
-    scrollRestoration: true
-  },
   typescript: {
     ignoreBuildErrors: true
   }
