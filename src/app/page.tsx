@@ -12,8 +12,7 @@ export const generateMetadata = (): Metadata => {
   };
 };
 
-export default async function Home() {
-  const categories = await getCategories();
+export default function Home() {
   return (
     <>
       {/* @ts-expect-error Async Server Component */}
