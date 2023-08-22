@@ -4,7 +4,6 @@ import path from "path";
 import remarkGfm from "remark-gfm";
 import { cache } from "react";
 import { Frontmatter, Post } from "../interface/posts.interface";
-import rehypeHighlight from "rehype-highlight";
 import rehypePrism from "rehype-prism-plus";
 import { MdxCustomComponent } from "../components/mdx-custom-component";
 
@@ -35,40 +34,44 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
 
   const posts = await fs.readdir(filePath);
 
-  return Promise.all(
-    posts
-      .filter((file) => path.extname(file) === ".mdx")
-      .map(async (file) => {
-        const filePath = path.join(
-          process.cwd(),
-          "src",
-          "posts",
-          categoryName,
-          file
-        );
+  const mdxs = posts.filter((file) => path.extname(file) === ".mdx");
 
-        const source = await fs.readFile(filePath, "utf8");
+  const list: Post[] = [];
 
-        const { content, frontmatter } = await compileMDX<Frontmatter>({
-          options: {
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [rehypePrism]
-            },
-            parseFrontmatter: true
-          },
-          components: { ...components, ...{} },
-          source
-        });
+  for await (const mdx of mdxs) {
+    const filePath = path.join(
+      process.cwd(),
+      "src",
+      "posts",
+      categoryName,
+      mdx
+    );
 
-        return {
-          ...frontmatter,
-          body: content,
-          category: categoryName,
-          slug: file.replace(".mdx", "")
-        } as Post;
-      })
-  );
+    const source = await fs.readFile(filePath, "utf8");
+
+    const { content, frontmatter } = await compileMDX<Frontmatter>({
+      options: {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypePrism]
+        },
+        parseFrontmatter: true
+      },
+      components: { ...components, ...{} },
+      source
+    });
+
+    if (!frontmatter.published) continue;
+
+    list.push({
+      ...frontmatter,
+      body: content,
+      category: categoryName,
+      slug: mdx.replace(".mdx", "")
+    } as Post);
+  }
+
+  return list.filter((item) => item);
 });
 
 export const getPost = async (slug: string, categoryName: string) => {

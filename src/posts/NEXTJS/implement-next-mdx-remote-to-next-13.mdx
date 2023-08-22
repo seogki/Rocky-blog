@@ -1,0 +1,56 @@
+---
+title: implement next-mdx-remote to nextjs 13 
+date: "2023/08/22"
+description: shows how to implement mdx in nextjs 13
+tags : 'nextjs, next-mdx-remote, tailwindcss'
+published: true
+---
+
+This article shows how to implement next-mdx-remote to nextjs 13
+
+First you need to install the next-mdx-remote
+
+## Install / Configuration
+
+```
+npm install next-mdx-remote
+yarn add next-mdx-remote
+```
+
+
+If you want to use tailwindcss with typography you have to install first
+
+```
+npm install -D tailwindcss @tailwindcss/typography
+yarn add --dev tailwindcss @tailwindcss/typography
+```
+
+
+Since tailwindcss configuration describes well on the website, i will not going to describe details about how to config settings about it
+
+If you have learn about tailwindcss configuration [tailwindcss](https://tailwindcss.com/docs/installation) here is the link
+
+```js showLineNumbers
+tailwindcss.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+    extend: {
+      screens: {
+        xs: "480px",
+        "2xl": "1440px"
+      }
+    }
+  },
+  darkMode: ["class"],
+
+  plugins: [require("@tailwindcss/typography")]
+};
+```
+
+## Reference
+
+https://github.com/hashicorp/next-mdx-remote
+https://docs.npmjs.com/cli/v8/commands/npm-install

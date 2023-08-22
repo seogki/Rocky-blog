@@ -7,8 +7,8 @@ import { Suspense } from "react";
 
 export const generateMetadata = (): Metadata => {
   return {
-    title: `Rocky Blog - Posts [RECENT]`,
-    description: `Rocky Blog - Posts [RECENT]`
+    title: `Rocky Blog - Posts`,
+    description: `Rocky Blog - Posts`
   };
 };
 

@@ -1,8 +1,9 @@
 ---
 title: basic mdx with remark-gfm plugin syntax
 date: "2023/08/18"
-description: basic markdown syntax that we can use
-tags : 'mdx,markdown,remark-gfm'
+description: basic markdown syntax that we can use with addition plugin by of remark-gfm through next-remote-mdx
+tags : 'mdx,markdown,remark-gfm,next-mdx-remote' 
+published: true
 ---
 
 ## Heading
@@ -39,7 +40,7 @@ hash from 1 ~ 6
 
 Ordered list is define by number with a dot
 
-even though we define list unorderly, it does not order by itself<br/>
+Even though we define list unorderly, it does not order by itself<br/>
 please make sure that the number is ordered
 
 ```
@@ -130,7 +131,7 @@ export default function PostTags({ tags }: { tags: string }) {
 
 #### Code Result
 
-```js
+```js {1,3-4} showLineNumbers
 export default function PostTags({ tags }: { tags: string }) {
   return (
     <>

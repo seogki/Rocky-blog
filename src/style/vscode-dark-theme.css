@@ -274,3 +274,13 @@ pre[class*="language-"] > code[class*="language-"] {
   box-shadow: inset 5px 0 0 #f7d87c;
   z-index: 0;
 }
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175); /* Line number color */
+  content: attr(line);
+}

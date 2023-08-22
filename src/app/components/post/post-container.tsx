@@ -16,9 +16,7 @@ export default async function PostContainer({ title, children }: Props) {
           className="hidden sm:block sm:basis-2/12"
         />
         <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
-          <h1 className="text-xl sm:text-lg font-bold text-center my-2">
-            {title}
-          </h1>
+          <h1 className="text-2xl font-bold text-center my-2">{title}</h1>
           {children}
         </section>
       </div>
