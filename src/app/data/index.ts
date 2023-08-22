@@ -5,8 +5,8 @@ import remarkGfm from "remark-gfm";
 import { cache } from "react";
 import { Frontmatter, Post } from "../interface/posts.interface";
 import rehypeHighlight from "rehype-highlight";
+import rehypePrism from "rehype-prism-plus";
 import { MdxCustomComponent } from "../components/mdx-custom-component";
-import { convertFormat } from "../utils/date";
 
 export const getCategories = cache(async (): Promise<string[]> => {
   const filePath = path.join(process.cwd(), "src", "posts");
@@ -53,7 +53,7 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
           options: {
             mdxOptions: {
               remarkPlugins: [remarkGfm],
-              rehypePlugins: [rehypeHighlight]
+              rehypePlugins: [rehypePrism]
             },
             parseFrontmatter: true
           },

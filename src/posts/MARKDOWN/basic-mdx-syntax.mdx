@@ -2,6 +2,7 @@
 title: basic mdx with remark-gfm plugin syntax
 date: "2023/08/18"
 description: basic markdown syntax that we can use
+tags : 'mdx,markdown,remark-gfm'
 ---
 
 ## Heading
@@ -108,36 +109,42 @@ Code Block usually opens by tripple grave \`\`\` and close by tripple grave \`\`
 ````js
 ```(open tripple grave)
 
-<html lang="en" suppressHydrationWarning>
-    <body className={inter.className}>
-        <div>
-            <MyHeader />
-            <main>
-                {children}
-            </main>
-            <MyFooter />
-        </div>
-    </body>
-</html>
+export default function PostTags({ tags }: { tags: string }) {
+  return (
+    <>
+      {tags.split(",").map((tag) => (
+        <span
+          key={tag}
+          className="test"
+        >
+          {tag}
+        </span>
+      ))}
+    </>
+  );
+}
 
-```(close tripple grave)
+
+(close tripple grave)```
 ````
 
 #### Code Result
 
 ```js
-<html lang="en" suppressHydrationWarning>
-    <body className={inter.className}>
-        <div>
-            <MyHeader />
-            <main>
-                {children}
-            </main>
-            <MyFooter />
-        </div>
-    </body>
-</html>
-
+export default function PostTags({ tags }: { tags: string }) {
+  return (
+    <>
+      {tags.split(",").map((tag) => (
+        <span
+          key={tag}
+          className="test"
+        >
+          {tag}
+        </span>
+      ))}
+    </>
+  );
+}
 ```
 
 ## Delimeter
