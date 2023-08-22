@@ -28,7 +28,11 @@ export default async function PostList({ category }: Props) {
       <ul className="flex flex-col w-full h-full px-2">
         {posts.map((post) => (
           <li key={post!.slug}>
-            <Link href={`/posts/${category}/${post!.slug}`}>
+            <Link
+              href={`/posts/${
+                category === "RECENT" ? post.category : category
+              }/${post!.slug}`}
+            >
               <div className="w-full h-auto p-4 my-4 flex flex-col justify-between align-middle">
                 <div className="text-lg font-medium dark:text-zinc-100 text-zinc:800 line-clamp-2">
                   <h2>{post!.title}</h2>
