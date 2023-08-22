@@ -23,9 +23,8 @@ type LinkProps = {
 const NavLink = ({ children, onClick, href, isActive }: LinkProps) => {
   return (
     <li
-      className={`text-sm p-2 m-4 ml-2 sm:m-2 border-2 border-transparent rounded-md font-medium ${
-        isActive &&
-        "border-2 bg-teal-600 dark:bg-teal-400 border-teal-600 dark:border-teal-400 text-white dark:text-black"
+      className={`text-sm p-2 m-4 ml-2 sm:m-2 border-2 border-transparent rounded-md font-bold ${
+        isActive ? "text-teal-600 dark:text-teal-400" : "text-zinc-500"
       }`}
       onClick={onClick}
     >
