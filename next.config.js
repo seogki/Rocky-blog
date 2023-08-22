@@ -5,6 +5,15 @@ const nextConfig = {
   env: {
     jest: true
   },
+  async redirects() {
+    return [
+      {
+        source: "/posts",
+        destination: "/",
+        permanent: true
+      }
+    ];
+  },
   typescript: {
     ignoreBuildErrors: true
   }
