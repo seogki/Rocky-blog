@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReduxProvider>
-            <div className="w-full h-full overflow-auto">
+            <div className="w-full h-full">
               {/* @ts-expect-error Async Server Component */}
               <MyHeader />
               <main className="w-full min-h-[calc(100%-4rem)] p-4 pb-8 max-w-screen-xl mx-auto relative">

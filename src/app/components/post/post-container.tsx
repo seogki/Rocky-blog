@@ -12,7 +12,6 @@ export default async function PostContainer({ title, children }: Props) {
     <>
       <div className="w-full h-full flex flex-col sm:flex-row mx-auto justify-start content-start">
         <Navigation
-          defaultPath={title}
           list={categories}
           className="hidden sm:block sm:basis-2/12"
         />
