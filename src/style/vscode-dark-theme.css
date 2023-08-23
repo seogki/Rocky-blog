@@ -18,6 +18,9 @@ code[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  border-radius: unset;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
 }
 
 pre[class*="language-"]::selection,
@@ -40,12 +43,12 @@ pre[class*="language-"] {
   margin: 0.5em 0;
   overflow: auto;
   background: #1e1e1e;
+  border-top: 1px solid #a1a1aa;
 }
 
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
-  /* border-bottom-right-radius: 0.3rem; */
-  /* border-bottom-left-radius: 0.3rem; */
+
   border-radius: 0.3rem;
   color: #db4c69;
   background: #1e1e1e;
