@@ -10,21 +10,21 @@ export function rehypeTocExtractHeadings() {
       //   console.debug(node);
       if (scanResult.includes(node.tagName) && node.properties.id) {
         // console.debug(node);
+        const obj = {
+          href: "",
+          parent: "",
+          text: ""
+        };
         for (const child of node.children) {
-          const obj = {
-            href: "",
-            parent: "",
-            text: ""
-          };
           if (child?.properties?.className === "toc") {
             obj.href = child.properties.href;
             obj.parent = node.tagName;
           } else {
             obj.text = child.value;
           }
-
-          list.push(obj);
         }
+
+        list.push(obj);
       }
     });
     data.matter.toc = list;
