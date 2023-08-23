@@ -53,6 +53,9 @@ export default async function PostList({ category }: Props) {
                   )}
                   <time>{convertFormat(post!.date)}</time>
                 </div>
+                <p className="ml-auto text-sm font-medium mt-2 text-zinc-500">
+                  <b>📖 {post.minutesRead}</b>
+                </p>
               </div>
             </Link>
           </li>

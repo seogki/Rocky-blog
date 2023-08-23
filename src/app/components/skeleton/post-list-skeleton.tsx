@@ -21,6 +21,9 @@ export default function PostListSkeleton() {
           <div className="animate-pulse ml-auto text-sm font-light h-4 w-1/3 rounded-lg bg-zinc-200 dark:bg-zinc-700 mt-2 dark:text-zinc-300 text-zinc-600">
             <time></time>
           </div>
+          <div className="animate-pulse ml-auto text-sm font-light h-4 w-2/12 rounded-lg bg-zinc-200 dark:bg-zinc-700 mt-2 dark:text-zinc-300 text-zinc-600">
+            <time></time>
+          </div>
         </div>
       ))}
     </>

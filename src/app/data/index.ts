@@ -9,6 +9,7 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { MdxCustomComponent } from "../components/mdx-custom-component";
+import { remarkReadingTime } from "../utils/remark-reading-time";
 
 export const getCategories = cache(async (): Promise<string[]> => {
   const filePath = path.join(process.cwd(), "src", "posts");
@@ -49,7 +50,7 @@ export const getPostsByCategoryName = cache(
       const { content, frontmatter } = await compileMDX<Frontmatter>({
         options: {
           mdxOptions: {
-            remarkPlugins: [remarkGfm],
+            remarkPlugins: [remarkGfm, remarkReadingTime],
             rehypePlugins: [
               rehypeSlug,
               rehypeCodeTitles,
