@@ -22,14 +22,12 @@ export default function PostItemContainer({
     return <></>;
   }
 
-  // console.debug(post.body);
-
   return (
     <>
       {/* @ts-expect-error Async Server Component */}
       <PostContainer
         className={`hidden sm:flex ${className}`}
-        aside={<PostItemAside />}
+        aside={<PostItemAside toc={post.toc} />}
       >
         <PostItem category={category} post={post} />
       </PostContainer>

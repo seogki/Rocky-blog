@@ -308,3 +308,25 @@ pre[class*="language-"] > code[class*="language-"] {
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
 }
+
+/* link */
+
+.prose .anchor {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: "#";
+
+  padding: 0.2rem;
+}
+
+.anchor:hover,
+.prose *:hover > .anchor {
+  @apply visible;
+}

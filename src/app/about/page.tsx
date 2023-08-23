@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const About: NextPage = () => {
   return (
     <div className="w-full mx-auto max-w-screen-md">
+      <h1 className="text-center mt-8">Ing..</h1>
       {/* <Image
         src={myPic}
         width={120}
