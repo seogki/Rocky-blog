@@ -1,3 +1,5 @@
+const { spacing } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -6,7 +8,17 @@ module.exports = {
       screens: {
         xs: "480px",
         "2xl": "1440px"
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            //...
+            "h1,h2,h3,h4": {
+              "scroll-margin-top": spacing[32]
+            }
+          }
+        }
+      })
     }
   },
   darkMode: ["class"],
