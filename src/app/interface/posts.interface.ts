@@ -1,3 +1,5 @@
+import { JSXElementConstructor, ReactElement } from "react";
+
 export interface Post {
   slug: string;
   title: string;
@@ -6,7 +8,7 @@ export interface Post {
   description: string;
   published: boolean;
   tags: string;
-  body: any;
+  body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
 export type Frontmatter = {
