@@ -6,6 +6,9 @@ import { cache } from "react";
 import { Frontmatter, Post } from "../interface/posts.interface";
 import rehypePrism from "rehype-prism-plus";
 import { MdxCustomComponent } from "../components/mdx-custom-component";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export const getCategories = cache(async (): Promise<string[]> => {
   const filePath = path.join(process.cwd(), "src", "posts");
@@ -53,7 +56,19 @@ export const getPostsByCategoryName = cache(async (categoryName: string) => {
       options: {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
-          rehypePlugins: [rehypePrism]
+          rehypePlugins: [
+            rehypeSlug,
+            rehypeCodeTitles,
+            rehypePrism,
+            [
+              rehypeAutolinkHeadings,
+              {
+                properties: {
+                  className: ["anchor"]
+                }
+              }
+            ]
+          ]
         },
         parseFrontmatter: true
       },

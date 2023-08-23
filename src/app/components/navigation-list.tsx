@@ -46,7 +46,7 @@ export default function NavigationList({ className, onClick, list }: Props) {
 
   return (
     <nav className={`${className}`} onClick={onClick}>
-      <ul>
+      <ul className="sm:fixed">
         <NavLink
           key={"RECENT"}
           href={`/`}

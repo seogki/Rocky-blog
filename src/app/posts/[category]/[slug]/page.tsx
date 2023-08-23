@@ -1,5 +1,5 @@
 import { MdxCustomComponent } from "@/app/components/mdx-custom-component";
-import PostItem from "@/app/components/post/post-item";
+import PostItemContainer from "@/app/components/post/post-item-container";
 import { getPost } from "@/app/data";
 import { Metadata } from "next";
 
@@ -37,7 +37,7 @@ export default async function Posts({ params }: Props) {
 
   return (
     <>
-      <PostItem category={category} post={post} />
+      <PostItemContainer category={category} post={post} />
     </>
   );
 }

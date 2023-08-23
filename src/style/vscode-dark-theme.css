@@ -44,7 +44,9 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
-  border-radius: 0.3em;
+  /* border-bottom-right-radius: 0.3rem; */
+  /* border-bottom-left-radius: 0.3rem; */
+  border-radius: 0.3rem;
   color: #db4c69;
   background: #1e1e1e;
 }
@@ -283,4 +285,23 @@ pre[class*="language-"] > code[class*="language-"] {
   margin-left: -8px;
   color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
+}
+
+.rehype-code-title {
+  margin-bottom: -0.6rem;
+  padding: 0.5em 1em;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
+
+  /* border-bottom: 0.1rem solid grey; */
+
+  background-color: #27272a;
+  color: white;
+  /* font-weight: bold; */
+  z-index: 0;
+
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
 }
