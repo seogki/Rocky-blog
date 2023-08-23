@@ -7,6 +7,7 @@ export interface Post {
   category: string;
   description: string;
   published: boolean;
+  minutesRead: string;
   tags: string;
   body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
@@ -15,5 +16,6 @@ export type Frontmatter = {
   title: string;
   description: string;
   date: string;
+  minutesRead: string;
   published: boolean;
 };
