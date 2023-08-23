@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import MyHeader from "./header";
 import MyFooter from "./footer";
@@ -8,11 +7,6 @@ import { ReduxProvider } from "./redux/redux-provider";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Rocky Blog",
-  description: "Rocky Blog Main"
-};
 
 export default function RootLayout({
   children

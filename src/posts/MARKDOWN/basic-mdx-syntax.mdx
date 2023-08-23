@@ -1,8 +1,9 @@
 ---
 title: basic mdx with remark-gfm plugin syntax
 date: "2023/08/18"
-description: basic markdown syntax that we can use
-tags : 'mdx,markdown,remark-gfm'
+description: basic markdown syntax that we can use with addition plugin by of remark-gfm through next-remote-mdx
+tags: 'mdx,markdown,remark-gfm,next-mdx-remote' 
+published: true
 ---
 
 ## Heading
@@ -10,7 +11,7 @@ tags : 'mdx,markdown,remark-gfm'
 Heading is commonly used to define something important or give attention to reader 
 We can use it by adding hash(#), and everytime hash(#) increases smaller the size of text it is
 
-```
+```markdown
 hash from 1 ~ 6
 # 1 hash Biggest
 ## 2 hash
@@ -39,10 +40,10 @@ hash from 1 ~ 6
 
 Ordered list is define by number with a dot
 
-even though we define list unorderly, it does not order by itself<br/>
+Even though we define list unorderly, it does not order by itself<br/>
 please make sure that the number is ordered
 
-```
+```markdown
 1. one
 2. two
 3. three
@@ -62,7 +63,7 @@ please make sure that the number is ordered
 
 Unordered List is define by -
 
-```
+```markdown
 - parent
     - child
         - descendent
@@ -78,7 +79,7 @@ Unordered List is define by -
 
 Check List is define by -`[ ] for uncheck [x] for check`
 
-```
+```markdown
 * [x] finish
 * [ ] todo
 
@@ -91,7 +92,7 @@ Check List is define by -`[ ] for uncheck [x] for check`
 
 ## Next Line
 
-```
+```markdown
 <br/>
 
 test<br/>test<br/><br/>test
@@ -106,7 +107,7 @@ test<br/>test<br/><br/>test
 
 Code Block usually opens by tripple grave \`\`\` and close by tripple grave \`\`\`
 
-````js
+````js showLineNumbers 
 ```(open tripple grave)
 
 export default function PostTags({ tags }: { tags: string }) {
@@ -129,8 +130,7 @@ export default function PostTags({ tags }: { tags: string }) {
 ````
 
 #### Code Result
-
-```js
+```tsx:sample.tsx js showLineNumbers 
 export default function PostTags({ tags }: { tags: string }) {
   return (
     <>
@@ -151,7 +151,7 @@ export default function PostTags({ tags }: { tags: string }) {
 
 Delimeter is define by `<hr/>` `---`
 
-```
+```markdown
 between any contents
 
 ---
@@ -171,7 +171,7 @@ contents
 
 Link is define by `[name](link)`
 
-```
+```markdown
 URL Link
 [Google](https://google.com)
 
@@ -185,7 +185,7 @@ Link: [Google](https://google.com)<br/>
 
 Text Type of Strong, em, strike
 
-```
+```markdown
 
 I am _Seogki Hong_ (emphasis)
 
@@ -211,8 +211,7 @@ I am ~~Seogki Hong~~ (strike)
 
 Image is define by `![image name](/path/image.jpg|png)`
 
-```
-
+```markdown
 default
 ![Sample](./image.jpg)
 
@@ -230,7 +229,7 @@ public path
 
 Table is define by combination of `|`, `:`, `-`
 
-```
+```markdown
 | a | b  |  c |  d  |
 | - | :- | -: | :-: | 
 | 1 | 2  |  3 |  4  |

@@ -7,9 +7,10 @@ import PostTags from "./post-tags";
 type Props = {
   category: string;
   post: Post | null | undefined;
+  className?: string;
 };
 
-export default function PostItem({ category, post }: Props) {
+export default function PostItem({ category, post, className = "" }: Props) {
   if (!post || post === null) {
     return <></>;
   }
@@ -17,7 +18,7 @@ export default function PostItem({ category, post }: Props) {
   return (
     <>
       <article
-        className={`prose max-w-screen-md dark:prose-invert mx-auto post-article break-words`}
+        className={`${className} post-article prose dark:prose-invert break-words`}
       >
         <Suspense
           fallback={
@@ -27,18 +28,15 @@ export default function PostItem({ category, post }: Props) {
           }
         >
           <h1 className="text-center mt-4 lg:mt-8">{`[${category}] ${post.title}`}</h1>
-          <p className="flex justify-center text-sm">
+          <div className="flex justify-center flex-wrap text-sm py-4">
             <PostTags tags={post.tags} />
-          </p>
-          <p className="ml-auto text-right text-base">
+          </div>
+          <div className="ml-auto text-right text-base py-4">
             <time>{convertFormat(post.date)}</time>
-          </p>
+          </div>
           {post.body}
         </Suspense>
       </article>
-      {/* <aside className="hidden lg:block absolute right-0 top-0">
-        lg일때만 show
-      </aside> */}
     </>
   );
 }

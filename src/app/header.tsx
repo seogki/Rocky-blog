@@ -23,7 +23,6 @@ export default async function MyHeader({ className }: { className?: string }) {
           <div className="hidden lg:block lg:ml-auto">
             <MenuTabList />
           </div>
-          {/* <MdSearch className="cursor-pointer mr-3 ml-auto lg:ml-10" /> */}
           <ThemeModifier />
           <div className="block lg:hidden">
             <HeaderMore />

@@ -1,0 +1,211 @@
+---
+title: implement next-mdx-remote to nextjs 13 
+date: "2023/08/22"
+description: shows how to implement mdx in nextjs 13
+tags: 'nextjs, next-mdx-remote, tailwindcss'
+published: true
+---
+
+This article shows how to implement next-mdx-remote to nextjs 13
+
+First you need to install the next-mdx-remote
+
+## Install / Configuration
+
+```bash
+npm install next-mdx-remote
+yarn add next-mdx-remote
+```
+
+
+If you want to use tailwindcss with typography you have to install first
+
+```bash
+npm install -D tailwindcss @tailwindcss/typography
+yarn add --dev tailwindcss @tailwindcss/typography
+```
+
+
+Since tailwindcss configuration describes well on the website, i will not going to describe details about how to config settings about it
+
+If you have learn about tailwindcss configuration [tailwindcss configuration](https://tailwindcss.com/docs/installation)
+
+```js:tailwind.config.js js showLineNumbers
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+    extend: {
+      screens: {
+        xs: "480px",
+        "2xl": "1440px"
+      }
+    }
+  },
+  darkMode: ["class"],
+
+  plugins: [require("@tailwindcss/typography")]
+};
+```
+
+## 1. Create mdx file
+
+First we need to create mdx in order to display mdx file to nextjs 13
+
+```markdown:sample.mdx showLineNumbers
+---
+title: title for h1 tag
+date: "2023/08/22"
+description: description about mdx file
+tags: 'nextjs, mdx, tag'
+published: true
+---
+
+contents
+
+## sub title
+
+information
+
+```
+
+Inside mdx file you can use markdown language and customize data as object, which is called **Frontmatter**, it is a YAML like key/value pairing that can be used to store data about a page
+
+For example, i have title, date, description, tags, published, you can customize as much as you want
+
+
+## 2. Get mdx files
+
+I have created a data folder with index.ts file, and from there let's get our file
+
+
+```ts:index.ts showLineNumbers
+import { JSXElementConstructor, ReactElement } from "react";
+import { compileMDX } from "next-mdx-remote/rsc";
+import { promises as fs } from "fs";
+import { cache } from "react";
+import path from "path";
+
+type Frontmatter = {
+  title: string;
+  description: string;
+  date: string;
+  published: boolean;
+};
+
+interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  published: boolean;
+  tags: string;
+  body: ReactElement<any, string | JSXElementConstructor<any>>;
+}
+
+/** Since it is SSR you can cover your function by react cache, and retrieve later on*/
+export const getPosts = cache(async (sort = true) => {
+
+  const list: Post[] = [];
+
+  //so you need to change to your mdx file directory, process.cwd() shows your root directory
+  const basePath = [process.cwd(), "src", "posts"];
+  const filePath = path.join(...basePath);
+  const files = await fs.readdir(filePath);
+  const mdxFiles = files.filter((file) => path.extname(file) === ".mdx");
+
+
+  for await (const mdx of mdxFiles) {
+    const filePath = path.join(...basePath, mdx);
+
+    const source = await fs.readFile(filePath, "utf8");
+
+
+    const { content, frontmatter } = await compileMDX<Frontmatter>({
+      options: {
+        //multiple options that can customize your mdx file, and i will talk about it later
+        mdxOptions: {},
+        //to parse Frontmatter you have to enable it
+        parseFrontmatter: true
+      },
+      //it is your mdx file
+      source
+    });
+
+    //if published is false no not add to your list, because you don't want to display unfinished post to readers
+    if (!frontmatter.published) continue;
+
+    list.push({
+      //your can use spread syntax to destructure, or just pass frontmatter as you like
+      ...frontmatter,
+      body: content,
+      slug: mdx.replace(".mdx", "")
+    } as Post);
+  }
+
+  if(!sort) return list;
+
+  //i wanted to sort list by date from latest to oldest
+  return list
+    .sort((a, b) => +new Date(b.date) - +new Date(a.date));
+});
+```
+
+By using **compileMDX** you can compile your mdx file to react components, since everything is done by ssr you don't have to worry about seo problems
+
+#### This is how it work
+
+1. get your mdx file path
+2. read mdx file and retrieve as source
+3. convert to element by compileMDX (make sure to enable parseFrontmatter if you want to use it)
+4. use spread syntax to destructure and save it as list
+5. since it is cached you only have to worry about first retrievement
+
+## 3. Create TSX file to display compiled contents
+
+
+```tsx:post-item.tsx showLineNumbers
+export default function PostItem() {
+
+  const posts = await getPosts();
+
+  if (posts.length < 1) return <>No Post Available</>;
+
+  const post = posts[0];
+
+  return (
+    <>
+      <article
+        className={`post-article prose dark:prose-invert break-words`}
+      >
+        <Suspense
+          fallback={
+            <>
+              <div>loading</div>
+            </>
+          }
+        >
+          <h1 className="text-center mt-4 lg:mt-8">{post.title}</h1>
+          <div className="ml-auto text-right text-base py-4">
+            <time>{post.date}</time>
+          </div>
+          {post.body}
+        </Suspense>
+      </article>
+    </>
+  );
+}
+```
+
+Since mine is written in tailwindcss, it has tailwindcss code, if you don't want it you can customize styles by yourself
+
+Suspense let's you display a fallback until its children have finished loading, you can find more about [here](https://react.dev/reference/react/Suspense)
+
+That's it, this is how i made my blog by twerking little bit of my code since i have categories, with additional mdx options to make code looks nice, i will talk about it on next blog
+
+## Reference
+
+https://nextjs.org/docs/app/building-your-application/configuring/mdx<br/>
+https://github.com/hashicorp/next-mdx-remote<br/>
+https://docs.npmjs.com/cli/v8/commands/npm-install<br/>
+https://bepyan.github.io/blog/nextjs-blog/3-mdx-plugin#rehype-slug-rehype-autolink-headings<br/>

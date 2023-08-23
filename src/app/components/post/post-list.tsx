@@ -34,16 +34,16 @@ export default async function PostList({ category }: Props) {
               }/${post!.slug}`}
             >
               <div className="w-full h-auto p-2 my-4 sm:py-4 flex flex-col justify-between align-middle">
-                <div className="text-lg font-medium dark:text-zinc-100 text-zinc:800 line-clamp-2">
+                <div className="text-xl font-medium dark:text-zinc-100 text-zinc:800 line-clamp-2">
                   <h2>{post!.title}</h2>
                 </div>
                 <div className="text-base font-normal mt-0 sm:mt-2 dark:text-zinc-400 text-zinc-500 line-clamp-2">
                   <p>{post!.description}</p>
                 </div>
 
-                <p className="ml-auto text-sm font-light pt-8 pb-2">
+                <div className="ml-auto text-sm font-light pt-8 pb-2 flex flex-wrap justify-end">
                   <PostTags tags={post.tags} />
-                </p>
+                </div>
 
                 <div className="ml-auto text-sm font-medium mt-2 text-zinc-500">
                   {category === "RECENT" && (
