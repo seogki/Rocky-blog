@@ -17,7 +17,11 @@ export default function HeaderTitle() {
 
   return (
     <>
-      <Link href={"/"} onClick={() => closeAllOpener()}>
+      <Link
+        href={"/"}
+        onClick={() => closeAllOpener()}
+        className={"hover:text-teal-600 dark:hover:text-teal-400"}
+      >
         Rocky Blog
       </Link>
     </>

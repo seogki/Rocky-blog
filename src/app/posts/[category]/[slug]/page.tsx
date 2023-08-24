@@ -4,7 +4,7 @@ import PostItemSkeleton from "@/app/components/skeleton/post-item-skeleton";
 import TopScrollButton from "@/app/components/top-scroll-button";
 import { getPost } from "@/app/data";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {
@@ -39,7 +39,9 @@ export default async function Posts({ params }: Props) {
 
   const post = await getPost(slug, category);
 
-  if (!post) return notFound();
+  if (!post) {
+    redirect("/");
+  }
 
   return (
     <>

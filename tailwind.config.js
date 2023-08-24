@@ -21,6 +21,9 @@ module.exports = {
       })
     }
   },
+  future: {
+    hoverOnlyWhenSupported: true
+  },
   darkMode: ["class"],
 
   plugins: [require("@tailwindcss/typography")]

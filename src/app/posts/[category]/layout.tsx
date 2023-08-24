@@ -1,5 +1,5 @@
 import { getCategories } from "@/app/data";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import NavigationList from "@/app/components/navigation-list";
 import { Suspense } from "react";
 import NavigationListSkeleton from "@/app/components/skeleton/navigation-list-skeleton";
@@ -14,7 +14,8 @@ type Props = {
 export default async function layout({ children, params }: Props) {
   const { category } = params;
   const categories = await getCategories();
-  if (!category) return notFound();
+  if (!category || !categories.includes(category)) redirect("/");
+
   return (
     <>
       <div

@@ -33,10 +33,10 @@ export default async function PostList({ category }: Props) {
                 category === "RECENT" ? post.category : category
               }/${post!.slug}`}
             >
-              <div className="w-full h-auto p-2 my-4 sm:py-4 flex flex-col justify-between align-middle">
-                <div className="text-xl font-medium dark:text-zinc-100 text-zinc:800 line-clamp-2">
-                  <h2>{post!.title}</h2>
-                </div>
+              <div className="w-full h-auto p-2 my-4 sm:py-4 flex flex-col justify-between align-middle group">
+                <h2 className="group-hover:text-teal-600 dark:group-hover:text-teal-400 text-xl font-bold dark:text-zinc-100 text-zinc:800 line-clamp-2">
+                  {post!.title}
+                </h2>
                 <div className="text-base font-normal mt-0 sm:mt-2 dark:text-zinc-400 text-zinc-500 line-clamp-2">
                   <p>{post!.description}</p>
                 </div>

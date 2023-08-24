@@ -43,7 +43,11 @@ export default function PostItemAside({ toc }: Props) {
                     shallow
                     className={`text-sm xl:text-base`}
                   >
-                    <p className={`${setIndent(item.parent)} py-2 my-2`}>
+                    <p
+                      className={`${setIndent(
+                        item.parent
+                      )} py-2 my-2 hover:text-teal-600 dark:hover:text-teal-400`}
+                    >
                       {addDashIfNotH1H2(item.parent, item.text)}
                     </p>
                   </Link>
