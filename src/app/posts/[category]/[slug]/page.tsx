@@ -43,13 +43,11 @@ export default async function Posts({ params }: Props) {
 
   return (
     <>
-      <Suspense fallback={<PostItemSkeleton />}>
-        <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1 relative">
-          <PostItem category={category} post={post} />
-          <TopScrollButton />
-        </section>
-        <PostItemAside toc={post.toc} />
-      </Suspense>
+      <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1 relative">
+        <PostItem category={category} post={post} />
+        <TopScrollButton />
+      </section>
+      <PostItemAside toc={post.toc} />
     </>
   );
 }
