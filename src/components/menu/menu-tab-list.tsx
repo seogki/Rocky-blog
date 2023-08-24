@@ -1,6 +1,6 @@
 "use client";
-import { closeDrawer, closeMore } from "../../redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { closeDrawer, closeMore } from "@/redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import MenuTab from "./menu-tab";
 
 export default function MenuTabList() {

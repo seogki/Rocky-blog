@@ -1,7 +1,7 @@
 "use client";
 
-import { useMount } from "@/app/hooks/useMount";
-import { Toc } from "@/app/interface/posts.interface";
+import { useMount } from "@/hooks/useMount";
+import { Toc } from "@/interface/posts.interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

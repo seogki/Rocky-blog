@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useMount } from "../hooks/useMount";
+import { useMount } from "@/hooks/useMount";
 import { FaSpinner } from "react-icons/fa6";
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 

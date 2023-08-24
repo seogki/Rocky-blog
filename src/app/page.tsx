@@ -1,9 +1,8 @@
-import PostList from "./components/post/post-list";
-import PostContainer from "./components/post/post-container";
+import PostContainer from "@/components/post/post-container";
+import PostList from "@/components/post/post-list";
+import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
-import PostListSkeleton from "./components/skeleton/post-list-skeleton";
 import { Suspense } from "react";
-import Script from "next/script";
 
 export const generateMetadata = (): Metadata => {
   return {

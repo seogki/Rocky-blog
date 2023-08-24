@@ -1,9 +1,8 @@
 import { Suspense } from "react";
 import Loading from "../loading";
-import { Post } from "@/app/interface/posts.interface";
-import { convertFormat } from "@/app/utils/date";
+import { Post } from "@/interface/posts.interface";
+import { convertFormat } from "@/utils/date";
 import PostTags from "./post-tags";
-import TopScrollButton from "../top-scroll-button";
 
 type Props = {
   category: string;

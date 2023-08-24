@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { closeDrawer } from "../redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { closeDrawer } from "@/redux/features/headerSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname } from "next/navigation";
 
 type Props = {

@@ -1,8 +1,8 @@
-import PostItem from "@/app/components/post/post-item";
-import PostItemAside from "@/app/components/post/post-item-aside";
-import PostItemSkeleton from "@/app/components/skeleton/post-item-skeleton";
-import TopScrollButton from "@/app/components/top-scroll-button";
-import { getPost } from "@/app/data";
+import PostItem from "@/components/post/post-item";
+import PostItemAside from "@/components/post/post-item-aside";
+import PostItemSkeleton from "@/components/skeleton/post-item-skeleton";
+import TopScrollButton from "@/components/top-scroll-button";
+import { getPost } from "@/data";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";

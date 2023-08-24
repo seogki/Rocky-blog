@@ -1,5 +1,5 @@
-import { getAllPostsOrderByDate, getPostsByCategoryName } from "@/app/data";
-import { convertFormat } from "@/app/utils/date";
+import { getAllPostsOrderByDate, getPostsByCategoryName } from "@/data";
+import { convertFormat } from "@/utils/date";
 import Link from "next/link";
 import PostTags from "./post-tags";
 

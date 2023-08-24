@@ -1,4 +1,4 @@
-import PostItemSkeleton from "@/app/components/skeleton/post-item-skeleton";
+import PostItemSkeleton from "@/components/skeleton/post-item-skeleton";
 
 export default function Loading() {
   return (
