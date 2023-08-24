@@ -5,6 +5,8 @@ import "@/style/globals.scss";
 import { ThemeProvider } from "./theme-provider";
 import { ReduxProvider } from "./redux/redux-provider";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "./components/google-analytics";
+import { cookies } from "next/dist/client/components/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <GoogleAnalytics />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReduxProvider>
             <div className="w-full h-full">

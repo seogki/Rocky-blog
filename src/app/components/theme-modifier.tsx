@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { useMount } from "../hooks/useMount";
 import { FaSpinner } from "react-icons/fa6";
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+
 export default function ThemeModifier() {
   const { theme, setTheme, systemTheme } = useTheme();
   const { isMount } = useMount();
@@ -19,12 +20,12 @@ export default function ThemeModifier() {
     <>
       {currentTheme === "dark" ? (
         <BsFillMoonFill
-          className="ml-auto lg:ml-2 cursor-pointer mr-3"
+          className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("light")}
         />
       ) : (
         <BsFillSunFill
-          className="ml-auto lg:ml-2 cursor-pointer mr-3"
+          className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("dark")}
         />
       )}

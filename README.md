@@ -42,8 +42,6 @@
     - posts
     - interface
     - redux-tool-kits (local state management)
-  - assets
-    - image
   - style (scss)
 
 ---

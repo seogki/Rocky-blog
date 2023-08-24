@@ -1,6 +1,5 @@
 import { Metadata, NextPage } from "next";
 import Image from "next/image";
-// import myPic from "@/assets/image/me.jpg";
 
 export const metadata: Metadata = {
   title: "Rocky Blog - About",
