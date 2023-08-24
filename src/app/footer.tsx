@@ -8,6 +8,7 @@ export default function MyFooter({ className = "" }: { className?: string }) {
       >
         <div className="w-full h-full max-w-screen-xl flex flex-row justify-center items-center mx-auto">
           <a
+            title="Seogki's github"
             href="https://github.com/seogki"
             className="text-xl h-max w-auto p-4"
           >
@@ -15,6 +16,7 @@ export default function MyFooter({ className = "" }: { className?: string }) {
           </a>
 
           <a
+            title="Seogki's mail"
             href="mailto:skhmailweb@gmail.com"
             className="text-xl h-max w-auto p-4"
           >
