@@ -5,6 +5,6 @@ export function remarkReadingTime() {
   return function (tree: any, { data }: { data: any }) {
     const textOnPage = toString(tree);
     const readingTime = getReadingTime(textOnPage);
-    data.matter["minutesRead"] = readingTime.text;
+    data.matter.minutesRead = readingTime.text;
   };
 }

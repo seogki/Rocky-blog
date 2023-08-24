@@ -6,12 +6,7 @@ export function MdxCustomComponent() {
   );
 
   const components = {
-    img: ResponsiveImage,
-    h1: (props: any) => (
-      <h1 {...props} className="large-text">
-        {props.children}
-      </h1>
-    )
+    img: ResponsiveImage
   };
 
   return { components };

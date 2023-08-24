@@ -7,9 +7,7 @@ export function rehypeTocExtractHeadings() {
 
   return function (tree: any, { data }: { data: any }) {
     visit(tree, "element", (node) => {
-      //   console.debug(node);
       if (scanResult.includes(node.tagName) && node.properties.id) {
-        // console.debug(node);
         const obj = {
           href: "",
           parent: "",

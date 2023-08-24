@@ -3,6 +3,7 @@ import Loading from "../loading";
 import { Post } from "@/app/interface/posts.interface";
 import { convertFormat } from "@/app/utils/date";
 import PostTags from "./post-tags";
+import TopScrollButton from "../top-scroll-button";
 
 type Props = {
   category: string;
@@ -18,7 +19,7 @@ export default function PostItem({ category, post, className = "" }: Props) {
   return (
     <>
       <article
-        className={`${className} post-article prose dark:prose-invert break-words`}
+        className={`${className} post-article prose dark:prose-invert break-words max-w-max sm:mx-8`}
       >
         <Suspense
           fallback={
@@ -31,9 +32,14 @@ export default function PostItem({ category, post, className = "" }: Props) {
           <div className="flex justify-center flex-wrap text-sm py-4">
             <PostTags tags={post.tags} />
           </div>
-          <div className="ml-auto text-right text-base py-4">
+          <div className="ml-auto text-right text-base pt-4 pb-2">
             <time>{convertFormat(post.date)}</time>
           </div>
+
+          <div className="ml-auto text-right text-base pb-4">
+            <strong>📖 {post.minutesRead}</strong>
+          </div>
+
           {post.body}
         </Suspense>
       </article>

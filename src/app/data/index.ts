@@ -10,7 +10,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { MdxCustomComponent } from "../components/mdx-custom-component";
 import { remarkReadingTime } from "../utils/remark-reading-time";
-import { rehypeTocExtractHeadings } from "../utils/rehypeTocExtractHeadings";
+import { rehypeTocExtractHeadings } from "../utils/rehype-toc-extract-headings";
 
 export const getCategories = cache(async (): Promise<string[]> => {
   const filePath = path.join(process.cwd(), "src", "posts");
