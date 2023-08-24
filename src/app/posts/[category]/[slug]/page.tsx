@@ -1,7 +1,11 @@
-import { MdxCustomComponent } from "@/app/components/mdx-custom-component";
-import PostItemContainer from "@/app/components/post/post-item-container";
+import PostItem from "@/app/components/post/post-item";
+import PostItemAside from "@/app/components/post/post-item-aside";
+import PostItemSkeleton from "@/app/components/skeleton/post-item-skeleton";
+import TopScrollButton from "@/app/components/top-scroll-button";
 import { getPost } from "@/app/data";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 type Props = {
   params: {
@@ -35,9 +39,17 @@ export default async function Posts({ params }: Props) {
 
   const post = await getPost(slug, category);
 
+  if (!post) return notFound();
+
   return (
     <>
-      <PostItemContainer category={category} post={post} />
+      <Suspense fallback={<PostItemSkeleton />}>
+        <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1 relative">
+          <PostItem category={category} post={post} />
+          <TopScrollButton />
+        </section>
+        <PostItemAside toc={post.toc} />
+      </Suspense>
     </>
   );
 }

@@ -47,14 +47,14 @@ export default async function PostList({ category }: Props) {
 
                 <div className="ml-auto text-sm font-medium mt-2 text-zinc-500">
                   {category === "RECENT" && (
-                    <b className="mr-2 text-teal-600 font-bold dark:text-teal-400">
+                    <strong className="mr-2 text-teal-600 font-bold dark:text-teal-400">
                       {post!.category}
-                    </b>
+                    </strong>
                   )}
                   <time>{convertFormat(post!.date)}</time>
                 </div>
                 <p className="ml-auto text-sm font-medium mt-2 text-zinc-500">
-                  <b>📖 {post.minutesRead}</b>
+                  <strong>📖 {post.minutesRead}</strong>
                 </p>
               </div>
             </Link>
