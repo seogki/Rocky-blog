@@ -28,9 +28,7 @@ export default function Posts({ params }: Props) {
   return (
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
-        {category && (
-          <h1 className="text-2xl font-bold text-center my-2">{category}</h1>
-        )}
+        <h1 className="text-2xl font-bold text-center my-2">{category}</h1>
         <Suspense fallback={<PostListSkeleton />}>
           {/* @ts-expect-error Async Server Component */}
           <PostList category={category} />
