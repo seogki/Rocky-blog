@@ -2,8 +2,6 @@ import AsideSkeleton from "./aside-skeleton";
 import Skeleton from "./skeleton";
 
 export default function PostItemSkeleton() {
-  const posts = [1, 2, 3];
-
   return (
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">

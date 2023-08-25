@@ -14,7 +14,6 @@ export default function HeaderNav({ categories }: { categories: string[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer
   );
-  const { path } = useAppSelector(({ commonReducer }) => commonReducer);
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
 

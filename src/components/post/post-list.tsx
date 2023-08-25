@@ -1,4 +1,5 @@
 import { getAllPostsOrderByDate, getPostsByCategoryName } from "@/data";
+import { Post } from "@/interface/posts.interface";
 import { convertFormat } from "@/utils/date";
 import Link from "next/link";
 import PostTags from "./post-tags";
@@ -8,12 +9,18 @@ type Props = {
 };
 
 export default async function PostList({ category }: Props) {
-  const posts =
-    category === "RECENT"
-      ? await getAllPostsOrderByDate()
-      : await getPostsByCategoryName(category);
+  let posts: Post[] = [];
 
-  if (posts.length < 1) {
+  try {
+    posts =
+      category === "RECENT"
+        ? await getAllPostsOrderByDate()
+        : await getPostsByCategoryName(category);
+  } catch (e: any) {
+    console.error(e);
+  }
+
+  if (!posts || posts.length < 1) {
     return (
       <>
         <div className="text-center text-lg py-8">

@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
-import MyHeader from "./header";
-import MyFooter from "./footer";
+import MyHeader from "@/components/root/header";
+import MyFooter from "@/components/root/footer";
 import "@/style/globals.scss";
 import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/react";
