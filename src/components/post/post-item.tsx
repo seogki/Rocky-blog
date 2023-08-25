@@ -31,7 +31,7 @@ export default function PostItem({ category, post, className = "" }: Props) {
         <div className="ml-auto text-right text-base pb-4">
           <strong>📖 {post.minutesRead}</strong>
         </div>
-        {post.body}
+        <Suspense>{post.body}</Suspense>
       </article>
     </>
   );
