@@ -291,8 +291,6 @@ pre[class*="language-"] > code[class*="language-"] {
 }
 
 .rehype-code-title {
-  /* @apply text-white bg-zinc-800 */
-
   margin-bottom: -0.6rem;
   padding: 0.5em 1em;
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
@@ -303,14 +301,19 @@ pre[class*="language-"] > code[class*="language-"] {
   border-bottom: 0.1rem solid grey;
   font-weight: bold;
   z-index: 0;
+  /* background: #27272a; */
 
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
 }
 
+.prose .rehype-code-title {
+  @apply bg-zinc-800 text-white;
+}
+
 /* link */
 
-.prose .anchor {
+.prose .toc {
   @apply invisible absolute no-underline;
 
   margin-left: -1em;
@@ -318,14 +321,14 @@ pre[class*="language-"] > code[class*="language-"] {
   cursor: pointer;
 }
 
-.prose .anchor:after {
+.prose .toc:after {
   @apply text-gray-300 dark:text-gray-700;
   content: "#";
 
   padding: 0.2rem;
 }
 
-.anchor:hover,
-.prose *:hover > .anchor {
+.toc:hover,
+.prose *:hover > .toc {
   @apply visible;
 }

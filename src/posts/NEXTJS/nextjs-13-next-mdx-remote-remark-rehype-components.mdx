@@ -1,0 +1,528 @@
+---
+title: nextjs 13 next-mdx-remote remark, rehype plugins, component
+date: "2023/08/25"
+description: describe how to implement remark-gfm, remark-reading-time, rehype-slug, rehype-code-titles, rehype-prism, rehype-autolink-headings, and custom rehype-toc-extract-headings, mdx custom components to next-mdx-remote in nextjs 13
+tags: 'remark, rehype, next-mdx-remote, nextjs, mdx-plugins, next/image'
+published: true
+---
+
+
+This article describe how to implement multiple remark, rhype plugins as well as mdx custom components in nextjs 13
+
+There are multiple plugins that can use to make your blog looks nice
+
+
+## Introduction
+
+- remark plugins
+    - remark-gfm
+    - reading-time
+
+- rehype plugins
+    - rehype-slug
+    - rehype-autolink-headings
+    - rehype-prism-plus
+    - rehype-code-titles
+    - rehype-toc-extract-headings (custom)
+
+- custom components
+
+
+These are the Plugin that i used to create my Mdx contents, and let's find out one by one
+
+
+## Remark-gfm
+
+[This](https://github.com/remarkjs/remark-gfm) is a plugin enable markdown lanaguage just like github readme.md
+
+This is a most basic plugin that every mdx blogger might be use
+
+```bash
+npm install -D remark-gfm
+yarn add --dev remark-gfm
+pnpm install -D remark-gfm
+```
+
+### How to define plugin
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            remarkPlugins: [remarkGfm]
+            ...
+        },
+    }
+});
+```
+
+## Reading-time
+
+[This](https://github.com/ngryman/reading-time) is a plugin reads the contents of your mdx file and estimate the reading time by minutes
+
+```bash
+npm install -D reading-time mdast-util-to-string
+yarn add --dev reading-time mdast-util-to-string
+pnpm install -D reading-time mdast-util-to-string
+```
+
+For this plugin you have to install reading-time and mdast-util-to-string, and we will create ts file to configure
+
+
+### How to define plugin
+
+Let's create **remark-reading-time.ts** 
+
+```ts:remark-reading-time.ts showLineNumbers
+import getReadingTime from "reading-time";
+import { toString } from "mdast-util-to-string";
+
+export function remarkReadingTime() {
+  return function (tree: any, { data }: { data: any }) {
+    const textOnPage = toString(tree);
+    const readingTime = getReadingTime(textOnPage);
+    data.matter.minutesRead = readingTime.text;
+  };
+}
+```
+
+**textOnPage** will convert mdx file to text based, and **getReadingTime(textOnPage)** will estimate the number by minutes
+
+data is where you store result, and data.matter is your frontmatter information
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            remarkPlugins: [remarkReadingTime]
+            ...
+        },
+    }
+});
+```
+
+
+## Rehype-slug
+
+[This](https://github.com/rehypejs/rehype-slug) is a plugin which add ids to headings. It finds headings from h1 to h6 and add id on to it
+
+This plugin usually used with rehype-auto-links-headings
+
+```bash
+npm install -D rehype-slug
+yarn add --dev rehype-slug
+pnpm install -D rehype-slug
+```
+
+### How to define plugin
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            rehypePlugins: [rehypeSlug]
+            ...
+        },
+    }
+});
+```
+
+### HTML result
+
+```html showLineNumbers
+<h2 id="rehype-slug">Rehype-slug</h2>
+```
+
+
+## Rehype-autolink-headings
+
+[This](https://github.com/rehypejs/rehype-autolink-headings) is a plugin add link to headings from h1 to h6, which has id attributes
+
+This plugin usually used with rehype-slug
+
+```bash
+npm install -D rehype-autolink-headings
+yarn add --dev rehype-autolink-headings
+pnpm install -D rehype-autolink-headings
+```
+
+### How to define plugin
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            rehypePlugins: [
+            [
+                rehypeAutolinkHeadings,
+                {
+                  properties: {
+                    className: "toc"
+                  }
+                }
+              ],
+            ]
+            ...
+        },
+    }
+});
+```
+
+define plugin with array and add properties. I defined my className as toc so that i can retrieve the classname later on by using my custom rehype-toc-extract-headings plugins
+
+You can define any classname you want
+
+
+### HTML result
+
+```html showLineNumbers
+<a class="toc" href="#rehype-autolink-headings">
+    <span class="icon icon-link"></span>
+</a>
+```
+
+You can set theme by yourself, if you are not using tailwindcss typography you don't need **prose** class
+
+### Set theme
+
+```css:toc.tailwind.css showLineNumbers
+.prose .toc {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+
+.prose .toc:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: "#";
+
+  padding: 0.2rem;
+}
+
+.toc:hover,
+.prose *:hover > .toc {
+  @apply visible;
+}
+```
+
+
+## Rehype-prism-plus
+
+[This](https://github.com/timlrx/rehype-prism-plus) is a plugin which hightlight syntax in code block, inspired by [@mapbox/rehype-prism](https://github.com/mapbox/rehype-prism).
+The main difference between **rehype-prism-plus** and original **mapbox/rehype-prism** is line numbers and line highlight
+
+```bash
+npm install -D rehype-prism-plus
+yarn add --dev rehype-prism-plus
+pnpm install -D rehype-prism-plus
+```
+
+You can find more detail from rehype-prism-plus, i will show you couple of examples that i use
+
+### Set ShowLineNumbers
+
+First you need define custom css by yourself
+
+```css:line-number.css showLineNumbers
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175); /* Line number color */
+  content: attr(line);
+}
+```
+
+And from mdx file just append meta string which is **showLineNumbers**
+
+````markdown:sample.mdx showLineNumbers
+```markdown showLineNumbers
+## Title
+
+#### contents
+
+```
+````
+
+
+### Set styles for themes
+
+It also provide multiple language style [here](https://github.com/wooorm/refractor#refractoraliasname-alias)
+
+
+#### MARKDOWN
+
+```markdown:markdown.sample.mdx showLineNumbers
+## Title
+
+#### contents
+
+1. test
+2. test
+3. test
+```
+
+#### TSX
+
+```tsx:tsx.sample.tsx showLineNumbers
+type Props = {
+    test:string;
+}
+
+export default function sample({test} :Props) {
+    return <>
+        <div></div>
+    </>
+}
+```
+
+#### HTML
+
+```html:html.sample.html showLineNumbers
+<div>
+    <p>test</p>
+</div>
+```
+
+#### BASH
+
+```bash:bash.sample.sh showLineNumbers
+npm install -D rehype-prism-plus
+```
+
+
+### Set additional theme
+
+You can find additional themes from [here](https://github.com/PrismJS/prism-themes), i personally use vs-code dark theme
+
+#### theme For scss
+
+After you select theme, save the theme css somewhere else and import css file to your global.scss file
+
+```scss:global.scss
+@import "vscode-dark-theme.css";
+```
+
+
+## Rehype-code-titles
+
+[This](https://github.com/rockchalkwushock/rehype-code-titles) plugin add title to your code block
+
+### How to define plugin
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            rehypePlugins: [rehypeCodeTitles]
+            ...
+        },
+    }
+});
+```
+
+### How to add Title to code block
+````
+```[type]:[title].[type] showLineNumbers
+
+for example
+
+```tsx:title.tsx showLineNumbers
+````
+
+
+And add style to your code title
+
+```css:code-title.css showLineNumbers
+.rehype-code-title {
+  margin-bottom: -0.6rem;
+  padding: 0.5em 1em;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
+
+  border-bottom: 0.1rem solid grey;
+  font-weight: bold;
+  z-index: 0;
+
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+}
+
+/* tailwindcss for customize background and text color */
+.prose .rehype-code-title {
+  @apply bg-zinc-800 text-white;
+}
+
+```
+
+
+## Rehype-toc-extract-headings
+
+This is my plugin to display table of contents
+
+First you need to install unist-util-visit, this package traverse the element and return html as object array
+
+
+```bash
+npm install -D unist-util-visit
+yarn add --dev unist-util-visit
+pnpm install -D unist-util-visit
+```
+
+And create **rehype-toc-extract-headings.ts**
+
+```ts:rehype-toc-extract-headings.ts showLineNumbers
+import { visit } from "unist-util-visit";
+
+export type Toc = {
+  href: string;
+  parent: string;
+  text: string;
+};
+
+export function rehypeTocExtractHeadings() {
+  const scanResult = ["h1", "h2", "h3", "h4", "h5", "h6"];
+  const list: Toc[] = [];
+
+  return function (tree: any, { data }: { data: any }) {
+    //this will loop all the element and find node includes headings and id
+    visit(tree, "element", (node) => {
+      if (scanResult.includes(node.tagName) && node.properties.id) {
+        const obj = {
+          href: "",
+          parent: "",
+          text: ""
+        };
+
+        //loop child element to find which one is a tag and which one contains text
+        for (const child of node.children) {
+          if (child?.properties?.className === "toc") {
+            obj.href = child.properties.href;
+            obj.parent = node.tagName;
+          } else {
+            obj.text = child.value;
+          }
+        }
+        list.push(obj);
+      }
+    });
+
+    //add to your frontmatter object
+    data.matter.toc = list;
+  };
+}
+```
+
+- href: It is your anchor link
+- parent: It is from h1 to h6, later on to customize which is what
+- text: It is your display text
+
+Once you finish, you can find toc information inside frontmatter
+
+### How to define plugin
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        mdxOptions: {
+            rehypePlugins: [rehypeTocExtractHeadings]
+            ...
+        },
+    }
+});
+```
+
+### For tailwindcss typography
+
+for tailwindcss typography
+
+you can add margin-top to anchor better
+
+```js:tailwind.config.js showLineNumbers
+const { spacing } = require("tailwindcss/defaultTheme");
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+    extend: {
+      screens: {
+        xs: "480px",
+        "2xl": "1440px"
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            //...
+            "h1,h2,h3,h4": {
+              "scroll-margin-top": spacing[32]
+            }
+          }
+        }
+      })
+    }
+  },
+  future: {
+    hoverOnlyWhenSupported: true
+  },
+  darkMode: ["class"],
+  plugins: [require("@tailwindcss/typography")]
+};
+```
+
+
+## Custom components
+
+You can use custom components and modify your own html style
+
+
+### How to define components
+
+```ts:compileMDX.ts showLineNumbers
+compileMDX<Frontmatter>({
+    options: {
+        ...
+    },
+    components: { ...components },
+    }
+});
+```
+
+### Mdx Custom Component
+
+I have created MdxCustomComponent.tsx and used next/image components to optimize my image tag
+
+```tsx:MdxCustomComponent.tsx showLineNumbers
+import Image from "next/image";
+
+export function MdxCustomComponent() {
+  const ResponsiveImage = (props: any) => (
+    <Image alt={props.alt} sizes="100vw" width={1000} height={500} {...props} />
+  );
+
+  const components = {
+    img: ResponsiveImage
+  };
+
+  return { components };
+}
+```
+
+
+
+## Reference 🔗
+
+https://bepyan.github.io/blog/nextjs-blog/3-mdx-plugin<br/>
+https://docs.astro.build/ko/recipes/reading-time/<br/>
+https://github.com/timlrx/rehype-prism-plus<br/>
+https://github.com/remarkjs/remark-gfm<br/>
+https://github.com/ngryman/reading-time<br/>
+https://github.com/rehypejs/rehype-slug<br/>
+https://github.com/rehypejs/rehype-autolink-headings<br/>
+https://github.com/rockchalkwushock/rehype-code-titles<br/>

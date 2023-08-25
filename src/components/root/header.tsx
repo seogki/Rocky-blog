@@ -1,9 +1,9 @@
-import MenuTabList from "./components/menu/menu-tab-list";
+import MenuTabList from "@/components/menu/menu-tab-list";
+import ThemeModifier from "@/components/theme-modifier";
+import { getCategories } from "@/data";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
-import ThemeModifier from "./components/theme-modifier";
 import HeaderTitle from "./header-title";
-import { getCategories } from "./data";
 
 type Props = {
   className?: string;

@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
-import { getAllPostsOrderByDate } from "./data";
-import { stringToDate } from "./utils/date";
+import { getAllPostsOrderByDate } from "@/data";
+import { stringToDate } from "@/utils/date";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://rocky-blog.vercel.app";

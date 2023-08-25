@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerReducer from "./features/headerSlice";
-import commonReducer from "./features/commonSlice";
 
 export const store = configureStore({
   reducer: {
-    headerReducer,
-    commonReducer
+    headerReducer
   },
   devTools: process.env.NODE_ENV !== "production"
 });

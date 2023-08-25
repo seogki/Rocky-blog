@@ -1,8 +1,8 @@
-import { getCategories } from "@/app/data";
+import { getCategories } from "@/data";
 import { notFound, redirect } from "next/navigation";
-import NavigationList from "@/app/components/navigation-list";
+import NavigationList from "@/components/navigation-list";
 import { Suspense } from "react";
-import NavigationListSkeleton from "@/app/components/skeleton/navigation-list-skeleton";
+import NavigationListSkeleton from "@/components/skeleton/navigation-list-skeleton";
 
 type Props = {
   params: {

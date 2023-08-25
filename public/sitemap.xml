@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://rocky-blog.vercel.app</loc>
-<lastmod>2023-08-23T06:56:02.568Z</lastmod>
+<lastmod>2023-08-25T05:57:26.856Z</lastmod>
+</url>
+<url>
+<loc>https://rocky-blog.vercel.app/posts/NEXTJS/nextjs-13-next-mdx-remote-remark-rehype-components</loc>
+<lastmod>2023-08-25T00:00:00.000Z</lastmod>
 </url>
 <url>
 <loc>https://rocky-blog.vercel.app/posts/NEXTJS/implement-next-mdx-remote-to-nextjs-13</loc>

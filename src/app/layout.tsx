@@ -1,12 +1,11 @@
 import { Inter } from "next/font/google";
-import MyHeader from "./header";
-import MyFooter from "./footer";
-import "@/style/globals.scss";
+import MyHeader from "@/components/root/header";
+import MyFooter from "@/components/root/footer";
+import "@/style/global.scss";
 import { ThemeProvider } from "./theme-provider";
-import { ReduxProvider } from "./redux/redux-provider";
 import { Analytics } from "@vercel/analytics/react";
-import GoogleAnalytics from "./components/google-analytics";
-import { cookies } from "next/dist/client/components/headers";
+import GoogleAnalytics from "@/components/google-analytics";
+import { ReduxProvider } from "@/redux/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

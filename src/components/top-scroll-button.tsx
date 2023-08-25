@@ -2,8 +2,7 @@
 import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
-import { useMount } from "../hooks/useMount";
-import useScrollPosition from "../hooks/useScrollPosition";
+import useScrollPosition from "@/hooks/useScrollPosition";
 
 export default function TopScrollButton() {
   const [showScroll, setShowScroll] = useState(false);

@@ -1,11 +1,12 @@
-import PostItem from "@/app/components/post/post-item";
-import PostItemAside from "@/app/components/post/post-item-aside";
-import PostItemSkeleton from "@/app/components/skeleton/post-item-skeleton";
-import TopScrollButton from "@/app/components/top-scroll-button";
-import { getPost } from "@/app/data";
+import PostItem from "@/components/post/post-item";
+import PostItemAside from "@/components/post/post-item-aside";
+import TopScrollButton from "@/components/top-scroll-button";
+import { getPost } from "@/data";
+import { Post } from "@/interface/posts.interface";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import Loading from "./loading";
 
 type Props = {
   params: {
@@ -18,10 +19,19 @@ export const generateMetadata = async ({
   params
 }: Props): Promise<Metadata> => {
   const { category, slug } = params;
+  let post: Post | undefined;
 
-  const post = await getPost(slug, category);
+  try {
+    post = await getPost(slug, category);
+  } catch (e: any) {
+    console.error(e);
+    return {
+      title: "Rocky Blog - Post",
+      description: "Rocky Blog"
+    };
+  }
 
-  if (!post || post === null) {
+  if (!post) {
     return {
       title: "Rocky Blog - Post",
       description: "Rocky Blog"
@@ -37,11 +47,15 @@ export const generateMetadata = async ({
 export default async function Posts({ params }: Props) {
   const { category, slug } = params;
 
-  const post = await getPost(slug, category);
+  let post: Post | undefined;
 
-  if (!post) {
-    redirect("/");
+  try {
+    post = await getPost(slug, category);
+  } catch (e: any) {
+    console.error(e);
   }
+
+  if (!post) redirect("/");
 
   return (
     <>

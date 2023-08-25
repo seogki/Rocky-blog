@@ -1,4 +1,4 @@
-import { getCategories } from "@/app/data";
+import { getCategories } from "@/data";
 import { Suspense } from "react";
 import NavigationList from "../navigation-list";
 import NavigationListSkeleton from "../skeleton/navigation-list-skeleton";

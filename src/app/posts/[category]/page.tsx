@@ -1,8 +1,8 @@
-import PostList from "@/app/components/post/post-list";
+import PostList from "@/components/post/post-list";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import PostListSkeleton from "@/app/components/skeleton/post-list-skeleton";
+import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 
 type Props = {
   params: {
