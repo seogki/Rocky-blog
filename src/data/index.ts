@@ -69,7 +69,7 @@ export const getPostsByCategoryName = cache(
           },
           parseFrontmatter: true
         },
-        components: { ...components, ...{} },
+        components: { ...components },
         source
       });
 

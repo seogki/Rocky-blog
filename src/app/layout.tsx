@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import MyHeader from "@/components/root/header";
 import MyFooter from "@/components/root/footer";
-import "@/style/globals.scss";
+import "@/style/global.scss";
 import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/google-analytics";
