@@ -1,7 +1,9 @@
 import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import { useEffect } from "react";
 
 export default function MenuTab({
-  className,
+  className = "",
   onClick,
   link,
   children
@@ -11,12 +13,18 @@ export default function MenuTab({
   link: string;
   onClick: () => void;
 }) {
+  // const pathname = usePathname();
+
+  // useEffect(() => {
+  //   const prefix = pathname.split("/")[1];
+  //   console.debug(prefix);
+  //   console.debug(pathname);
+  // }, [pathname]);
+
   return (
     <>
       <li
-        className={`${
-          className && className
-        } w-full lg:w-auto my-4 lg:my-0 hover:text-teal-600 dark:hover:text-teal-400`}
+        className={`${className} w-full lg:w-auto my-4 lg:my-0 hover:text-teal-600 dark:hover:text-teal-400`}
       >
         <Link
           href={link}

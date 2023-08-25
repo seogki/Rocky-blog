@@ -4,6 +4,10 @@
     {
       "name": "@tailwind",
       "description": "Use the @tailwind directive to insert Tailwind's `base`, `components`, `utilities`, and `screens` styles into your CSS."
+    },
+    {
+      "name": "@apply",
+      "description": "apply tailwindcss style to original css"
     }
   ]
 }
