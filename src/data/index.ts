@@ -11,7 +11,6 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { MdxCustomComponent } from "@/components/mdx-custom-component";
 import { remarkReadingTime } from "@/utils/remark-reading-time";
 import { rehypeTocExtractHeadings } from "@/utils/rehype-toc-extract-headings";
-import "server-only";
 
 export const getCategories = cache(async () => {
   const filePath = path.join(process.cwd(), "src", "posts");

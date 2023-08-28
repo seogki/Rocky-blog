@@ -16,9 +16,7 @@ export default function Home() {
     <>
       <h1 className="text-2xl text-center font-bold mb-4 md:my-8">Home</h1>
       <div className="space-y-4 max-w-screen-md mx-auto">
-        {/* <MainContainerSkeleton /> */}
         <Suspense fallback={<MainContainerSkeleton />}>
-          {/* @ts-expect-error Async Server Component */}
           <MainContainer />
         </Suspense>
       </div>

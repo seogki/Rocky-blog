@@ -1,5 +1,6 @@
 {
   "css.customData": [".vscode/css_custom_data.json"],
   "javascript.suggest.paths": false,
-  "typescript.suggest.paths": false
+  "typescript.suggest.paths": false,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

@@ -2,7 +2,7 @@ import PostItemContainer from "@/components/post/post-item-container";
 import { getPost } from "@/data";
 import { Post } from "@/interface/posts.interface";
 import { Metadata } from "next";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Loading from "./loading";
 
 type Props = {
@@ -45,7 +45,6 @@ export default function PostItemPage({ params }: Props) {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        {/* @ts-expect-error Async Server Component */}
         <PostItemContainer params={params} />
       </Suspense>
     </>

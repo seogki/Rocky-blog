@@ -4,18 +4,6 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     jest: true
-  },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/posts",
-  //       destination: "/",
-  //       permanent: true
-  //     }
-  //   ];
-  // },
-  typescript: {
-    ignoreBuildErrors: true
   }
 };
 
