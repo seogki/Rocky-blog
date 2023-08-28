@@ -19,7 +19,7 @@ export const getCategories = cache(async () => {
   return categories;
 });
 
-export const getAllPostsOrderByDate = cache(async () => {
+export const getAllPostsOrderByDate = cache(async (limit = 0) => {
   const categories = await getCategories();
 
   const list: Post[] = [];
@@ -31,7 +31,9 @@ export const getAllPostsOrderByDate = cache(async () => {
 
   list.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
-  return list;
+  if (limit === 0) return list;
+
+  return list.slice(0, 5);
 });
 
 export const getPostsByCategoryName = cache(
