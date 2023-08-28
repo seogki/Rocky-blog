@@ -1,0 +1,178 @@
+---
+title: Implement jest in Nextjs 13
+date: "2023/08/28"
+description: describe how to implement jest in nextjs 13
+tags: 'jest,nextjs'
+published: true
+---
+
+This Article describes how to add jest to next.js 13
+
+## Introduction
+
+```bash showLineNumbers
+npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+yarn add --dev jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+pnpm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+```
+
+> For @testing-library/jest-dom<br/>
+> I had to upgrade version to 5.17.0 -> 6.1.2 in order to make toBeInTheDocument() function to work
+
+```json:package.json {6} showLineNumbers
+"scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --watch" //Add command to your script
+  },
+```
+
+
+### Additional setup
+
+For Typescript you have to install **@types/jest**
+
+```bash showLineNumbers
+npm install -D @types/jest
+yarn add --dev @types/jest
+pnpm install -D @types/jest
+```
+
+And define in your tsconfig.json
+
+```json:tsconfig.json {3} showLineNumbers
+{
+    ...,
+    "types": ["jest", "@testing-library/jest-dom"],
+    ...,
+}
+```
+
+## Jest config file
+
+
+Create jest.config.js file to setup your jest files
+
+```js:jest.config.js showLineNumbers
+const nextJest = require("next/jest");
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: "./"
+});
+
+// Add any custom config to be passed to Jest
+/** @type {import('jest').Config} */
+const config = {
+  // Add more setup options before each test is run
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testPathIgnorePatterns: ["/node_modules/"],
+  testEnvironment: "jest-environment-jsdom",
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
+  transformIgnorePatterns: []
+};
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+// export default createJestConfig(config);
+
+module.exports = createJestConfig(config)
+```
+
+## Jest setup file
+
+In order to use .toBeInTheDocument() kinds of functions you need to follow additional steps
+
+Let's create jest.setup.(js|ts)
+
+```ts:jest.setup.ts showLineNumbers
+import "@testing-library/jest-dom"; // since i am using 6 version
+// import "@testing-library/jest-dom/extend-expect" for below version 6 only;
+```
+
+NextJs team gives you warning based on @testing-library/jest-dom version
+
+> extend-expect was removed in v6.0, so if you are using @testing-library/jest-dom before version 6, you will need to import @testing-library/jest-dom/extend-expect instead.
+
+That's it for setting jest configuration
+
+
+```tsx:myHeader.tsx showLineNumbers
+import { render, screen } from "@testing-library/react";
+import MyHeader from "./header";
+
+describe("header test", () => {
+  test("display", async () => {
+    render(<MyHeader />);
+
+    expect(screen.getByText("Rocky Blog")).toBeInTheDocument();
+  });
+});
+```
+
+## Jest Test
+
+I have simple footer for test whether my a link is visible
+
+```tsx:footer.tsx showLineNumbers
+import { BsGithub } from "react-icons/bs";
+import { BiLogoGmail } from "react-icons/bi";
+export default function MyFooter({ className = "" }: { className?: string }) {
+  return (
+    <>
+      <footer
+        className={`${className} h-24 sm:h-32 w-full px-6 pt-2 border-t-2 border-gray-200 dark:border-gray-600`}
+      >
+        <div className="w-full h-full max-w-screen-xl flex flex-row justify-center items-center mx-auto">
+          <a
+            title="Seogki's github"
+            href="https://github.com/seogki"
+            className="text-xl h-max w-auto p-4"
+          >
+            <BsGithub></BsGithub>
+          </a>
+
+          <a
+            title="Seogki's mail"
+            href="mailto:skhmailweb@gmail.com"
+            className="text-xl h-max w-auto p-4"
+          >
+            <BiLogoGmail></BiLogoGmail>
+          </a>
+        </div>
+      </footer>
+    </>
+  );
+}
+```
+
+And my footer.test.ts in same folder
+
+```ts:footer.test.ts showLineNumbers
+import { render, screen } from "@testing-library/react";
+import MyFooter from "./footer";
+
+describe("footer test", () => {
+  test("test github link", async () => {
+    render(<MyFooter />);
+
+    expect(screen.getByTitle("Seogki's github")).toBeInTheDocument();
+  });
+});
+```
+
+Now run **npm run test**
+
+![testResult](/posts/NEXTJS/implement-jest-in-nextjs-13/test-result.png)
+
+That's it! 
+
+I will talk about more jest details later on my blog
+
+
+## Reference 🔗
+
+https://nextjs.org/docs/pages/building-your-application/optimizing/testing#jest-and-react-testing-library<br/>
