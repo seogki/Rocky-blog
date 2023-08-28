@@ -17,7 +17,7 @@ export default function MenuTabList() {
   return (
     <nav className="text-base lg:text-sm font-medium lg:ml-auto">
       <ul className="flex flex-wrap flex-col lg:flex-row">
-        <MenuTab onClick={closeAllOpener} link={"/"}>
+        <MenuTab onClick={closeAllOpener} link={"/posts"}>
           Posts
         </MenuTab>
         <MenuTab onClick={closeAllOpener} link={"/about"}>

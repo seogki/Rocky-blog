@@ -11,8 +11,9 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { MdxCustomComponent } from "@/components/mdx-custom-component";
 import { remarkReadingTime } from "@/utils/remark-reading-time";
 import { rehypeTocExtractHeadings } from "@/utils/rehype-toc-extract-headings";
+import "server-only";
 
-export const getCategories = cache(async (): Promise<string[]> => {
+export const getCategories = cache(async () => {
   const filePath = path.join(process.cwd(), "src", "posts");
   const categories = await fs.readdir(filePath);
   return categories;
@@ -89,10 +90,10 @@ export const getPostsByCategoryName = cache(
   }
 );
 
-export const getPost = async (slug: string, categoryName: string) => {
+export const getPost = cache(async (slug: string, categoryName: string) => {
   const posts = await getPostsByCategoryName(categoryName);
 
   if (posts.length < 1) return;
 
   return posts.find((post) => post?.slug === slug);
-};
+});

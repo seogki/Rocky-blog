@@ -2,7 +2,7 @@ import PostList from "@/components/post/post-list";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
+import Loading from "./loading";
 
 type Props = {
   params: {
@@ -21,7 +21,7 @@ export const generateMetadata = async ({
   };
 };
 
-export default function Posts({ params }: Props) {
+export default function PostListPage({ params }: Props) {
   const { category } = params;
   if (!category) return notFound();
 
@@ -29,7 +29,7 @@ export default function Posts({ params }: Props) {
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
         <h1 className="text-2xl font-bold text-center my-2">{category}</h1>
-        <Suspense fallback={<PostListSkeleton />}>
+        <Suspense fallback={<Loading />}>
           {/* @ts-expect-error Async Server Component */}
           <PostList category={category} />
         </Suspense>
