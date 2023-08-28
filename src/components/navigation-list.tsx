@@ -47,8 +47,8 @@ export default function NavigationList({ className, onClick, list }: Props) {
       <ul className="sm:fixed">
         <NavLink
           key={"RECENT"}
-          href={`/`}
-          isActive={pathname === `/`}
+          href={`/posts`}
+          isActive={pathname === `/posts`}
           onClick={() => handleClick()}
         >
           RECENT

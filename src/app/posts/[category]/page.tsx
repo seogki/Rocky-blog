@@ -21,7 +21,7 @@ export const generateMetadata = async ({
   };
 };
 
-export default function Posts({ params }: Props) {
+export default function PostListPage({ params }: Props) {
   const { category } = params;
   if (!category) return notFound();
 

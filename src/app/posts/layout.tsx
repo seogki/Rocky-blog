@@ -5,16 +5,11 @@ import { Suspense } from "react";
 import NavigationListSkeleton from "@/components/skeleton/navigation-list-skeleton";
 
 type Props = {
-  params: {
-    category?: string;
-  };
   children: React.ReactNode;
 };
 
-export default async function layout({ children, params }: Props) {
-  const { category } = params;
+export default async function layout({ children }: Props) {
   const categories = await getCategories();
-  if (!category || !categories.includes(category)) redirect("/");
 
   return (
     <>

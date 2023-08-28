@@ -13,14 +13,6 @@ export default function MenuTab({
   link: string;
   onClick: () => void;
 }) {
-  // const pathname = usePathname();
-
-  // useEffect(() => {
-  //   const prefix = pathname.split("/")[1];
-  //   console.debug(prefix);
-  //   console.debug(pathname);
-  // }, [pathname]);
-
   return (
     <>
       <li
