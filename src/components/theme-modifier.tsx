@@ -2,9 +2,9 @@
 
 import { useTheme } from "next-themes";
 import { useMount } from "@/hooks/useMount";
-import { FaSpinner } from "react-icons/fa6";
-import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
-
+import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
+import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
+import { FaSun } from "@react-icons/all-files/fa/FaSun";
 export default function ThemeModifier() {
   const { theme, setTheme, systemTheme } = useTheme();
   const { isMount } = useMount();
@@ -19,12 +19,12 @@ export default function ThemeModifier() {
   return (
     <>
       {currentTheme === "dark" ? (
-        <BsFillMoonFill
+        <FaMoon
           className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("light")}
         />
       ) : (
-        <BsFillSunFill
+        <FaSun
           className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("dark")}
         />

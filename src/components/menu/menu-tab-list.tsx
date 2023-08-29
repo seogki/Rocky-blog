@@ -1,12 +1,9 @@
 "use client";
-import { closeDrawer, closeMore } from "@/redux/features/headerSlice";
+import { closeAll, closeDrawer, closeMore } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import MenuTab from "./menu-tab";
 
 export default function MenuTabList() {
-  const { isMore, isDrawerOpen } = useAppSelector(
-    ({ headerReducer }) => headerReducer
-  );
   const dispatch = useAppDispatch();
 
   const list = [
@@ -15,8 +12,7 @@ export default function MenuTabList() {
   ];
 
   const closeAllOpener = () => {
-    if (isMore) dispatch(closeMore());
-    if (isDrawerOpen) dispatch(closeDrawer());
+    dispatch(closeAll());
   };
 
   return (

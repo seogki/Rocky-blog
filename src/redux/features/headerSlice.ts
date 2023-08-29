@@ -25,11 +25,25 @@ export const headerSlice = createSlice({
     },
     closeMore: (state) => {
       state.isMore = false;
+    },
+    openAll: (state) => {
+      state.isMore = true;
+      state.isDrawerOpen = true;
+    },
+    closeAll: (state) => {
+      state.isMore = false;
+      state.isDrawerOpen = false;
     }
   }
 });
 
-export const { openDrawer, closeDrawer, openMore, closeMore } =
-  headerSlice.actions;
+export const {
+  openDrawer,
+  closeDrawer,
+  openMore,
+  closeMore,
+  openAll,
+  closeAll
+} = headerSlice.actions;
 
 export default headerSlice.reducer;

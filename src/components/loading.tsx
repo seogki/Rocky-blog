@@ -1,5 +1,4 @@
-import { FaSpinner } from "react-icons/fa6";
-
+import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 export default function Loading() {
   return (
     <>

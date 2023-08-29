@@ -1,5 +1,6 @@
-import { BsGithub } from "react-icons/bs";
-import { BiLogoGmail } from "react-icons/bi";
+import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
+import { SiGmail } from "@react-icons/all-files/si/SiGmail";
+
 export default function MyFooter({ className = "" }: { className?: string }) {
   return (
     <>
@@ -12,7 +13,7 @@ export default function MyFooter({ className = "" }: { className?: string }) {
             href="https://github.com/seogki"
             className="text-xl h-max w-auto p-4"
           >
-            <BsGithub></BsGithub>
+            <AiFillGithub></AiFillGithub>
           </a>
 
           <a
@@ -20,7 +21,7 @@ export default function MyFooter({ className = "" }: { className?: string }) {
             href="mailto:skhmailweb@gmail.com"
             className="text-xl h-max w-auto p-4"
           >
-            <BiLogoGmail></BiLogoGmail>
+            <SiGmail></SiGmail>
           </a>
         </div>
       </footer>

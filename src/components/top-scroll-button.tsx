@@ -1,7 +1,7 @@
 "use client";
 import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
-import { MdArrowUpward } from "react-icons/md";
+import { MdArrowUpward } from "@react-icons/all-files/md/MdArrowUpward";
 import useScrollPosition from "@/hooks/useScrollPosition";
 
 export default function TopScrollButton() {
