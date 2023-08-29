@@ -29,6 +29,7 @@ export default function RootLayout({
             </div>
           </ReduxProvider>
         </ThemeProvider>
+        {/* analytics for vercel */}
         <Analytics />
       </body>
     </html>

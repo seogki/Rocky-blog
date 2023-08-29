@@ -3,7 +3,7 @@ import { getPost } from "@/data";
 import { Post } from "@/interface/posts.interface";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import Loading from "./loading";
+import PostItemSkeleton from "@/components/skeleton/post-item-skeleton";
 
 type Props = {
   params: {
@@ -44,7 +44,7 @@ export const generateMetadata = async ({
 export default function PostItemPage({ params }: Props) {
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<PostItemSkeleton />}>
         <PostItemContainer params={params} />
       </Suspense>
     </>

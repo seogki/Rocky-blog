@@ -1,5 +1,6 @@
 import Skeleton from "@/components/skeleton/skeleton";
 import { getAllPostsOrderByDate } from "@/data";
+import { convertFormat } from "@/utils/date";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -49,7 +50,7 @@ const MainContainer = async () => {
               className="py-1 flex flex-row flex-wrap w-full"
               key={post.slug}
             >
-              <time className="grow-0">[{post.date}]</time>
+              <span className="grow-0">[{post.category}]</span>
               <em className="truncate hover:text-teal-600 hover:dark:text-teal-400 mx-2 flex-1">
                 <Link href={`/posts/${post.category}/${post!.slug}`}>
                   {post.title}
