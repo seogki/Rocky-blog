@@ -50,7 +50,7 @@ And define in your tsconfig.json
 }
 ```
 
-## Jest config file
+## Config file
 
 
 Create jest.config.js file to setup your jest files
@@ -82,7 +82,7 @@ const config = {
 module.exports = createJestConfig(config)
 ```
 
-## Jest setup file
+## Setup file
 
 In order to use .toBeInTheDocument() kinds of functions you need to follow additional steps
 
@@ -98,20 +98,6 @@ NextJs team gives you warning based on @testing-library/jest-dom version
 > extend-expect was removed in v6.0, so if you are using @testing-library/jest-dom before version 6, you will need to import @testing-library/jest-dom/extend-expect instead.
 
 That's it for setting jest configuration
-
-
-```tsx:myHeader.tsx showLineNumbers
-import { render, screen } from "@testing-library/react";
-import MyHeader from "./header";
-
-describe("header test", () => {
-  test("display", async () => {
-    render(<MyHeader />);
-
-    expect(screen.getByText("Rocky Blog")).toBeInTheDocument();
-  });
-});
-```
 
 ## Jest Test
 
