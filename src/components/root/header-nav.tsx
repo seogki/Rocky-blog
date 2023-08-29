@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import { MdMenu } from "react-icons/md";
+import { MdMenu } from "@react-icons/all-files/md/MdMenu";
 import { Transition } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
@@ -10,6 +9,7 @@ import {
   openDrawer
 } from "@/redux/features/headerSlice";
 import NavigationList from "@/components/navigation-list";
+
 export default function HeaderNav({ categories }: { categories: string[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(
     ({ headerReducer }) => headerReducer

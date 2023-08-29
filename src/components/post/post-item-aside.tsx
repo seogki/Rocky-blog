@@ -42,13 +42,7 @@ export default function PostItemAside({ toc }: Props) {
             </h2>
             <ul>
               {toc.map((item, idx) => (
-                <li
-                  key={idx}
-                  className={`${
-                    (item.parent === "h1" || item.parent === "h2") &&
-                    "border-t-2 border-zinc-200 dark:border-zinc-700 first-of-type:border-0"
-                  }`}
-                >
+                <li key={idx}>
                   <Link href={`${pathname}/${item.href}`} shallow>
                     <p
                       className={`${setIndent(

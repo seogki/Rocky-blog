@@ -10,6 +10,8 @@ This Article describes how to add jest to next.js 13
 
 ## Introduction
 
+When you implement jest to nextjs you have to install four packages
+
 ```bash showLineNumbers
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
 yarn add --dev jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
@@ -99,13 +101,13 @@ NextJs team gives you warning based on @testing-library/jest-dom version
 
 That's it for setting jest configuration
 
-## Jest Test
+## Test
 
 I have simple footer for test whether my a link is visible
 
 ```tsx:footer.tsx showLineNumbers
-import { BsGithub } from "react-icons/bs";
-import { BiLogoGmail } from "react-icons/bi";
+import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
+import { SiGmail } from "@react-icons/all-files/si/SiGmail";
 export default function MyFooter({ className = "" }: { className?: string }) {
   return (
     <>

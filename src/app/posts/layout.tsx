@@ -1,5 +1,4 @@
 import { getCategories } from "@/data";
-import { notFound, redirect } from "next/navigation";
 import NavigationList from "@/components/navigation-list";
 import { Suspense } from "react";
 import NavigationListSkeleton from "@/components/skeleton/navigation-list-skeleton";
