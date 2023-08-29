@@ -9,6 +9,11 @@ export default function MenuTabList() {
   );
   const dispatch = useAppDispatch();
 
+  const list = [
+    { name: "Posts", link: "/posts" },
+    { name: "About", link: "/about" }
+  ];
+
   const closeAllOpener = () => {
     if (isMore) dispatch(closeMore());
     if (isDrawerOpen) dispatch(closeDrawer());
@@ -17,12 +22,11 @@ export default function MenuTabList() {
   return (
     <nav className="text-base lg:text-sm font-medium lg:ml-auto">
       <ul className="flex flex-wrap flex-col lg:flex-row">
-        <MenuTab onClick={closeAllOpener} link={"/posts"}>
-          Posts
-        </MenuTab>
-        <MenuTab onClick={closeAllOpener} link={"/about"}>
-          About
-        </MenuTab>
+        {list.map((item) => (
+          <MenuTab key={item.name} onClick={closeAllOpener} link={item.link}>
+            {item.name}
+          </MenuTab>
+        ))}
       </ul>
     </nav>
   );
