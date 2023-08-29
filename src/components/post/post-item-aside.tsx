@@ -13,13 +13,13 @@ export default function PostItemAside({ toc }: Props) {
 
   const setIndent = (parent: string) => {
     if (parent === "h2" || parent === "h1")
-      return "ml-2 font-semibold text-sm xl:text-base";
+      return "ml-2 font-normal text-sm xl:text-base";
     if (parent === "h3")
-      return "ml-4 font-medium text-xs xl:text-sm text-zinc-800 dark:text-zinc-200";
+      return "ml-4 font-light text-xs xl:text-sm text-zinc-800 dark:text-zinc-200";
     if (parent === "h4")
-      return "ml-6 font-normal text-xs xl:text-sm text-zinc-700 dark:text-zinc-300";
+      return "ml-6 font-light text-xs xl:text-sm text-zinc-700 dark:text-zinc-300";
     if (parent === "h5")
-      return "ml-8 font-light text-xs xl:text-sm text-zinc-600 dark:text-zinc-400";
+      return "ml-8 font-extralight text-xs xl:text-sm text-zinc-600 dark:text-zinc-400";
     if (parent === "h6")
       return "ml-10 font-extralight text-xs xl:text-sm text-zinc-500";
   };
