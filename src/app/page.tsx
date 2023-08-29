@@ -1,9 +1,8 @@
-import Skeleton from "@/components/skeleton/skeleton";
 import { getAllPostsOrderByDate } from "@/data";
-import { convertFormat } from "@/utils/date";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import MainContainerSkeleton from "@/components/skeleton/main-container-skeleton";
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -24,15 +23,6 @@ export default function Home() {
     </>
   );
 }
-
-const MainContainerSkeleton = () => {
-  return (
-    <>
-      <Skeleton className="p-4 md:p-5 mx-2 h-[300px] md:h-[200px]" />
-      <Skeleton className="p-4 md:p-5 mx-2 h-[300px] md:h-[200px]" />
-    </>
-  );
-};
 
 const MainContainer = async () => {
   const posts = await getAllPostsOrderByDate(5);

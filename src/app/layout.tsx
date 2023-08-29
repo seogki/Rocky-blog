@@ -6,6 +6,7 @@ import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
