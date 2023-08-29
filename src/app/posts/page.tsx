@@ -2,7 +2,6 @@ import PostList from "@/components/post/post-list";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
 import { Suspense } from "react";
-// import Loading from "./loading";
 
 export const generateMetadata = (): Metadata => {
   return {

@@ -6,6 +6,7 @@ export function MdxCustomComponent() {
       alt={props.alt}
       width={0}
       height={0}
+      placeholder="blur"
       sizes="100vw"
       style={{ width: "auto", height: "auto" }}
       {...props}
