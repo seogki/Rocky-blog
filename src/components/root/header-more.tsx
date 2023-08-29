@@ -1,7 +1,7 @@
 "use client";
 
 import { Transition } from "@headlessui/react";
-import { MdMoreVert } from "react-icons/md";
+import { MdMoreVert } from "@react-icons/all-files/md/MdMoreVert";
 import MenuTabs from "@/components/menu/menu-tab-list";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import { closeDrawer, closeMore, openMore } from "@/redux/features/headerSlice";
