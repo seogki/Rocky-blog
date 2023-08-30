@@ -1,11 +1,14 @@
 import { getCategories } from "@/data";
-import NavigationList from "@/components/navigation-list";
+// import NavigationList from "@/components/navigation-list";
 import { Suspense } from "react";
 import NavigationListSkeleton from "@/components/skeleton/navigation-list-skeleton";
+import dynamic from "next/dynamic";
 
 type Props = {
   children: React.ReactNode;
 };
+
+const NavigationList = dynamic(() => import("@/components/navigation-list"));
 
 export default async function layout({ children }: Props) {
   const categories = await getCategories();
