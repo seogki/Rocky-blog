@@ -91,10 +91,10 @@ export const getPostsByCategoryName = cache(
   }
 );
 
-export const getPost = cache(async (slug: string, categoryName: string) => {
+export const getPost = async (slug: string, categoryName: string) => {
   const posts = await getPostsByCategoryName(categoryName);
 
   if (posts.length < 1) return;
 
   return posts.find((post) => post?.slug === slug);
-});
+};
