@@ -73,7 +73,7 @@ type MainSectionProps = {
 
 const MainSection = ({ children, title }: MainSectionProps) => {
   return (
-    <section className="p-4 md:p-5 mx-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+    <section className="drop-shadow-lg dark:drop-shadow-none p-4 md:p-5 mx-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
       <h2 className="text-lg font-medium">{title}</h2>
       <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
         {children}
