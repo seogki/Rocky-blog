@@ -13,7 +13,9 @@ type Props = {
   className?: string;
 };
 
-const PostBody = dynamic(() => import("./post-body"));
+const PostBody = dynamic(() => import("./post-body"), {
+  loading: () => <PostBodySkeleton />
+});
 
 export default function PostItem({ category, post, className = "" }: Props) {
   if (!post || post === null) {
@@ -36,9 +38,7 @@ export default function PostItem({ category, post, className = "" }: Props) {
         <div className="ml-auto text-right text-base pb-4">
           <strong>📖 {post.minutesRead}</strong>
         </div>
-        <Suspense fallback={<PostBodySkeleton />}>
-          <PostBody body={post.body} />
-        </Suspense>
+        <PostBody body={post.body} />
         {/* {post.body} */}
       </article>
     </>
