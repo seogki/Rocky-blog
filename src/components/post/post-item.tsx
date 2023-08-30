@@ -39,7 +39,6 @@ export default function PostItem({ category, post, className = "" }: Props) {
           <strong>📖 {post.minutesRead}</strong>
         </div>
         <PostBody body={post.body} />
-        {/* {post.body} */}
       </article>
     </>
   );

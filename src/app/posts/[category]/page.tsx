@@ -1,8 +1,9 @@
-import PostList from "@/components/post/post-list";
+// import PostList from "@/components/post/post-list";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
+import dynamic from "next/dynamic";
 
 type Props = {
   params: {
@@ -10,9 +11,11 @@ type Props = {
   };
 };
 
-export const generateMetadata = async ({
-  params
-}: Props): Promise<Metadata> => {
+const PostList = dynamic(() => import("@/components/post/post-list"), {
+  loading: () => <PostListSkeleton />
+});
+
+export const generateMetadata = ({ params }: Props): Metadata => {
   const { category } = params;
 
   return {
@@ -29,9 +32,7 @@ export default function PostListPage({ params }: Props) {
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
         <h1 className="text-2xl font-bold text-center my-2">{category}</h1>
-        <Suspense fallback={<PostListSkeleton />}>
-          <PostList category={category} />
-        </Suspense>
+        <PostList category={category} />
       </section>
     </>
   );

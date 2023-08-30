@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function PostBody({ body }: Props) {
-  return <></>;
+  return <>{body}</>;
 }
