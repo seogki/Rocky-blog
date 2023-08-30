@@ -21,15 +21,15 @@ export const generateMetadata = async ({
   } catch (e: any) {
     console.error(e);
     return {
-      title: "Rocky Blog - Post",
-      description: "Rocky Blog"
+      title: `${slug.replaceAll("-", " ")}`,
+      description: "This is my Rocky Blog Single Post Page"
     };
   }
 
   if (!post) {
     return {
-      title: "Rocky Blog - Post",
-      description: "Rocky Blog"
+      title: `${slug.replaceAll("-", " ")}`,
+      description: "This is my Rocky Blog Single Post Page"
     };
   }
 
