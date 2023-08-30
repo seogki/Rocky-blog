@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-export default async function MyHeader({ className }: Props) {
+export default async function MyHeader({ className = "" }: Props) {
   const categories = await getCategories();
 
   return (

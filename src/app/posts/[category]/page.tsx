@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
+import dynamic from "next/dynamic";
 
 type Props = {
   params: {
@@ -10,14 +11,12 @@ type Props = {
   };
 };
 
-export const generateMetadata = async ({
-  params
-}: Props): Promise<Metadata> => {
+export const generateMetadata = ({ params }: Props): Metadata => {
   const { category } = params;
 
   return {
     title: `Rocky Blog - Posts [${category}]`,
-    description: `Rocky Blog - Posts [${category}]`
+    description: `This is my Rocky Blog ${category} Posts Page`
   };
 };
 

@@ -7,7 +7,7 @@ import MainContainerSkeleton from "@/components/skeleton/main-container-skeleton
 export const generateMetadata = (): Metadata => {
   return {
     title: `Rocky Blog - Home`,
-    description: `Rocky Blog - Home`
+    description: `This is my Rocky Blog Home Page with recent posts and tags`
   };
 };
 
