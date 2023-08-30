@@ -8,7 +8,6 @@ import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 

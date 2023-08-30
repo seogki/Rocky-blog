@@ -13,6 +13,11 @@ export interface Post {
   body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
+export interface PostV2 {
+  source: string;
+  slug: string;
+}
+
 export type Toc = {
   href: string;
   parent: string;

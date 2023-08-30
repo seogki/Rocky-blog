@@ -1,6 +1,6 @@
 import { HiCheckCircle } from "@react-icons/all-files/hi/HiCheckCircle";
+import { MdWarning } from "@react-icons/all-files/md/MdWarning";
 import { Metadata } from "next";
-
 export const metadata: Metadata = {
   title: "Rocky Blog - Todo",
   description: "This is my Rocky Blog Todo Page of what i need to do"
@@ -13,7 +13,7 @@ export default function TodoHomePage() {
       <div className="space-y-4 max-w-screen-md mx-auto">
         <h2 className="text-lg font-medium">Need To Fix</h2>
         <section className="p-4 md:p-5 mx-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <HiCheckCircle className="float-right text-xl" />
+          <HiCheckCircle className="float-right text-2xl" />
           <h3 className="text-base font-normal pb-4 mx-2">Expectation</h3>
           <p className="py-2 mx-4 font-light">
             By Streaming condition, I expected see loading skeleton before
@@ -21,7 +21,8 @@ export default function TodoHomePage() {
             page&apos;s HTML into smaller chunks and pass down one by one
           </p>
 
-          <h3 className="text-base font-normal py-4 mx-2 text-red-600 dark:text-red-400">
+          <h3 className=" text-base font-normal py-4 mx-2 text-red-600 dark:text-red-400">
+            <MdWarning className="mr-2 mb-1 inline-block" />
             Error
           </h3>
           <p className="py-2 mx-4 font-light">
@@ -36,14 +37,15 @@ export default function TodoHomePage() {
         </section>
 
         <section className="p-4 md:p-5 mx-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <HiCheckCircle className="float-right text-xl" />
+          <HiCheckCircle className="float-right text-2xl" />
           <h3 className="text-base font-normal pb-4 mx-2">Expectation</h3>
           <p className="py-2 mx-4 font-light">
             When building my nextjs i expect to see one rehype-prism-plus bundle
             share between components
           </p>
 
-          <h3 className="text-base font-normal py-4 mx-2 text-red-600 dark:text-red-400">
+          <h3 className="align-baseline text-base font-normal py-4 mx-2 text-red-600 dark:text-red-400">
+            <MdWarning className="mr-2 mb-1 inline-block" />
             Error
           </h3>
           <p className="py-2 mx-4 font-light">
