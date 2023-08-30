@@ -1,9 +1,8 @@
-// import PostItem from "@/components/post/post-item";
-// import PostItemAside from "@/components/post/post-item-aside";
+import PostItem from "@/components/post/post-item";
+import PostItemAside from "@/components/post/post-item-aside";
 import TopScrollButton from "@/components/top-scroll-button";
 import { getPost } from "@/data";
 import { Post } from "@/interface/posts.interface";
-import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 
 type Props = {
@@ -12,12 +11,6 @@ type Props = {
     slug: string;
   };
 };
-
-const PostItemAside = dynamic(
-  () => import("@/components/post/post-item-aside")
-);
-
-const PostItem = dynamic(() => import("@/components/post/post-item"));
 
 export default async function PostItemContainer({ params }: Props) {
   const { category, slug } = params;
