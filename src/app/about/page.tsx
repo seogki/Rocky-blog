@@ -3,13 +3,13 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Rocky Blog - About",
-  description: "Rocky Blog about"
+  description: "This is my Rocky Blog About Page to describe myself"
 };
 
 const About: NextPage = () => {
   return (
     <div className="w-full mx-auto max-w-screen-md">
-      <h1 className="text-center mt-8">Ing..</h1>
+      <h1 className="text-center mt-8">Who am I</h1>
       {/* <Image
         src={myPic}
         width={120}
