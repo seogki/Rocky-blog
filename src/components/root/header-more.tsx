@@ -8,9 +8,7 @@ import { closeDrawer, closeMore, openMore } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function HeaderMore() {
-  const { isMore, isDrawerOpen } = useAppSelector(
-    ({ headerReducer }) => headerReducer
-  );
+  const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);
   const dispatch = useAppDispatch();
   useToggleScrollbar(isMore);
 

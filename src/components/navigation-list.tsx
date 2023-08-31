@@ -34,7 +34,7 @@ const NavLink = ({ children, onClick, href, isActive }: LinkProps) => {
 };
 
 export default function NavigationList({ className, onClick, list }: Props) {
-  const { isDrawerOpen } = useAppSelector(({ headerReducer }) => headerReducer);
+  const { isDrawerOpen } = useAppSelector(({ header }) => header);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
 
