@@ -1,13 +1,13 @@
 ---
-title: redux with jest in nextjs 13
+title: testing redux + RTL with jest in nextjs 13
 date: "2023/08/31"
-description: describes how to combine jest with redux in order to test
+description: describes how to testing redux + @testing-library/react with jest in nextjs 13 in order to test
 tags: 'nextjs,jest,redux,@reduxjs/toolkit' 
 published: true
 ---
 
 
-This article describes how to combine jest with redux in order to test
+This article describes how to testing redux + @testing-library/react with jest in nextjs 13 in order to test
 
 ## Redux warning
 
@@ -64,9 +64,10 @@ export type AppDispatch = AppStore["dispatch"];
 ```
 
 
-Create redux-test-utils.tsx
+Create test-utils.tsx, This will be your custom render function, you can find more setup [here](https://testing-library.com/docs/react-testing-library/setup/),
+since we are testing redux i will only talk about redux right now
 
-```tsx:redux-test-utils.tsx {22,23,27} showLineNumbers
+```tsx:test-utils.tsx {22,23,27} showLineNumbers
 import React, { PropsWithChildren } from "react";
 import { render } from "@testing-library/react";
 import type { RenderOptions } from "@testing-library/react";
@@ -149,6 +150,32 @@ If you want to use original render than use **render(components)** with provider
 
 
 ![Sample](/posts/JEST/jest-nextjs-13-with-redux/header-title-test-result.png)
+
+
+## Additional tip
+
+Sometime you need to preload data before test acutally happens, and that's when **preloadedState** is needed
+
+Let's say my headerReducer has *isDrawerOpen* state and i want it to make it true from the start
+
+```tsx:header-title.test.tsx showLineNumbers
+import { render, screen } from "@testing-library/react";
+import HeaderTitle from "./header-title";
+import { renderWithProviders } from "@/redux/test-utils";
+
+describe("header title test", () => {
+  test("header title exists", async () => {
+
+    const initialHeader = []
+
+    renderWithProviders(<HeaderTitle />); //with redux provider
+
+    const link: HTMLAnchorElement = screen.getByRole("link");
+
+    expect(link.textContent).toEqual("Rocky Blog");
+  });
+});
+```
 
 ## Reference 🔗
 

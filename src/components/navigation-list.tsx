@@ -12,7 +12,7 @@ type Props = {
 };
 
 type LinkProps = {
-  children: React.JSX.Element | string;
+  children: React.ReactNode;
   href: string;
   isActive: boolean;
   onClick?: React.MouseEventHandler;
