@@ -1,7 +1,7 @@
 // "use client";
 
 type Props = {
-  body?: React.JSX.Element;
+  body?: React.ReactNode;
 };
 
 export default function PostBody({ body }: Props) {

@@ -1,6 +1,6 @@
 type Props = {
   className?: string;
-  children?: React.JSX.Element;
+  children?: React.ReactNode;
 };
 
 export default function Skeleton({ children, className = "" }: Props) {

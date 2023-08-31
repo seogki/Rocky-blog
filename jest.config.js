@@ -9,6 +9,7 @@ const createJestConfig = nextJest({
 /** @type {import('jest').Config} */
 const config = {
   // Add more setup options before each test is run
+  preset: "ts-jest",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/"],
   testEnvironment: "jest-environment-jsdom",

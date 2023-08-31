@@ -11,9 +11,7 @@ import {
 import NavigationList from "@/components/navigation-list";
 
 export default function HeaderNav({ categories }: { categories: string[] }) {
-  const { isMore, isDrawerOpen } = useAppSelector(
-    ({ headerReducer }) => headerReducer
-  );
+  const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
 

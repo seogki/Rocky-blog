@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://rocky-blog.vercel.app</loc>
-<lastmod>2023-08-29T06:13:20.419Z</lastmod>
+<lastmod>2023-08-31T04:43:16.584Z</lastmod>
 </url>
 <url>
 <loc>https://rocky-blog.vercel.app/posts</loc>
-<lastmod>2023-08-29T06:13:20.419Z</lastmod>
+<lastmod>2023-08-31T04:43:16.584Z</lastmod>
+</url>
+<url>
+<loc>https://rocky-blog.vercel.app/posts/JEST/jest-nextjs-13-with-redux</loc>
+<lastmod>2023-08-31T00:00:00.000Z</lastmod>
 </url>
 <url>
 <loc>https://rocky-blog.vercel.app/posts/NEXTJS/how-i-reduce-bundle-size-nextjs-13</loc>

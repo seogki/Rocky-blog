@@ -12,8 +12,21 @@ export function MdxCustomComponent() {
     />
   );
 
+  const Strong = (props: any) => (
+    <strong className={`text-teal-600 dark:text-teal-400`} {...props}></strong>
+  );
+
+  const BlockQuote = (props: any) => (
+    <blockquote
+      className="bg-zinc-200 dark:bg-zinc-700"
+      {...props}
+    ></blockquote>
+  );
+
   const components = {
-    img: ResponsiveImage
+    img: ResponsiveImage,
+    strong: Strong,
+    blockquote: BlockQuote
   };
 
   return { components };
