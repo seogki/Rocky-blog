@@ -8,6 +8,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import GoogleAdsense from "@/components/google-adsense";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <GoogleAnalytics />
+        <GoogleAdsense />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReduxProvider>
             <div className="w-full h-full">
