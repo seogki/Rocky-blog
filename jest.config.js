@@ -13,13 +13,32 @@ const config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/"],
   testEnvironment: "jest-environment-jsdom",
+  // moduleDirectories: ["node_modules", "<rootDir>/"],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1"
+    "^@/(.*)$": "<rootDir>/src/$1",
+    react:
+      "<rootDir>/node_modules/next/dist/compiled/react/cjs/react.development.js"
   },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**"
+  ],
+  transformIgnorePatterns: [],
   moduleFileExtensions: ["ts", "tsx", "js", "mjs", "cjs", "jsx", "json", "node"]
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-// export default createJestConfig(config);
+module.exports = async (...args) => {
+  const fn = createJestConfig(config);
+  const res = await fn(...args);
 
-module.exports = createJestConfig(config);
+  res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
+    if (pattern === "/node_modules/") {
+      return "/node_modules/next-dx-remote(?!/rsc)/";
+    }
+    return pattern;
+  });
+
+  return res;
+};

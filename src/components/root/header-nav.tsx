@@ -1,6 +1,8 @@
 "use client";
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
 import { Transition } from "@headlessui/react";
+// import Transition from "@headlessui/react/dist/components/transitions/transition";
+// import { Transition } from "@headlessui/react/dist/index.js";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import {
