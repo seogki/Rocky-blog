@@ -15,6 +15,8 @@ const config = {
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1"
+    // react:
+    //   "<rootDir>/node_modules/next/dist/compiled/react/cjs/react.development.js"
   },
   collectCoverage: true,
   collectCoverageFrom: [
