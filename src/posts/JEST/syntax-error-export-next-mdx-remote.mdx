@@ -1,0 +1,125 @@
+---
+title: syntaxError unexpected token export when trying to use jest in next-mdx-remote + RTL 
+date: "2023/09/04"
+description: describe how to fix export syntax error in jest when using next-mdx-remote with react-testing-library
+tags: 'syntax-error,export,next-mdx-remote,jest,RTL,react-testing-library' 
+published: true
+---
+
+This article describes describe how to fix export syntax error in jest when using next-mdx-remote with react-testing-library
+
+## Syntax error 'export'
+
+When i was trying to test next-mdx-remote library i had error of **SntaxError: Unexpected token 'export'** problems.
+This error normally occur when you write code wrongly so that language could not understand properly. 
+
+For Jest, they do not support *ES6* modules, hence throwing this error. 
+
+### Error
+
+```text {2} showLineNumbers
+C:\Users\user\Downloads\code\rocky-blog\node_modules\.pnpm\next-mdx-remote@4.4.1_react-dom@18.2.0_react@18.2.0\node_modules\next-mdx-remote\rsc.js:6
+    export * from './dist/rsc.js'
+    ^^^^^^
+
+    SyntaxError: Unexpected token 'export'
+
+      at Runtime.createScriptFromCode (node_modules/.pnpm/jest-runtime@29.6.3/node_modules/jest-runtime/build/index.js:1505:14)
+      at Object.<anonymous> (src/data/index.ts:1372:26)
+      at Object.<anonymous> (src/components/root/header-nav.test.tsx:8:15)
+```
+
+As you can see in node_modules path next-mdx-remote has rsc.js file which export all the files from *./dist/rsc.js* by es6
+
+
+My import compileMDX function
+
+```ts:index.ts showLineNumbers
+import { compileMDX } from "next-mdx-remote/rsc";
+```
+
+## TransformIgnorePatterns
+
+TransformIgnorePatterns return list of regexp pattern strings. If the file path matches any of the patterns, it will not be transformed,
+you can find more information from [here](https://jestjs.io/docs/configuration#transformignorepatterns-arraystring)
+
+
+### CreateJestConfig
+
+This is how i implement transformIgnorePatterns to disable transform of *next-mdx-remote/rsc*
+
+```js jest.config.js showLineNumbers
+// original module.exports
+// module.exports = createJestConfig(config);
+
+// custom module.exports
+module.exports = async (...args) => {
+  const fn = createJestConfig(config);
+  const res = await fn(...args);
+
+  res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
+    if (pattern === "/node_modules/") {
+      return "/node_modules/next-mdx-remote(?!/rsc)/";
+    }
+    return pattern;
+  });
+
+  return res;
+};
+```
+
+Before i create jest config with my options, i have searched all the file path and add next-mdx-remote path to my array
+
+This is my full config file
+
+```js jest.config.js showLineNumbers
+const nextJest = require("next/jest");
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: "./"
+});
+
+// Add any custom config to be passed to Jest
+/** @type {import('jest').Config} */
+const config = {
+  preset: "ts-jest",
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/"],
+  testEnvironment: "jest-environment-jsdom",
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**"
+  ],
+  transformIgnorePatterns: [],
+};
+
+// original module.exports
+// module.exports = createJestConfig(config);
+
+// custom module.exports
+module.exports = async (...args) => {
+  const fn = createJestConfig(config);
+  const res = await fn(...args);
+
+  res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
+    if (pattern === "/node_modules/") {
+      return "/node_modules/next-mdx-remote(?!/rsc)/";
+    }
+    return pattern;
+  });
+
+  return res;
+};
+```
+
+## Reference 
+
+https://github.com/vercel/next.js/discussions/49304<br/>
+https://jestjs.io/docs/configuration#transformignorepatterns-arraystring<br/>
+https://academic-accelerator.com/encyclopedia/kr/syntax-error<br/>

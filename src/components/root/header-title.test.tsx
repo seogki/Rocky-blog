@@ -4,9 +4,7 @@ import { renderWithProviders } from "@/test/test-utils";
 
 describe("header title test", () => {
   test("header title exists", async () => {
-    // render(<HeaderTitle />); without redux provider
-
-    renderWithProviders(<HeaderTitle />); //with redux provider
+    renderWithProviders(<HeaderTitle />);
 
     const link: HTMLAnchorElement = screen.getByRole("link");
 

@@ -16,10 +16,28 @@ const config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1"
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "mjs", "cjs", "jsx", "json", "node"]
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**"
+  ],
+  transformIgnorePatterns: []
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-// export default createJestConfig(config);
+// module.exports = createJestConfig(config);
 
-module.exports = createJestConfig(config);
+module.exports = async (...args) => {
+  const fn = createJestConfig(config);
+  const res = await fn(...args);
+
+  res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
+    if (pattern === "/node_modules/") {
+      return "/node_modules/next-mdx-remote/(?!rsc)/";
+      // return "/node_modules/(?!/next-mdx-remote)/";
+    }
+    return pattern;
+  });
+
+  return res;
+};
