@@ -13,11 +13,8 @@ const config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/"],
   testEnvironment: "jest-environment-jsdom",
-  // moduleDirectories: ["node_modules", "<rootDir>/"],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1",
-    react:
-      "<rootDir>/node_modules/next/dist/compiled/react/cjs/react.development.js"
+    "^@/(.*)$": "<rootDir>/src/$1"
   },
   collectCoverage: true,
   collectCoverageFrom: [
@@ -25,9 +22,10 @@ const config = {
     "!**/*.d.ts",
     "!**/node_modules/**"
   ],
-  transformIgnorePatterns: [],
-  moduleFileExtensions: ["ts", "tsx", "js", "mjs", "cjs", "jsx", "json", "node"]
+  transformIgnorePatterns: []
 };
+
+// module.exports = createJestConfig(config);
 
 module.exports = async (...args) => {
   const fn = createJestConfig(config);
@@ -35,7 +33,8 @@ module.exports = async (...args) => {
 
   res.transformIgnorePatterns = res.transformIgnorePatterns.map((pattern) => {
     if (pattern === "/node_modules/") {
-      return "/node_modules/next-dx-remote(?!/rsc)/";
+      return "/node_modules/next-mdx-remote/(?!rsc)/";
+      // return "/node_modules/(?!/next-mdx-remote)/";
     }
     return pattern;
   });

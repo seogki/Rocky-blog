@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import HeaderNav from "./header-nav";
 import { renderWithProviders } from "@/test/test-utils";
-// import { getCategories } from "@/data";
-import { expect, jest, test } from "@jest/globals";
+import { getCategories } from "@/data";
+// import { expect, jest, test } from "@jest/globals";
 
 describe("header nav test", () => {
   test("when isDrawerOpen is true open navigation", async () => {
