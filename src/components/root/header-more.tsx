@@ -12,21 +12,20 @@ export default function HeaderMore() {
   const dispatch = useAppDispatch();
   useToggleScrollbar(isMore);
 
+  const close = () => {
+    if (isDrawerOpen) dispatch(closeDrawer());
+    setTimeout(() => {
+      if (isMore) {
+        dispatch(closeMore());
+      } else {
+        dispatch(openMore());
+      }
+    }, 50);
+  };
+
   return (
     <>
-      <MdMoreVert
-        className="cursor-pointer"
-        onClick={() => {
-          if (isDrawerOpen) dispatch(closeDrawer());
-          setTimeout(() => {
-            if (isMore) {
-              dispatch(closeMore());
-            } else {
-              dispatch(openMore());
-            }
-          }, 50);
-        }}
-      />
+      <MdMoreVert className="cursor-pointer" onClick={() => close()} />
       <Transition
         show={isMore}
         className="w-full h-[calc(100%-4rem)] fixed bottom-0 left-0 z-40 overflow-hidden"

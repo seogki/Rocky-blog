@@ -19,7 +19,7 @@ describe("header nav test", () => {
       }
     );
 
-    expect(container.lastElementChild).not.toBeNull();
+    expect(container.lastElementChild?.tagName).toBe("DIV");
   });
 
   test("when isDrawerOpen is close hide navigation", async () => {
