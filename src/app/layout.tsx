@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <GoogleAnalytics />
-        <GoogleAdsense />
+        {/* <GoogleAdsense /> */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReduxProvider>
             <div className="w-full h-full">
