@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllPostsOrderByDate } from "@/data";
+import { getAllPostsOrderByDate, getCategories } from "@/data";
 import { stringToDate } from "@/utils/date";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -15,6 +15,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date()
     }
   ];
+
+  const categories = await getCategories();
+
+  for (const category of categories) {
+    sitemapList.push({
+      url: `${baseUrl}/posts/${category}`,
+      lastModified: new Date()
+    });
+  }
 
   const posts = await getAllPostsOrderByDate();
 
