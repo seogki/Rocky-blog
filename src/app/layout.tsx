@@ -9,8 +9,17 @@ import { ReduxProvider } from "@/redux/redux-provider";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import GoogleAdsense from "@/components/google-adsense";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// export const metadata: Metadata = {
+//   icons: {
+//     icon: "./favicon.ico",
+//     shortcut: "./favicon.ico",
+//     apple: "./apple-icon.png"
+//   }
+// };
 
 export default function RootLayout({
   children
