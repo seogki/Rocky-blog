@@ -10,6 +10,13 @@ export const metadata: Metadata = {
 export default function TodoHomePage() {
   const fixList: Fix[] = [
     {
+      expectation: "Expect to see my post as soon as possible",
+      error: "Slow Rendering in vercel almost 2~5 seconds, i have to wait",
+      done: true,
+      result:
+        "I have tested in Vercel and Railway to deploy my app, Vercel took almost 3 seconds to display my post, but railway was only 400ms. I just decided that vercel has network limits when using hobby"
+    },
+    {
       expectation:
         "By Streaming condition, I expected see loading skeleton before fetching all the server side html, because streaming break down the page's HTML into smaller chunks and pass down one by one",
       error:
@@ -70,6 +77,7 @@ const FixSection = ({ fix }: FixSectionProps) => {
 
         <h3 className="text-base font-normal py-4 mx-2">Result</h3>
         {!fix.done && <p className="py-2 mx-4 font-light">On Progress...</p>}
+        {fix.done && <p className="py-2 mx-4 font-light">{fix.result}</p>}
       </section>
     </>
   );
