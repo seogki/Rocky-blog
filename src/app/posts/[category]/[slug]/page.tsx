@@ -14,28 +14,38 @@ export const generateMetadata = async ({
   params
 }: Props): Promise<Metadata> => {
   const { category, slug } = params;
-  let post: Post | undefined;
+  const baseUrl = "https://rocky-blog.vercel.app";
 
+  let post: Post | undefined;
   try {
     post = await getPost(slug, category);
   } catch (e: any) {
     console.error(e);
     return {
       title: `${slug.replaceAll("-", " ")}`,
-      description: "This is my Rocky Blog Single Post Page"
+      description: "This is my Rocky Blog Single Post Page",
+      alternates: {
+        canonical: `${baseUrl}/posts/${category}/${slug}`
+      }
     };
   }
 
   if (!post) {
     return {
       title: `${slug.replaceAll("-", " ")}`,
-      description: "This is my Rocky Blog Single Post Page"
+      description: "This is my Rocky Blog Single Post Page",
+      alternates: {
+        canonical: `${baseUrl}/posts/${category}/${slug}`
+      }
     };
   }
 
   return {
     title: `[${category}] ${post.title}`,
-    description: post.description
+    description: post.description,
+    alternates: {
+      canonical: `${baseUrl}/posts/${category}/${slug}`
+    }
   };
 };
 

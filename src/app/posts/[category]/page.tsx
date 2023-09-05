@@ -13,10 +13,13 @@ type Props = {
 
 export const generateMetadata = ({ params }: Props): Metadata => {
   const { category } = params;
-
+  const baseUrl = "https://rocky-blog.vercel.app";
   return {
     title: `Rocky Blog - Posts [${category}]`,
-    description: `This is my Rocky Blog ${category} Posts Page`
+    description: `This is my Rocky Blog ${category} Posts Page`,
+    alternates: {
+      canonical: category ?? `${baseUrl}/posts/${category}`
+    }
   };
 };
 
