@@ -45,6 +45,7 @@ export default function PostItemAside({ toc }: Props) {
                 <li key={idx}>
                   <Link href={`${pathname}/${item.href}`} shallow>
                     <p
+                      role="paragraph"
                       className={`${setIndent(
                         item.parent
                       )} py-2 my-2 hover:text-teal-600 dark:hover:text-teal-400`}

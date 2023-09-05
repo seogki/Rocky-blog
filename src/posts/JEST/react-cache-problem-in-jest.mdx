@@ -1,0 +1,82 @@
+---
+title: react.cache type error when handling jest + RTL in nextjs 13
+date: "2023/09/05"
+description: describes how i managed to handle react.cache type error in nextjs 13
+tags: 'nextjs,cache,react,jest,react-testing-library' 
+published: true
+---
+
+This article describes how i managed to handle react.cache type error in nextjs 13
+
+
+## About React.cache
+
+React cache is simply make return value cache so that when server side rendering happens, you only have to deal with function one time only
+
+```ts:index.ts showLineNumbers
+export const getCategories = cache(async () => {
+  const filePath = path.join(process.cwd(), "src", "posts");
+  const categories = await fs.readdir(filePath);
+  return categories;
+});
+```
+
+I normally cache my result, because getting cateogries from same path is one time only.
+I decided to use react cache which describes in [here](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data),
+and everything worked fine, until i tried to test my code
+
+
+### TypeError
+
+```text
+TypeError: (0 , _react.cache) is not a function
+```
+
+I was getting TypeError problems when my *process.env.NODE_ENV* was test, and decided to fix it.
+I kept searching for react cache and how people handled about this problem, 
+but did not have much informations about how to handle and how to test using jest
+
+
+
+### What i have tried
+
+I was able to find similar problems from nextjs [issue](https://github.com/vercel/next.js/discussions/49304), and he simply used moduleNameMapper and add resolved react module with react-canary version
+
+i did not wanted to use react@canary, because it might be unstable. Nextjs 13 itself is not stable enough so i did not want additional unstable library to my package. 
+In the end i just create a function which **bypass cache when NODE_ENV is test**
+
+## Bypass function
+
+This is how i configured to bypass react.cache in test
+
+```ts:index.ts showLineNumbers
+const isNotTest = process.env.NODE_ENV !== "test";
+
+//this is my bypass function only works in NODE_ENV === test
+function testCache<T extends Function>(func: T) {
+  return func;
+}
+//cache is actual react.cache
+const cachedFunc = isNotTest ? cache : testCache;
+```
+
+From which ever files use react.cache simply check *NODE_ENV* and define your function just to bypass.
+Simple test will not need react.cache so i thought it will be ok to handle like this
+
+## How to implement
+
+```ts:index.ts showLineNumbers
+export const getCategories = cachedFunc(async () => {
+  const filePath = path.join(process.cwd(), "src", "posts");
+  const categories = await fs.readdir(filePath);
+  return categories;
+});
+```
+
+Just convert React.cache function to our cachedFunc and that it.
+
+I will have to wait until next react.js packages or next.js, until then i am going to stick to this bypass function
+
+## Reference 🔗
+https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data<br/>
+https://github.com/vercel/next.js/discussions/49304<br/>

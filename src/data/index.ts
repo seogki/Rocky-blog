@@ -12,13 +12,20 @@ import { MdxCustomComponent } from "@/components/mdx-custom-component";
 import { remarkReadingTime } from "@/utils/remark-reading-time";
 import { rehypeTocExtractHeadings } from "@/utils/rehype-toc-extract-headings";
 
-export const getCategories = cache(async () => {
+const isNotTest = process.env.NODE_ENV !== "test";
+
+function testCache<T extends Function>(func: T) {
+  return func;
+}
+const cachedFunc = isNotTest ? cache : testCache;
+
+export const getCategories = cachedFunc(async () => {
   const filePath = path.join(process.cwd(), "src", "posts");
   const categories = await fs.readdir(filePath);
   return categories;
 });
 
-export const getAllPostsOrderByDate = cache(async (limit = 0) => {
+export const getAllPostsOrderByDate = cachedFunc(async (limit = 0) => {
   const categories = await getCategories();
 
   const list: Post[] = [];
@@ -35,7 +42,7 @@ export const getAllPostsOrderByDate = cache(async (limit = 0) => {
   return list.slice(0, 5);
 });
 
-export const getPostsByCategoryName = cache(
+export const getPostsByCategoryName = cachedFunc(
   async (categoryName: string, sort = true) => {
     const list: Post[] = [];
     const { components } = MdxCustomComponent();

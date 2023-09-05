@@ -20,6 +20,7 @@ const config = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
+    "!jest.config.js",
     "!**/node_modules/**"
   ],
   transformIgnorePatterns: []
