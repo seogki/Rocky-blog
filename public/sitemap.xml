@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://rocky-blog.vercel.app</loc>
-<lastmod>2023-09-04T04:30:12.693Z</lastmod>
+<lastmod>2023-09-05T06:18:31.358Z</lastmod>
 </url>
 <url>
 <loc>https://rocky-blog.vercel.app/posts</loc>
-<lastmod>2023-09-04T04:30:12.693Z</lastmod>
+<lastmod>2023-09-05T06:18:31.358Z</lastmod>
+</url>
+<url>
+<loc>https://rocky-blog.vercel.app/posts/JEST/react-cache-problem-in-jest</loc>
+<lastmod>2023-09-05T00:00:00.000Z</lastmod>
 </url>
 <url>
 <loc>https://rocky-blog.vercel.app/posts/JEST/syntax-error-export-next-mdx-remote</loc>
