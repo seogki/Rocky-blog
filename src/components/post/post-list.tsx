@@ -17,7 +17,7 @@ export default async function PostList({ category }: Props) {
         ? await getAllPostsOrderByDate()
         : await getPostsByCategoryName(category);
   } catch (e: any) {
-    console.error(e);
+    console.error("error", e);
   }
 
   if (!posts || posts.length < 1) {
@@ -39,7 +39,6 @@ export default async function PostList({ category }: Props) {
               href={`/posts/${
                 category === "RECENT" ? post.category : category
               }/${post!.slug}`}
-              // prefetch={false}
             >
               <div className="w-full h-auto p-2 my-4 sm:py-4 flex flex-col justify-between align-middle group">
                 <h2 className="group-hover:text-teal-600 dark:group-hover:text-teal-400 text-xl font-bold dark:text-zinc-100 text-zinc:800 line-clamp-2">

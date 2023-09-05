@@ -22,6 +22,14 @@ export default function TodoHomePage() {
       error:
         "I see two rehype-prism-plus bundled in two different js files of server side from @next/bundle-analyzer. I need to find out whether server side does not share components or i have implemented wrongly",
       done: false
+    },
+    {
+      expectation:
+        "When i am testing async react component i expect to set parameters just like normal react components",
+      error:
+        "async components cannot pass props values when component is actually rendered, and gives me error that props cannot destructure. Many people discussed about it in 'https://github.com/testing-library/react-testing-library/issues/1209' github, but could not find validate answer",
+
+      done: false
     }
   ];
 
