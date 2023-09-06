@@ -64,18 +64,18 @@ test("should add additional class based on h tags", async () => {
   );
 
   expect(contentsList[2].className).toContain(
-    "ml-4 font-light text-xs xl:text-sm text-zinc-800 dark:text-zinc-200"
+    "ml-4 font-light text-xs xl:text-sm"
   );
 
   expect(contentsList[3].className).toContain(
-    "ml-6 font-light text-xs xl:text-sm text-zinc-700 dark:text-zinc-300"
+    "ml-6 font-light text-xs xl:text-sm"
   );
 
   expect(contentsList[4].className).toContain(
-    "ml-8 font-extralight text-xs xl:text-sm text-zinc-600 dark:text-zinc-400"
+    "ml-8 font-extralight text-xs xl:text-sm"
   );
 
   expect(contentsList[5].className).toContain(
-    "ml-10 font-extralight text-xs xl:text-sm text-zinc-500"
+    "ml-10 font-extralight text-xs xl:text-sm"
   );
 });

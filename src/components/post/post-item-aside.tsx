@@ -14,14 +14,10 @@ export default function PostItemAside({ toc }: Props) {
   const setIndent = (parent: string) => {
     if (parent === "h2" || parent === "h1")
       return "ml-2 font-normal text-sm xl:text-base";
-    if (parent === "h3")
-      return "ml-4 font-light text-xs xl:text-sm text-zinc-800 dark:text-zinc-200";
-    if (parent === "h4")
-      return "ml-6 font-light text-xs xl:text-sm text-zinc-700 dark:text-zinc-300";
-    if (parent === "h5")
-      return "ml-8 font-extralight text-xs xl:text-sm text-zinc-600 dark:text-zinc-400";
-    if (parent === "h6")
-      return "ml-10 font-extralight text-xs xl:text-sm text-zinc-500";
+    if (parent === "h3") return "ml-4 font-light text-xs xl:text-sm";
+    if (parent === "h4") return "ml-6 font-light text-xs xl:text-sm";
+    if (parent === "h5") return "ml-8 font-extralight text-xs xl:text-sm";
+    if (parent === "h6") return "ml-10 font-extralight text-xs xl:text-sm";
   };
 
   const addPrefix = (parent: string, text: string) => {
@@ -36,8 +32,8 @@ export default function PostItemAside({ toc }: Props) {
     <>
       <aside className="basis-3/12 hidden lg:block ml-4">
         <div className="fixed mt-36 mr-4 drop-shadow-md ">
-          <section className="max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
-            <h2 className="text-teal-600 dark:text-teal-400 font-bold text-lg border-b-2 border-black dark:border-white pb-1 w-fit">
+          <section className="text-zinc-700 dark:text-zinc-300 max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
+            <h2 className="font-bold text-base border-b-2 border-black dark:border-white pb-1 w-fit">
               📄 Table of Contents
             </h2>
             <ul>
@@ -48,7 +44,7 @@ export default function PostItemAside({ toc }: Props) {
                       role="paragraph"
                       className={`${setIndent(
                         item.parent
-                      )} py-2 my-2 hover:text-teal-600 dark:hover:text-teal-400`}
+                      )} py-1 my-2 hover:text-teal-600 hover:dark:text-teal-400`}
                     >
                       {addPrefix(item.parent, item.text)}
                     </p>
@@ -57,7 +53,6 @@ export default function PostItemAside({ toc }: Props) {
               ))}
             </ul>
           </section>
-          {/* <section className="rounded-b-lg h-10 bg-zinc-200 dark:bg-zinc-700"></section> */}
         </div>
       </aside>
     </>
