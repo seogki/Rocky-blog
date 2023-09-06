@@ -8,14 +8,14 @@ export interface Post {
   description: string;
   published: boolean;
   minutesRead: string;
-  tags: string;
+  tags: string[];
   toc: Toc[];
   body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
-export interface PostV2 {
-  source: string;
-  slug: string;
+export interface Category {
+  length: number;
+  name: string;
 }
 
 export type Toc = {
@@ -27,6 +27,7 @@ export type Toc = {
 export type Frontmatter = {
   title: string;
   description: string;
+  tags: string;
   date: string;
   toc: Toc[];
   minutesRead: string;
