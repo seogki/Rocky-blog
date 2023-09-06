@@ -31,13 +31,7 @@ export const getCategories = cachedFunc(async () => {
     })
   );
 
-  // for await (const category of categoryNameList) {
-  //   const length = await getAllPostLengthByCategory(category);
-  // }
-
   return categoryList;
-
-  // return categories;
 });
 
 export const getAllPostLengthByCategory = cachedFunc(
@@ -66,6 +60,20 @@ export const getAllPostsOrderByDate = cachedFunc(async (limit = 0) => {
   if (limit === 0) return list;
 
   return list.slice(0, 5);
+});
+
+const filterIncludeTag = (post: Post, tagName: string) => {
+  const { tags } = post;
+  if (tags.includes(tagName)) return true;
+
+  return false;
+};
+
+export const getPostsByTagName = cachedFunc(async (tagName: string) => {
+  const list = await getAllPostsOrderByDate();
+  const tagIncludeList = list.filter((post) => filterIncludeTag(post, tagName));
+
+  return tagIncludeList;
 });
 
 export const getPostsByCategoryName = cachedFunc(

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { closeDrawer } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Category } from "@/interface/posts.interface";
 
 type Props = {
