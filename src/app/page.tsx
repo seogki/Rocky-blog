@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import MainContainerSkeleton from "@/components/skeleton/main-container-skeleton";
+import PostTagLink from "@/components/post/post-tag-link";
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -27,9 +28,7 @@ export default function Home() {
 const MainContainer = async () => {
   const posts = await getAllPostsOrderByDate(5);
 
-  const tags = Array.from(
-    new Set(posts.map((post) => post.tags.split(",")).flat())
-  );
+  const tags = Array.from(new Set(posts.map((post) => post.tags).flat()));
 
   return (
     <>
@@ -52,13 +51,8 @@ const MainContainer = async () => {
       </MainSection>
       <MainSection title={"Recent Tags"}>
         <>
-          {tags.map((tag) => (
-            <div
-              key={tag}
-              className="mx-1 my-1 first-of-type:ml-0 last-of-type:mr-0 py-1 px-3 rounded-2xl bg-violet-500 text-white"
-            >
-              {tag}
-            </div>
+          {tags.map((tag, idx) => (
+            <PostTagLink key={idx} tag={tag} />
           ))}
         </>
       </MainSection>

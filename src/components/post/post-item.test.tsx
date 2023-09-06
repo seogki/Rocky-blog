@@ -17,7 +17,7 @@ test("should display available contents description when data is not empty", asy
     minutesRead: "3 mins read",
     published: true,
     slug: "test",
-    tags: "test1,test2,test3",
+    tags: ["test1", "test2", "test3"],
     title: "TEST TITLE",
     toc: [
       {

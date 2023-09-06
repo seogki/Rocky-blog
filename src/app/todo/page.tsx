@@ -11,7 +11,7 @@ export default function TodoHomePage() {
   const fixList: Fix[] = [
     {
       expectation: "Expect to see my post as soon as possible",
-      error: "Slow Rendering in vercel almost 2~5 seconds, i have to wait",
+      error: "Slow Server Side Rendering in vercel almost 2~5 seconds to wait",
       done: true,
       result:
         "I have tested in Vercel and Railway to deploy my app, Vercel took almost 3 seconds to display my post, but railway was only 400ms. I just decided that vercel has network limits when using hobby"
@@ -21,7 +21,9 @@ export default function TodoHomePage() {
         "By Streaming condition, I expected see loading skeleton before fetching all the server side html, because streaming break down the page's HTML into smaller chunks and pass down one by one",
       error:
         "Even though Suspense is set, i have to wait 2~5 seconds to fetch document only depend on my post before actual loading happen. I still have not figured out whether it is causing by nextjs 13 or something else",
-      done: false
+      done: true,
+      result:
+        "I decided to create SSG files by generateStaticParams function, and make sure each page to build when bundling file"
     },
     {
       expectation:

@@ -1,8 +1,6 @@
 "use client";
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
 import { Transition } from "@headlessui/react";
-// import Transition from "@headlessui/react/dist/components/transitions/transition";
-// import { Transition } from "@headlessui/react/dist/index.js";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import {
@@ -11,8 +9,9 @@ import {
   openDrawer
 } from "@/redux/features/headerSlice";
 import NavigationList from "@/components/navigation-list";
+import { Category } from "@/interface/posts.interface";
 
-export default function HeaderNav({ categories }: { categories: string[] }) {
+export default function HeaderNav({ categories }: { categories: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);
   const dispatch = useAppDispatch();
   useToggleScrollbar(isDrawerOpen);
