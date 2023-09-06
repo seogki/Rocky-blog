@@ -13,7 +13,7 @@ const PostList = dynamic(() => import("@/components/post/post-list"), {
 });
 
 export function generateStaticParams() {
-  return;
+  return [];
 }
 
 export default function PostHomePage() {
