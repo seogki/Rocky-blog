@@ -49,14 +49,14 @@ export const generateMetadata = async ({
   };
 };
 
-export async function generateStaticParams() {
-  const posts = await getAllPostsOrderByDate(0);
+// export async function generateStaticParams() {
+//   const posts = await getAllPostsOrderByDate(0);
 
-  return posts.map((post) => ({
-    slug: post.slug,
-    category: post.category
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//     category: post.category
+//   }));
+// }
 
 export default function PostItemPage({ params }: Props) {
   return (

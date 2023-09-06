@@ -57,9 +57,9 @@ export default async function PostList({ category, tag }: Props) {
                   <p>{post!.description}</p>
                 </div>
 
-                <div className="ml-auto text-sm font-light pt-8 pb-2 flex flex-wrap justify-end">
+                <ul className="ml-auto text-sm font-light pt-8 pb-2 flex flex-wrap justify-end">
                   <PostTags tags={post.tags} />
-                </div>
+                </ul>
 
                 <div className="ml-auto text-sm font-medium mt-2 text-zinc-500">
                   {category === "RECENT" && (

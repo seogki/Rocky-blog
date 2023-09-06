@@ -14,7 +14,7 @@ const PostList = dynamic(() => import("@/components/post/post-list"), {
 
 type Props = {
   searchParams: {
-    tag: string;
+    tag?: string;
   };
 };
 
@@ -23,7 +23,7 @@ export default function PostSearchPage({ searchParams }: Props) {
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
         <h1 className="text-2xl font-bold text-center my-2">
-          {`TAG: ${searchParams.tag}`}
+          {searchParams.tag && `TAG: ${searchParams.tag}`}
         </h1>
         <PostList tag={searchParams.tag} />
       </section>
