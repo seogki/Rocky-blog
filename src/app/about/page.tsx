@@ -3,7 +3,11 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Rocky Blog - About",
-  description: "This is my Rocky Blog About Page to describe myself"
+  description: "This is my Rocky Blog About Page to describe myself",
+  openGraph: {
+    title: "Rocky Blog - About",
+    description: "This is my Rocky Blog About Page to describe myself"
+  }
 };
 
 const About: NextPage = () => {
