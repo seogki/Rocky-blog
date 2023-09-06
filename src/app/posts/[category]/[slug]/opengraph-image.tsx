@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/server";
 
-export const config = {
-  runtime: "edge"
-};
+// export const config = {
+//   runtime: "edge"
+// };
+
+export const runtime = "edge";
 
 type Props = {
   params: {
