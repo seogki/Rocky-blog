@@ -1,7 +1,7 @@
-export default function PostTags({ tags }: { tags: string }) {
+export default function PostTags({ tags }: { tags: string[] }) {
   return (
     <>
-      {tags.split(",").map((tag) => (
+      {tags.map((tag) => (
         <div
           key={tag}
           role="tag"

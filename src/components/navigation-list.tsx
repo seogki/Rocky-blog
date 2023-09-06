@@ -4,11 +4,12 @@ import Link from "next/link";
 import { closeDrawer } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname } from "next/navigation";
+import { Category } from "@/interface/posts.interface";
 
 type Props = {
   className?: string;
   onClick?: React.MouseEventHandler;
-  list?: string[];
+  list?: Category[];
 };
 
 type LinkProps = {
@@ -53,16 +54,16 @@ export default function NavigationList({ className, onClick, list }: Props) {
           isActive={pathname === `/posts`}
           onClick={() => handleClick()}
         >
-          RECENT
+          RECENT ({list?.reduce((a, b) => a + b.length, 0)})
         </NavLink>
         {list?.map((item, idx) => (
           <NavLink
             key={idx}
-            href={`/posts/${item}`}
-            isActive={pathname === `/posts/${item}`}
+            href={`/posts/${item.name}`}
+            isActive={pathname === `/posts/${item.name}`}
             onClick={() => handleClick()}
           >
-            {item}
+            {item.name} ({item.length})
           </NavLink>
         ))}
       </ul>

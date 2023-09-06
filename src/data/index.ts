@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
 import { cache } from "react";
-import { Frontmatter, Post } from "../interface/posts.interface";
+import { Frontmatter, Post, Category } from "../interface/posts.interface";
 import remarkGfm from "remark-gfm";
 import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
@@ -21,17 +21,43 @@ const cachedFunc = isNotTest ? cache : testCache;
 
 export const getCategories = cachedFunc(async () => {
   const filePath = path.join(process.cwd(), "src", "posts");
-  const categories = await fs.readdir(filePath);
-  return categories;
+  const categoryNameList = await fs.readdir(filePath);
+
+  const categoryList: Category[] = await Promise.all(
+    categoryNameList.map(async (category) => {
+      const length = await getAllPostLengthByCategory(category);
+
+      return { length, name: category };
+    })
+  );
+
+  // for await (const category of categoryNameList) {
+  //   const length = await getAllPostLengthByCategory(category);
+  // }
+
+  return categoryList;
+
+  // return categories;
 });
 
+export const getAllPostLengthByCategory = cachedFunc(
+  async (categoryName: string) => {
+    const basePath = [process.cwd(), "src", "posts", categoryName];
+    const filePath = path.join(...basePath);
+    const files = await fs.readdir(filePath);
+    const mdxFiles = files.filter((file) => path.extname(file) === ".mdx");
+
+    return mdxFiles.length;
+  }
+);
+
 export const getAllPostsOrderByDate = cachedFunc(async (limit = 0) => {
-  const categories = await getCategories();
+  const categoryList = await getCategories();
 
   const list: Post[] = [];
 
-  for await (const category of categories) {
-    const posts = await getPostsByCategoryName(category, false);
+  for await (const category of categoryList) {
+    const posts = await getPostsByCategoryName(category.name, false);
     list.push(...posts);
   }
 
@@ -86,6 +112,7 @@ export const getPostsByCategoryName = cachedFunc(
 
       list.push({
         ...frontmatter,
+        tags: frontmatter.tags.split(","),
         body: content,
         category: categoryName,
         slug: mdx.replace(".mdx", "")

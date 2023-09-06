@@ -27,9 +27,7 @@ export default function Home() {
 const MainContainer = async () => {
   const posts = await getAllPostsOrderByDate(5);
 
-  const tags = Array.from(
-    new Set(posts.map((post) => post.tags.split(",")).flat())
-  );
+  const tags = Array.from(new Set(posts.map((post) => post.tags).flat()));
 
   return (
     <>
