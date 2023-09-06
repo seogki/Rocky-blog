@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import dynamic from "next/dynamic";
+import { getCategories } from "@/data";
 
 type Props = {
   params: {
@@ -22,6 +23,14 @@ export const generateMetadata = ({ params }: Props): Metadata => {
     }
   };
 };
+
+export async function generateStaticParams() {
+  const categories = await getCategories();
+
+  return categories.map((category) => ({
+    category: category.name
+  }));
+}
 
 export default function PostListPage({ params }: Props) {
   const { category } = params;

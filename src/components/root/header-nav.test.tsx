@@ -1,17 +1,29 @@
 import { render, screen } from "@testing-library/react";
 import HeaderNav from "./header-nav";
 import { renderWithProviders } from "@/test/test-utils";
-import { getCategories } from "@/data";
-// import { expect, jest, test } from "@jest/globals";
+import { Category } from "@/interface/posts.interface";
 
 describe("header nav test", () => {
-  test("when isDrawerOpen is true open navigation", async () => {
-    // const categories = await getCategories();
+  const categoryList: Category[] = [
+    {
+      length: 5,
+      name: "JEST"
+    },
+    {
+      length: 5,
+      name: "MARKDOWN"
+    },
+    {
+      length: 5,
+      name: "NEXTJS"
+    }
+  ];
 
+  test("when isDrawerOpen is true open navigation", async () => {
     const initialHeader = { isDrawerOpen: true, isMore: false };
 
     const { container } = renderWithProviders(
-      <HeaderNav categories={["JEST", "NEXTJS", "MARKDOWN"]} />,
+      <HeaderNav categories={categoryList} />,
       {
         preloadedState: {
           header: initialHeader
@@ -23,12 +35,10 @@ describe("header nav test", () => {
   });
 
   test("when isDrawerOpen is close hide navigation", async () => {
-    // const categories = await getCategories();
-
     const initialHeader = { isDrawerOpen: false, isMore: false };
 
     const { container } = renderWithProviders(
-      <HeaderNav categories={["JEST", "NEXTJS", "MARKDOWN"]} />,
+      <HeaderNav categories={categoryList} />,
       {
         preloadedState: {
           header: initialHeader
