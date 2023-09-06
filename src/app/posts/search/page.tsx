@@ -3,20 +3,31 @@ import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-export const metadata: Metadata = {
-  title: `Rocky Blog - Posts [RECENT]`,
-  description: `This is my Rocky Blog Recent Posts Page`
-};
-
-const PostList = dynamic(() => import("@/components/post/post-list"), {
-  loading: () => <PostListSkeleton />
-});
-
 type Props = {
   searchParams: {
     tag?: string;
   };
 };
+
+export const generateMetadata = ({ searchParams }: Props): Metadata => {
+  const { tag } = searchParams;
+  const baseUrl = "https://rocky-blog.vercel.app";
+  return {
+    title: `Rocky Blog - Posts Search List [${tag}]`,
+    description: `This is my Rocky Blog Search List of ${tag}`,
+    alternates: {
+      canonical: tag ?? `${baseUrl}/posts/?tag=${tag}`
+    },
+    openGraph: {
+      title: `Rocky Blog - Posts Search List [${tag}]`,
+      description: `This is my Rocky Blog Search List of ${tag}`
+    }
+  };
+};
+
+const PostList = dynamic(() => import("@/components/post/post-list"), {
+  loading: () => <PostListSkeleton />
+});
 
 export default function PostSearchPage({ searchParams }: Props) {
   return (

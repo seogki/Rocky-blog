@@ -31,17 +31,17 @@ export default function RootLayout({
       <body className={inter.className}>
         <GoogleAnalytics />
         {/* <GoogleAdsense /> */}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ReduxProvider>
-            <div className="w-full h-full">
+        <div className="w-full h-full">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ReduxProvider>
               <MyHeader />
               <main className="w-full min-h-[calc(100%-4rem)] p-4 pb-8 max-w-screen-xl mx-auto relative">
                 {children}
               </main>
               <MyFooter />
-            </div>
-          </ReduxProvider>
-        </ThemeProvider>
+            </ReduxProvider>
+          </ThemeProvider>
+        </div>
         {/* analytics for vercel */}
         <Analytics />
       </body>

@@ -8,7 +8,11 @@ import PostTagLink from "@/components/post/post-tag-link";
 export const generateMetadata = (): Metadata => {
   return {
     title: `Rocky Blog - Home`,
-    description: `This is my Rocky Blog Home Page with recent posts and tags`
+    description: `This is my Rocky Blog Home Page with recent posts and tags`,
+    openGraph: {
+      title: `Rocky Blog - Home`,
+      description: `This is my Rocky Blog Home Page with recent posts and tags`
+    }
   };
 };
 
