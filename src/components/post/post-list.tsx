@@ -46,7 +46,11 @@ export default async function PostList({ category, tag }: Props) {
           <li key={post!.slug}>
             <Link
               href={`/posts/${
-                category === "RECENT" ? post.category : category
+                tag
+                  ? post.category
+                  : category === "RECENT"
+                  ? post.category
+                  : category
               }/${post!.slug}`}
             >
               <div className="w-full h-auto p-2 my-3 sm:py-4 flex flex-col justify-between align-middle group">
@@ -62,7 +66,7 @@ export default async function PostList({ category, tag }: Props) {
                 </ul>
 
                 <div className="ml-auto text-sm font-medium mt-2 text-zinc-500">
-                  {category === "RECENT" && (
+                  {(tag || category === "RECENT") && (
                     <strong className="mr-2 text-teal-600 font-bold dark:text-teal-400">
                       {post!.category}
                     </strong>
