@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const category of categories) {
     sitemapList.push({
-      url: `${baseUrl}/posts/${category}`,
+      url: `${baseUrl}/posts/${category.name}`,
       lastModified: new Date()
     });
   }
