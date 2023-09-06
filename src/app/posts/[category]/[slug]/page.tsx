@@ -1,5 +1,5 @@
 import PostItemContainer from "@/components/post/post-item-container";
-import { getPost } from "@/data";
+import { getAllPostsOrderByDate, getPost } from "@/data";
 import { Post } from "@/interface/posts.interface";
 import { Metadata } from "next";
 
@@ -48,6 +48,15 @@ export const generateMetadata = async ({
     }
   };
 };
+
+export async function generateStaticParams() {
+  const posts = await getAllPostsOrderByDate(0);
+
+  return posts.map((post) => ({
+    slug: post.slug,
+    category: post.category
+  }));
+}
 
 export default function PostItemPage({ params }: Props) {
   return (
