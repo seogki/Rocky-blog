@@ -1,0 +1,80 @@
+---
+title: Improve nextjs 13 initial performance by using generateStaticParams function
+date: "2023/09/06"
+description: This article describes how to improve nextjs 13 initial performance by using generateStaticParams function
+tags: 'nextjs,performance,generateStaticParams,isr,ssg'
+published: true
+---
+
+
+This article describes how to improve nextjs 13 initial performance by using generateStaticParams function
+
+## What is generateStaticParams
+
+GenerateStaticParams function used in combination with [dynamic route segments](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
+to [statically generate](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default) routes at build time instead of on-demand at request time
+
+Usually handle if you have dynamic routes to produce. In Nextjs 13 **getStaticPaths** is replaced by **generateStaticParams** More Information is provided [here](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 
+
+### How the function work
+
+- For Development **generateStaticParams** called when you enter route
+- For Production **generateStaticParams** called during *next build*
+
+You may not want to build from server whenever route change because your page does not change at all.
+This is depend on your website, because sometimes building *SSG* file can help you increase performance, 
+still *CSR* can be better if your file is large.
+
+
+### Nextjs team recommend
+
+> Static rendering is useful when a route has data that is not personalized to the user and can be known at build time, such as a static blog post or a product page.
+
+## How to implement
+
+From layout or page all you have to do is add **generateStaticParams** function, for example
+
+```tsx:page.tsx showLineNumbers
+type Props = {
+    params?: {
+        slug: string;
+        category:string;
+    },
+    // searchParams if need
+}
+
+/** dynamic page will be generate during build on production */
+export default async function generateStaticParams() {
+    const posts = await fetch("https://...").then((res) => res.json()) // from api
+    // const posts = await getAllPosts() //from local
+
+    return posts.map((post) => ({
+        slug: post.slug,
+        category: post.category
+    }))
+}
+
+export default function Page({params}:Props) {
+    ...
+    return <PostItemContainer params={params}/>
+}
+```
+
+- You can add params if needed, params will be passsed from the parent segment's **generateStaticParams** function
+- fetch requests are automatically memoized for same data across **generateMetadata, generateStaticParams, Layouts, Pages, and Server Components**
+- For local you can use React cache which i am using
+
+## Production
+
+![vercelBuild](/posts/NEXTJS/generate-static-params-to-improve-nextjs-13-inital-performance/generate-build-vercel.png)
+
+As you can see from Vercel my Static file has been successfully built and create each page,
+now my website will not handle files on request, it will just retrieve already created *SSG* files
+
+
+
+## Reference 🔗
+
+https://nextjs.org/docs/app/api-reference/functions/generate-static-params<br/>
+https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes<br/>
+https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default<br/>
