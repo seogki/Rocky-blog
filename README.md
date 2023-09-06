@@ -25,8 +25,8 @@
 - mobile first then proceed to desktop
 - optimize server side rendering
 - optimize search engine
-- unit test as possible
-- e2e test maybe?
+- unit test with JEST + RTL
+- e2e test with cypress
 - vercel deployment
 
 ---
@@ -36,12 +36,15 @@
 - public
   - posts (static images which will be using in mdx)
 - src
-  - app
-    - components (reusable component)
-    - hooks
-    - posts
-    - interface
-    - redux-tool-kits (local state management)
+  - app (route folder only)
+  - components
+  - data (data utils)
+  - hooks
+  - interface
+  - posts (mdx files)
+  - redux
   - style (scss)
+  - test (test code utils)
+  - utils (production utils)
 
 ---
