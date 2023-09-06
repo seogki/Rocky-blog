@@ -366,3 +366,7 @@ pre {
 .prose *:hover > .toc {
   @apply visible;
 }
+
+.prose blockquote p {
+  @apply p-2;
+}
