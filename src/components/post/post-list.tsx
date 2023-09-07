@@ -4,9 +4,10 @@ import {
   getPostsByTagName
 } from "@/data";
 import { Post } from "@/interface/posts.interface";
-import { convertFormat } from "@/utils/date";
 import Link from "next/link";
-import PostTags from "./post-tags";
+import PostCreateTime from "./contents/post-create-time";
+import PostReadMinute from "./contents/post-read-minute";
+import PostTags from "./contents/post-tags";
 
 type Props = {
   category?: string;
@@ -43,7 +44,7 @@ export default async function PostList({ category, tag }: Props) {
           Total {posts.length}
         </ul>
         {posts.map((post) => (
-          <li key={post!.slug}>
+          <li key={post.slug}>
             <Link
               href={`/posts/${
                 tag
@@ -51,14 +52,14 @@ export default async function PostList({ category, tag }: Props) {
                   : category === "RECENT"
                   ? post.category
                   : category
-              }/${post!.slug}`}
+              }/${post.slug}`}
             >
               <div className="w-full h-auto p-2 my-3 sm:py-4 flex flex-col justify-between align-middle group">
                 <h2 className="group-hover:text-teal-600 dark:group-hover:text-teal-400 text-xl font-bold dark:text-zinc-100 text-zinc:800 line-clamp-2">
-                  {post!.title}
+                  {post.title}
                 </h2>
                 <div className="text-base font-normal mt-0 sm:mt-2 dark:text-zinc-400 text-zinc-500 line-clamp-2">
-                  <p>{post!.description}</p>
+                  <p>{post.description}</p>
                 </div>
 
                 <ul className="ml-auto text-sm font-light pt-8 pb-2 flex flex-wrap justify-end">
@@ -68,13 +69,13 @@ export default async function PostList({ category, tag }: Props) {
                 <div className="ml-auto text-sm font-medium mt-2 text-zinc-500">
                   {(tag || category === "RECENT") && (
                     <strong className="mr-2 text-teal-600 font-bold dark:text-teal-400">
-                      {post!.category}
+                      {post.category}
                     </strong>
                   )}
-                  <time>{convertFormat(post!.date)}</time>
+                  <PostCreateTime date={post.date} />
                 </div>
                 <p className="ml-auto text-sm font-medium mt-2 text-zinc-500">
-                  <strong>📖 {post.minutesRead}</strong>
+                  <PostReadMinute min={post.minutesRead} />
                 </p>
               </div>
             </Link>

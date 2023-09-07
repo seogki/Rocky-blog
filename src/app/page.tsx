@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import MainContainerSkeleton from "@/components/skeleton/main-container-skeleton";
-import PostTagLink from "@/components/post/post-tag-link";
+import PostTagLink from "@/components/post/contents/post-tag-link";
 
 export const generateMetadata = (): Metadata => {
   return {
