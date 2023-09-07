@@ -2,7 +2,7 @@ import { getAllPostsOrderByDate } from "@/data";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import MainContainerSkeleton from "@/components/skeleton/main-container-skeleton";
+import HomeSkeleton from "@/components/skeleton/home-skeleton";
 import PostTagLink from "@/components/post/contents/post-tag-link";
 
 export const generateMetadata = (): Metadata => {
@@ -21,7 +21,7 @@ export default function Home() {
     <>
       <h1 className="text-2xl text-center font-bold mb-4 md:my-8">Home</h1>
       <div className="space-y-4 max-w-screen-md mx-auto">
-        <Suspense fallback={<MainContainerSkeleton />}>
+        <Suspense fallback={<HomeSkeleton />}>
           <MainContainer />
         </Suspense>
       </div>

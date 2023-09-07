@@ -1,6 +1,6 @@
 import Skeleton from "./skeleton";
 
-export default function PostBodySkeleton() {
+export default function PostItemArticleSkeleton() {
   return (
     <>
       <div className="w-full flex flex-row mt-16 mb-4 justify-center items-center">

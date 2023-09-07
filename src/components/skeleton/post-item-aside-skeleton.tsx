@@ -1,6 +1,6 @@
 import Skeleton from "./skeleton";
 
-export default function AsideSkeleton() {
+export default function PostItemAsideSkeleton() {
   return (
     <>
       <aside className="basis-3/12 hidden lg:block ml-8">

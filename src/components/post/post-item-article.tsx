@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Post } from "@/interface/posts.interface";
-import PostBodySkeleton from "../skeleton/post-body-skeleton";
+import PostBodySkeleton from "../skeleton/post-item-article-skeleton";
 import PostCreateTime from "./contents/post-create-time";
 import PostReadMinute from "./contents/post-read-minute";
 import PostTags from "./contents/post-tags";
