@@ -1,0 +1,313 @@
+---
+title: How to optimize SEO in nextjs 13
+date: "2023/09/07"
+description: describe show various examples of how to optimize seo in nextjs 13
+tags: "seo,nextjs,google-search-console"
+published: true
+---
+
+## What is SEO
+
+**SEO** knowns as Search Engine Optimization is to improve your search ranking by optimizing your website.
+Such as google, if you wants to show your website on the top, you need to tell google what's in your page.
+Basically SEO means describe the website so that program can understand where is your title and what kinds of information do you provide in your website
+
+
+## What kind of technique i can use to optimize
+
+There are many ways to optimize your website and
+these are brief informations of technique you can use to optimize **SEO**
+
+1. Semantic HTML
+2. Quality contents (such as how value is your contents are)
+3. Metadata
+4. robots.txt
+5. sitemap.xml
+
+We will figure out how to implement one by one
+
+## What is Semantic HTML
+
+Semantic HTML is a html tags that has role. 
+such as header, footer, main. 
+You can clearly tells that header will be on the top, main will be on the middle, and lastly footer will on the bottom
+
+Instead of using numerous **div** tags, it's better to write in semantic html to clarify your html sturcture
+
+### Some of Semantic HTML Introduced In HTML5
+
+- article
+- aside
+- details
+- figcaption
+- figure
+- footer
+- header
+- main
+- mark
+- nav
+- section
+- summary
+- time 
+
+
+Let's find out why we need to write semantic tags even though not using SEO
+
+```html:semantic.html showLineNumbers
+<!-- without semantic html -->
+<body>
+    <div></div> <!-- header -->
+    <div></div> <!-- main -->
+    <div></div> <!-- footer -->
+</body>
+
+<!-- with semantic html -->
+<div>
+ <header></header>
+ <main></main>
+ <footer></footer>   
+</div>
+```
+
+If you look at these two html structure, it's obvious that second structure is more readable to reader. 
+We don't have to comment on every tags or add random classname to show what they are doing, which makes our coding a lot more **confusing** and **difficult** to understand
+
+### Different Semantic HTML examples
+
+I will show you couple of examples
+
+- **article** usually used when you wants to show information about particular thing such as post
+- **section** usually used when you wants to show multiple information about contents, when you want multiple sections to describe, each section may not relate to themselves but related to main content
+- **time** used to show date
+- **aside** usually used to display side contents which are relate to main content (I'm using it as Table of contents information)
+- **nav** used to navigate between pages, and can be used with **ul** and **li**
+
+
+As a result Semantic HTML is very useful whether you use SEO or not
+
+
+## Quality contents
+
+SEO not only look at Semantic HTML but also look at **vocabulary** of it's contents. 
+Better grammer with better language sturucture will be required to make SEO optimized better
+
+
+## Metadata
+
+Metadata means data inside a data. In nextjs metadata refer as data description of html page
+
+There are couple of metadata your can define
+
+- title
+- description
+- opengraph
+
+Nextjs provide information about how to implement metadata on each page
+
+There are **Metadata** and **generateMetadata**, Metadata is for static text which you don't need to change it's contents,
+and generateMetadata usually used in dynamic route where your title, description, and more change based on route
+
+
+### Add title and description
+```tsx:page.tsx showLineNumbers
+import { Metadata } from 'next'
+ 
+// either Static metadata
+export const metadata: Metadata = {
+  title: `Rocky Blog - Home`,
+    description: `This is my Rocky Blog Home Page with recent posts and tags`,
+}
+ 
+// or Dynamic metadata
+export async function generateMetadata({ params }) {
+  return {
+    title: `Rocky Blog - Home`,
+    description: `This is my Rocky Blog Home Page with recent posts and tags`,
+  }
+}
+```
+
+Here you can use either **metadata** or **generateMetadata** to give information about what this page do
+
+
+### Add dynamic metadata with params
+
+Since dynamic metadata does not know which title and description will be given, so you need to use **generateMetadata**
+
+
+```tsx:page.tsx showLineNumbers
+type Props = {
+  params: {
+    category: string;
+    slug: string;
+  };
+// searchParams can be retrieved too
+};
+
+export const generateMetadata = async ({
+  params
+}: Props): Promise<Metadata> => {
+  const { category, slug } = params;
+  let post: post = await getPost(slug, category);
+
+  ...
+
+  return {
+    title: `[${category}] ${post.title}`,
+    description: post.description,
+    ...
+  };
+};
+```
+
+This is how i handle my dynamic route metadata by using **generateMetadata** function.
+In nextjs 13 fetch or react.cache can be used in anywhere in server side page, 
+and as you can see i was able to get params data. 
+From the params i retrieved post object and used it to show title and description.
+
+
+### Add ImageResponse for Open Graph images, Twitter cards, and more
+
+ImageResponse allows to generate JSX syntax based image and used it as social media images
+
+First you need to create opengraph-image.tsx file same folder where you want to display metadata
+
+```tsx:opengraph-image.tsx showLineNumbers
+import { ImageResponse } from "next/server";
+
+export const runtime = "edge";
+
+type Props = {
+  params: {
+    category: string;
+    slug: string;
+  };
+};
+
+export async function Image({ params }: Props) {
+  const { category, slug } = params;
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 64,
+          background: "#9E9E9E",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        [{category}] - {slug.replaceAll("-", " ")}
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 600
+    }
+  );
+}
+```
+
+Create Image function and you can get params infomration of dynamic routes.
+From params i created simple open graph image with category and slug (this will be my title name).
+This **opengraph-image.tsx** file will be generated at build time or dynamically at request time, which automatically added in **head**.
+
+ImageResponse support multiple css and you can find more about [here](https://nextjs.org/docs/app/building-your-application/optimizing/metadata#dynamic-image-generation)
+
+
+## robots.txt
+
+**robots.txt** help SEO to understand which contents should be crawl, normally used with sitemap.xml. 
+You can either put static file in **public** folder or generate one by nextjs function
+
+Nextjs give robots function that can create robots.txt file, make sure to put this file in root of your app folder.
+More information can be found [here](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots)
+
+```tsx:robots.ts showLineNumbers
+import { MetadataRoute } from 'next'
+ 
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: '/private/',
+    },
+    sitemap: 'https://acme.com/sitemap.xml',
+  }
+}
+```
+
+### Problems
+
+Somehow i wasn't able to make google SEO to find robots.txt so i manually placed in public folder
+
+
+## sitemap.xml
+
+**sitemap.xml** help SEO to understand which contents should be crawl, normally used with robots.txt.
+You can either create static file in **public** folder or create one with nextjs is given
+
+This is my sitemap.ts i am using right now
+
+```ts:sitemap.ts showLineNumbers
+import { MetadataRoute } from "next";
+import { getAllPostsOrderByDate, getCategories } from "@/data";
+import { stringToDate } from "@/utils/date";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = "https://rocky-blog.vercel.app";
+
+  const sitemapList = [
+    {
+      url: baseUrl,
+      lastModified: new Date()
+    },
+    {
+      url: `${baseUrl}/posts`,
+      lastModified: new Date()
+    }
+  ];
+
+  const categories = await getCategories();
+
+  for (const category of categories) {
+    sitemapList.push({
+      url: `${baseUrl}/posts/${category.name}`,
+      lastModified: new Date()
+    });
+  }
+
+  const posts = await getAllPostsOrderByDate();
+
+  for (const post of posts) {
+    if (!post || post === null) continue;
+
+    sitemapList.push({
+      url: `${baseUrl}/posts/${post.category}/${post.slug}`,
+      lastModified: stringToDate(post.date, "DD/MM/YYYY")
+    });
+  }
+
+  return sitemapList;
+}
+```
+
+Since sitemap.ts runs during build, it acts as server side. 
+You can use fetch or other functions and makes your own sitemap.xml
+
+### Problems
+
+Somehow i wasn't able to make google SEO to find sitemap.xml so i manually copy paste sitemap result from the sitemap.ts that i have created.
+I Hope nextjs teams have better information about how to handle it.
+
+## Reference 🔗
+
+https://developer.mozilla.org/en-US/docs/Glossary/SEO<br/>
+https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase<br/>
+https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko<br/>
+https://www.freecodecamp.org/news/semantic-html5-elements/<br/>
