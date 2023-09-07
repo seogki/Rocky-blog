@@ -25,15 +25,15 @@ export default function PostItem({ category, post, className = "" }: Props) {
   return (
     <>
       <article
-        className={`${className} post-article prose dark:prose-invert break-words max-w-max sm:mx-4`}
+        className={`${className} post-article prose lg:prose-lg dark:prose-invert break-words max-w-max sm:mx-4 lg:prose-h1:text-4xl prose-h1:text-3xl`}
       >
         <h1
           className="text-center mt-4 lg:mt-8"
           role="heading"
         >{`[${category}] ${post.title}`}</h1>
-        <div className="flex justify-center flex-wrap text-sm py-4">
+        <ul className="flex justify-center flex-wrap text-sm py-4 not-prose">
           <PostTags tags={post.tags} />
-        </div>
+        </ul>
         <div className="ml-auto text-right text-base pt-4 pb-2">
           <time>{convertFormat(post.date)}</time>
         </div>

@@ -30,8 +30,8 @@ export default function PostItemAside({ toc }: Props) {
 
   return (
     <>
-      <aside className="basis-3/12 hidden lg:block ml-4">
-        <div className="fixed mt-36 mr-4 drop-shadow-md ">
+      <aside className="basis-3/12 hidden lg:block ml-4 border-l-2 border-zinc-500">
+        <div className="fixed mt-16 mr-4 drop-shadow-md">
           <section className="text-zinc-700 dark:text-zinc-300 max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
             <h2 className="font-bold text-base border-b-2 border-black dark:border-white pb-1 w-fit">
               📄 Table of Contents
