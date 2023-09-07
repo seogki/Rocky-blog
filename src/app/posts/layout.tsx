@@ -2,7 +2,6 @@ import { getCategories } from "@/data";
 import NavigationList from "@/components/navigation-list";
 import { Suspense } from "react";
 import NavigationListSkeleton from "@/components/skeleton/navigation-list-skeleton";
-import dynamic from "next/dynamic";
 
 type Props = {
   children: React.ReactNode;

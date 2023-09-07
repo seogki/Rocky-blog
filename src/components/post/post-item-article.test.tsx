@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import PostItem from "./post-item";
+import PostItem from "./post-item-article";
 import { Post } from "@/interface/posts.interface";
 
 test("should display empty description when data is empty", async () => {

@@ -3,23 +3,22 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
-import dynamic from "next/dynamic";
 import { getCategories } from "@/data";
 
 type Props = {
   params: {
-    category?: string;
+    category: string;
   };
 };
 
 export const generateMetadata = ({ params }: Props): Metadata => {
   const { category } = params;
-  const baseUrl = "https://rocky-blog.vercel.app";
   return {
     title: `Rocky Blog - Posts [${category}]`,
     description: `This is my Rocky Blog ${category} Posts Page`,
-    alternates: {
-      canonical: category ?? `${baseUrl}/posts/${category}`
+    openGraph: {
+      title: `Rocky Blog - Posts [${category}]`,
+      description: `This is my Rocky Blog ${category} Posts Page`
     }
   };
 };
