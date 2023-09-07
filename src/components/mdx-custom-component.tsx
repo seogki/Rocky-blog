@@ -13,8 +13,15 @@ export function MdxCustomComponent() {
     />
   );
 
+  // const Strong = (props: any) => (
+  //   <strong className={`text-teal-600 dark:text-teal-400`} {...props}></strong>
+  // );
+
   const Strong = (props: any) => (
-    <strong className={`text-teal-600 dark:text-teal-400`} {...props}></strong>
+    <strong
+      className={`bg-zinc-200 dark:bg-zinc-700 rounded-lg px-3 py-1 my-1`}
+      {...props}
+    ></strong>
   );
 
   const BlockQuote = (props: any) => (
