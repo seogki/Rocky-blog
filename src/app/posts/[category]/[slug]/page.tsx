@@ -23,29 +23,20 @@ export const generateMetadata = async ({
     console.error(e);
     return {
       title: `${slug.replaceAll("-", " ")}`,
-      description: "This is my Rocky Blog Single Post Page",
-      alternates: {
-        canonical: `${baseUrl}/posts/${category}/${slug}`
-      }
+      description: "This is my Rocky Blog Single Post Page"
     };
   }
 
   if (!post) {
     return {
       title: `${slug.replaceAll("-", " ")}`,
-      description: "This is my Rocky Blog Single Post Page",
-      alternates: {
-        canonical: `${baseUrl}/posts/${category}/${slug}`
-      }
+      description: "This is my Rocky Blog Single Post Page"
     };
   }
 
   return {
     title: `[${category}] ${post.title}`,
     description: post.description,
-    alternates: {
-      canonical: `${baseUrl}/posts/${category}/${slug}`
-    },
     openGraph: {
       title: `[${category}] ${post.title}`,
       description: post.description
