@@ -3,6 +3,7 @@ import Image from "next/image";
 export function MdxCustomComponent() {
   const ResponsiveImage = (props: any) => (
     <Image
+      className="rounded-lg border-2 border-zinc-600 dark:border-zinc-400"
       alt={props.alt}
       width={0}
       height={0}

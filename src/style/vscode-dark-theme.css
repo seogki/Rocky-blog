@@ -368,5 +368,5 @@ pre {
 }
 
 .prose blockquote p {
-  @apply p-2;
+  @apply p-3;
 }
