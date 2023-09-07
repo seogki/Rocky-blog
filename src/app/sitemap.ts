@@ -8,11 +8,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapList = [
     {
       url: baseUrl,
-      lastModified: new Date()
+      lastModified: new Date(),
+      changeFrequency: "always",
+      priority: 1
     },
     {
       url: `${baseUrl}/posts`,
-      lastModified: new Date()
+      lastModified: new Date(),
+      changeFrequency: "always",
+      priority: 0.8
     }
   ];
 
@@ -21,7 +25,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const category of categories) {
     sitemapList.push({
       url: `${baseUrl}/posts/${category.name}`,
-      lastModified: new Date()
+      changeFrequency: "always",
+      lastModified: new Date(),
+      priority: 0.8
     });
   }
 
@@ -32,7 +38,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     sitemapList.push({
       url: `${baseUrl}/posts/${post.category}/${post.slug}`,
-      lastModified: stringToDate(post.date, "DD/MM/YYYY")
+      changeFrequency: "weekly",
+      lastModified: stringToDate(post.date, "DD/MM/YYYY"),
+      priority: 0.5
     });
   }
 

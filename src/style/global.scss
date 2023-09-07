@@ -54,3 +54,7 @@ div#__next {
   @apply w-full;
   @apply h-full;
 }
+
+.break-word {
+  word-break: break-word;
+}
