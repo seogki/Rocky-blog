@@ -140,3 +140,22 @@ export const getPost = async (slug: string, categoryName: string) => {
 
   return posts.find((post) => post?.slug === slug);
 };
+
+export const getPostWithPrevAndNext = async (
+  slug: string,
+  categoryName: string
+) => {
+  const posts = await getPostsByCategoryName(categoryName);
+
+  if (posts.length < 1) return;
+
+  const postIdx = posts.findIndex((post) => post?.slug === slug);
+
+  if (postIdx < 0) return;
+
+  return {
+    prev: postIdx - 1 >= 0 ? posts[postIdx - 1] : undefined,
+    current: posts[postIdx],
+    next: postIdx + 1 < posts.length ? posts[postIdx + 1] : undefined
+  };
+};

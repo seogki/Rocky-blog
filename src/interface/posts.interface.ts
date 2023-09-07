@@ -13,6 +13,12 @@ export interface Post {
   body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
+export interface PostIndex {
+  current?: Post;
+  prev?: Post;
+  next?: Post;
+}
+
 export interface Category {
   length: number;
   name: string;

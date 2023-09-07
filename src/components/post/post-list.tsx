@@ -46,13 +46,15 @@ export default async function PostList({ category, tag }: Props) {
         {posts.map((post) => (
           <li key={post.slug}>
             <Link
-              href={`/posts/${
-                tag
-                  ? post.category
-                  : category === "RECENT"
-                  ? post.category
-                  : category
-              }/${post.slug}`}
+              href={{
+                pathname: `/posts/${
+                  tag
+                    ? post.category
+                    : category === "RECENT"
+                    ? post.category
+                    : category
+                }/${post.slug}`
+              }}
             >
               <div className="w-full h-auto p-2 my-3 sm:py-4 flex flex-col justify-between align-middle group">
                 <h2 className="group-hover:text-teal-600 dark:group-hover:text-teal-400 text-xl font-bold dark:text-zinc-100 text-zinc:800 line-clamp-2">
