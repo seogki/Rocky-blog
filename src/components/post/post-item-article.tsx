@@ -3,7 +3,6 @@ import { Post } from "@/interface/posts.interface";
 import PostBodySkeleton from "../skeleton/post-body-skeleton";
 import PostCreateTime from "./contents/post-create-time";
 import PostReadMinute from "./contents/post-read-minute";
-import PostBody from "./post-body";
 import PostTags from "./contents/post-tags";
 
 type Props = {
@@ -12,7 +11,11 @@ type Props = {
   className?: string;
 };
 
-export default function PostItem({ category, post, className = "" }: Props) {
+export default function PostItemArticle({
+  category,
+  post,
+  className = ""
+}: Props) {
   if (!post || post === null) {
     return <p>Post is not available</p>;
   }
@@ -36,9 +39,7 @@ export default function PostItem({ category, post, className = "" }: Props) {
         <div className="ml-auto text-right text-base pb-4">
           <PostReadMinute min={post.minutesRead} />
         </div>
-        <Suspense fallback={<PostBodySkeleton />}>
-          <PostBody body={post.body} />
-        </Suspense>
+        <Suspense fallback={<PostBodySkeleton />}>{post.body}</Suspense>
       </article>
     </>
   );

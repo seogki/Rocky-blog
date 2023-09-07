@@ -1,4 +1,4 @@
-import PostItem from "@/components/post/post-item";
+import PostItemArticle from "@/components/post/post-item-article";
 import PostItemAside from "@/components/post/post-item-aside";
 import TopScrollButton from "@/components/top-scroll-button";
 import { getPost } from "@/data";
@@ -28,7 +28,7 @@ export default async function PostItemContainer({ params }: Props) {
   return (
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1 relative md:border-l-2 md:border-zinc-100 dark:md:border-zinc-800">
-        <PostItem category={category} post={post} />
+        <PostItemArticle category={category} post={post} />
         <TopScrollButton />
       </section>
       <PostItemAside toc={post.toc} />

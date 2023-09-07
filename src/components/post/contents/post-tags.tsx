@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function PostTags({ tags }: { tags: string[] }) {
   return (
     <>
