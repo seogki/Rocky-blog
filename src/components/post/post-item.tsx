@@ -1,21 +1,16 @@
 import { Suspense } from "react";
-import Loading from "../loading";
 import { Post } from "@/interface/posts.interface";
-import { convertFormat } from "@/utils/date";
-import PostTags from "./post-tags";
-import PostBody from "./post-body";
-import dynamic from "next/dynamic";
 import PostBodySkeleton from "../skeleton/post-body-skeleton";
+import PostCreateTime from "./contents/post-create-time";
+import PostReadMinute from "./contents/post-read-minute";
+import PostBody from "./post-body";
+import PostTags from "./contents/post-tags";
 
 type Props = {
   category: string;
   post: Post | null | undefined;
   className?: string;
 };
-
-// const PostBody = dynamic(() => import("./post-body"), {
-//   loading: () => <PostBodySkeleton />
-// });
 
 export default function PostItem({ category, post, className = "" }: Props) {
   if (!post || post === null) {
@@ -35,11 +30,11 @@ export default function PostItem({ category, post, className = "" }: Props) {
           <PostTags tags={post.tags} />
         </ul>
         <div className="ml-auto text-right text-base pt-4 pb-2">
-          <time>{convertFormat(post.date)}</time>
+          <PostCreateTime date={post.date} />
         </div>
 
         <div className="ml-auto text-right text-base pb-4">
-          <strong>📖 {post.minutesRead}</strong>
+          <PostReadMinute min={post.minutesRead} />
         </div>
         <Suspense fallback={<PostBodySkeleton />}>
           <PostBody body={post.body} />
