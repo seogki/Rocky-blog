@@ -11,7 +11,7 @@ export default function ThemeModifier() {
 
   if (!isMount)
     return (
-      <FaSpinner className="animate-spin ml-auto lg:ml-2 cursor-pointer mr-3 text-black/50 dark:text-white/50" />
+      <FaSpinner className="animate-spin ml-2 cursor-pointer mr-3 text-black/50 dark:text-white/50" />
     );
 
   const currentTheme = theme === "system" ? systemTheme : theme || "dark";
@@ -20,12 +20,12 @@ export default function ThemeModifier() {
     <>
       {currentTheme === "dark" ? (
         <FaMoon
-          className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
+          className="hover:text-teal-600 dark:hover:text-teal-400 ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("light")}
         />
       ) : (
         <FaSun
-          className="hover:text-teal-600 dark:hover:text-teal-400 ml-auto lg:ml-2 cursor-pointer mr-3"
+          className="hover:text-teal-600 dark:hover:text-teal-400 ml-2 cursor-pointer mr-3"
           onClick={() => setTheme("dark")}
         />
       )}

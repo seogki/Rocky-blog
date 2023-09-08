@@ -2,15 +2,17 @@ import Link from "next/link";
 
 type Props = {
   tag: string;
+  onClick?: React.MouseEventHandler;
 };
 
-export default function PostTagLink({ tag }: Props) {
+export default function PostTagLink({ tag, onClick }: Props) {
   return (
     <>
       <Link
         key={tag}
         href={{ pathname: `/posts/search`, query: { tag } }}
         className="mx-1 my-1 first-of-type:ml-0 last-of-type:mr-0"
+        onClick={onClick}
       >
         <div
           key={tag}

@@ -39,7 +39,7 @@ export default function HeaderNav({ categories }: { categories: Category[] }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="w-full h-full bg-slate-700/50 overflow-hidden"></div>
+          <div className="w-full h-full bg-zinc-800/50 overflow-hidden"></div>
         </Transition.Child>
         <Transition.Child
           className="w-full h-full fixed top-0 left-0 z-40 overflow-hidden"
