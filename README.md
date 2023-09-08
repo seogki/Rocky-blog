@@ -26,7 +26,7 @@
 - optimize server side rendering
 - optimize search engine
 - unit test with JEST + RTL
-- e2e test with cypress
+- e2e test with cypress?
 - vercel deployment
 
 ---
