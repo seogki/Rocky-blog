@@ -11,7 +11,7 @@ type Props = {
 
 export const generateMetadata = ({ searchParams }: Props): Metadata => {
   const { tag } = searchParams;
-  const baseUrl = "https://rocky-blog.vercel.app";
+  const baseUrl = "https://www.rockyblog.dev";
   return {
     title: `Rocky Blog - Posts Search List [${tag}]`,
     description: `This is my Rocky Blog Search List of ${tag}`,

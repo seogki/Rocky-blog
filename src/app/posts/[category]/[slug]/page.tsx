@@ -14,7 +14,6 @@ export const generateMetadata = async ({
   params
 }: Props): Promise<Metadata> => {
   const { category, slug } = params;
-  const baseUrl = "https://rocky-blog.vercel.app";
 
   let post: Post | undefined;
   try {
