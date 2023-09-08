@@ -4,8 +4,6 @@ import useDebounce from "@/hooks/useDebounce";
 import { Post, PostByTitle } from "@/interface/posts.interface";
 import { useEffect, useRef, useState } from "react";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
-import PostCreateTime from "../post/contents/post-create-time";
-import { convertFormat } from "@/utils/date";
 import Link from "next/link";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
