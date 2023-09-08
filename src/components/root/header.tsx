@@ -1,9 +1,10 @@
 import MenuTabList from "@/components/menu/menu-tab-list";
 import ThemeModifier from "@/components/theme-modifier";
-import { getCategories } from "@/data";
+import { getAllPostsOrderByDate, getCategories } from "@/data";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import HeaderTitle from "./header-title";
+import HeaderSearch from "./header-search";
 
 type Props = {
   className?: string;
@@ -11,6 +12,7 @@ type Props = {
 
 export default async function MyHeader({ className = "" }: Props) {
   const categories = await getCategories();
+  const posts = await getAllPostsOrderByDate();
 
   return (
     <>
@@ -27,6 +29,7 @@ export default async function MyHeader({ className = "" }: Props) {
           <div className="hidden lg:block lg:ml-auto">
             <MenuTabList />
           </div>
+          <HeaderSearch posts={posts} />
           <ThemeModifier />
           <div className="block lg:hidden">
             <HeaderMore />
