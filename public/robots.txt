@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://rocky-blog.vercel.app/sitemap.xml
+Sitemap: https://www.rockyblog.dev/sitemap.xml
