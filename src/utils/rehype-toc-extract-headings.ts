@@ -8,9 +8,8 @@ export function rehypeTocExtractHeadings() {
   return function (tree: any, { data }: { data: any }) {
     visit(tree, "element", (node) => {
       if (scanResult.includes(node.tagName) && node.properties.id) {
-        const obj = {
+        const obj: Toc = {
           href: "",
-          parent: "",
           text: ""
         };
         for (const child of node.children) {

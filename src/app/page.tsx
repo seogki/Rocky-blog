@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import HomeSkeleton from "@/components/skeleton/home-skeleton";
 import PostTagLink from "@/components/post/contents/post-tag-link";
+import { toUniqueList } from "@/utils/list";
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -32,7 +33,7 @@ export default function Home() {
 const MainContainer = async () => {
   const posts = await getAllPostsOrderByDate(5);
 
-  const tags = Array.from(new Set(posts.map((post) => post.tags).flat()));
+  const tags = toUniqueList(posts.map((post) => post.tags).flat());
 
   return (
     <>

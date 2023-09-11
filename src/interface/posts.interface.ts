@@ -31,9 +31,11 @@ export interface PostByTitle {
 
 export type Toc = {
   href: string;
-  parent: string;
+  parent?: TocParentType;
   text: string;
 };
+
+export type TocParentType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type Frontmatter = {
   title: string;

@@ -50,10 +50,10 @@ const TocList = ({ toc, pathname }: { toc: Toc[]; pathname: string }) => {
             <p
               role="paragraph"
               className={`${setIndent(
-                item.parent
+                item.parent!!
               )} py-1 my-2 hover:text-teal-600 hover:dark:text-teal-400`}
             >
-              {addPrefix(item.parent, item.text)}
+              {addPrefix(item.parent!!, item.text)}
             </p>
           </Link>
         </li>
