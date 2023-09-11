@@ -1,13 +1,13 @@
 "use client";
 
-import { closeAll, closeDrawer, closeMore } from "@/redux/features/headerSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { closeAll } from "@/redux/features/headerSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import Link from "next/link";
 
 export default function HeaderTitle() {
   const dispatch = useAppDispatch();
 
-  const closeAllOpener = () => {
+  const closeAllDrawer = () => {
     dispatch(closeAll());
   };
 
@@ -15,7 +15,7 @@ export default function HeaderTitle() {
     <>
       <Link
         href={"/"}
-        onClick={() => closeAllOpener()}
+        onClick={() => closeAllDrawer()}
         className={"hover:text-teal-600 dark:hover:text-teal-400"}
       >
         Rocky Blog

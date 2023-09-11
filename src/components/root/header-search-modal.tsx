@@ -9,13 +9,14 @@ import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { toUniqueList } from "@/utils/list";
 
 type Props = {
   sortPosts?: PostByTitle;
-  close: () => void;
+  closeModal: () => void;
 };
 
-export default function HeaderSearchModal({ sortPosts, close }: Props) {
+export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   const [value, setValue] = useState("");
   const [matchPosts, setMatchPosts] = useState<(Post | undefined)[]>([]);
   const [matchTags, setMatchTags] = useState<string[]>([]);
@@ -27,11 +28,9 @@ export default function HeaderSearchModal({ sortPosts, close }: Props) {
 
   useEffect(() => {
     if (debouncedValue) {
-      const list = Array.from(
-        new Set(debouncedValue.toLocaleLowerCase().split(" "))
+      const list = toUniqueList(
+        debouncedValue.toLocaleLowerCase().split(" ")
       ).filter((value) => value !== "");
-
-      //   console.debug("input List", list);
 
       if (!sortPosts) return;
 
@@ -67,29 +66,32 @@ export default function HeaderSearchModal({ sortPosts, close }: Props) {
         }
       }
 
-      const tmpList: string[] = [];
+      // const tmpList: string[] = [];
 
       let matchRankList: string[] = [];
 
-      if (highestRank === 1) {
-        matchRankList = Object.keys(obj).filter(
-          (key) => obj[key].num === highestRank
-        );
-      } else {
-        matchRankList = Object.keys(obj).filter(
-          (key) => obj[key].num === highestRank
-        );
-      }
+      // if (highestRank === 1) {
+      //   matchRankList = Object.keys(obj).filter(
+      //     (key) => obj[key].num === highestRank
+      //   );
+      // } else {
+      //   matchRankList = Object.keys(obj).filter(
+      //     (key) => obj[key].num === highestRank
+      //   );
+      // }
+      matchRankList = Object.keys(obj).filter((key) => obj[key].num);
 
-      tmpList.push(...matchRankList);
+      console.debug(obj, matchRankList);
 
-      const rankList: Post[] = tmpList.map((value) => obj[value].post);
+      const rankList: Post[] = matchRankList.map((value) => obj[value].post);
 
       const tags = Array.from(
         new Set(rankList.map((post) => post!.tags).flat())
       );
       setMatchPosts(rankList);
       setMatchTags(tags);
+
+      console.debug(rankList, tags);
     }
   }, [debouncedValue, sortPosts]);
 
@@ -102,46 +104,45 @@ export default function HeaderSearchModal({ sortPosts, close }: Props) {
   useEffect(() => {
     if (pathName !== curPathName) {
       setCurPathName(pathName);
-      close();
+      closeModal();
     }
-  }, [pathName, close, curPathName]);
+  }, [pathName, closeModal, curPathName]);
 
   return (
-    <div className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/50 flex justify-center items-start">
-      <div className="w-[calc(100%-2rem)] min-h-[500px] max-w-screen-sm p-4 my-8 mx-4 mx-auto rounded-lg border-2 dark:bg-zinc-800 bg-zinc-300 border-zinc-600 dark:border-zinc-700">
-        <MdClose
-          className="ml-auto text-2xl sm:text-3xl mb-2 cursor-pointer"
-          onClick={() => close()}
-        />
+    <div
+      role="dialog"
+      className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/50 flex justify-center items-start"
+    >
+      <div className="w-[calc(100%-2rem)] max-w-screen-sm p-4 my-8 mx-4 mx-auto rounded-md border-2 dark:bg-zinc-800 bg-white border-zinc-500 dark:border-zinc-700">
+        <header className="flex flex-row justify-between align-center pb-2">
+          <h2 className="text-base">Search</h2>
+          <MdClose
+            className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer rounded-full hover:bg-zinc-500/30"
+            onClick={() => closeModal()}
+          />
+        </header>
         <input
           ref={inputRef}
-          className="w-full py-2 px-4 outline outline-transparent placeholder:italic text-base rounded-lg"
+          className="w-full py-2 px-4 outline outline-violet-500 outline-2 placeholder:italic text-base rounded-lg"
           placeholder="please type anything..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
 
         <main>
-          <h2 className="text-base my-4 font-semibold">
-            {value === "" ? "Search Result" : `Search Result: ${value}`}
-          </h2>
-          {matchTags.length > 0 && (
-            <section>
-              <h3 className="text-sm my-4 font-medium">By tags</h3>
-              <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
-                {matchTags.map((tag, idx) => (
-                  <PostTagLink key={idx} tag={tag} />
-                ))}
-              </div>
-            </section>
-          )}
+          <h3 className="text-base mt-6 mb-4 font-semibold text-center text-zinc-600 dark:text-zinc-300">
+            {value === ""
+              ? "Search Anything..."
+              : value !== "" && matchPosts.length < 1
+              ? `No Search Result: ${value}`
+              : `Search Result: ${value}`}
+          </h3>
           {matchPosts.length > 0 && (
-            <section>
-              <h3 className="text-sm my-4 font-medium">By titles</h3>
+            <SearchSection title={"by Titles"}>
               {matchPosts.map((post, idx) => (
                 <p
                   key={idx}
-                  className="m-2 py-1 text-sm font-normal truncate mr-4 cursor-pointer text-zinc-600 dark:text-zinc-300 hover:text-black hover:dark:text-white"
+                  className="px-2 py-3 text-sm font-normal truncate mr-4 cursor-pointer hover:bg-zinc-500/50 rounded-2xl"
                 >
                   <Link
                     href={{
@@ -152,10 +153,38 @@ export default function HeaderSearchModal({ sortPosts, close }: Props) {
                   </Link>
                 </p>
               ))}
-            </section>
+            </SearchSection>
+          )}
+          {matchTags.length > 0 && (
+            <SearchSection title={"by Tags"}>
+              <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
+                {matchTags.map((tag, idx) => (
+                  <PostTagLink key={idx} tag={tag} />
+                ))}
+              </div>
+            </SearchSection>
           )}
         </main>
       </div>
     </div>
   );
 }
+
+const SearchSectionTitle = ({ title }: { title: string }) => {
+  return <h4 className="text-sm mb-2 font-normal">{title}</h4>;
+};
+
+const SearchSection = ({
+  title,
+  children
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <section className="p-4 border-2 rounded-lg border-zinc-400 dark:border-zinc-600 my-4 first:mt-0 dark:bg-zinc-700 bg-zinc-300">
+      <SearchSectionTitle title={title} />
+      {children}
+    </section>
+  );
+};
