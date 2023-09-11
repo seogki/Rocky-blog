@@ -8,6 +8,7 @@ import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
+import CardInner from "../card/card-inner";
 
 type Props = {
   sortPosts?: PostByTitle;
@@ -44,7 +45,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         .flat();
 
       const obj: any = {};
-    
+
       for (const post of posts) {
         if (!post) continue;
         if (!obj[post.slug]) {
@@ -86,7 +87,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
     >
       <div className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto rounded-lg dark:bg-zinc-800 bg-zinc-100">
         <div className="flex flex-row justify-between align-center pb-2">
-          <h2 className="text-base">Search</h2>
+          <h2 className="text-base font-bold">Search</h2>
           <MdClose
             className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer rounded-full hover:bg-zinc-500/50"
             onClick={() => closeModal()}
@@ -106,18 +107,18 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
               ? "Search Anything..."
               : value !== "" && matchPosts.length < 1
               ? `No Search Result: ${value}`
-              : `Search Result: ${value}`} 
+              : `Search Result: ${value}`}
           </h3>
           {matchPosts.length > 0 && (
             <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
                 <p
                   key={idx}
-                  className="px-2 py-3 font-normal dark:text-zinc-300 text-zinc-600 truncate cursor-pointer hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50 rounded-2xl"
+                  className="px-2 py-1.5 font-normal dark:text-zinc-300 text-zinc-600 truncate cursor-pointer hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50 rounded-2xl"
                 >
                   <Link
                     href={{
-                      pathname: `/posts/${post?.category}/${post?.slug}`
+                      pathname: `/posts/${post?.category}/${post?.slug}`,
                     }}
                   >
                     {post?.title}
@@ -147,15 +148,15 @@ const SearchSectionTitle = ({ title }: { title: string }) => {
 
 const SearchSection = ({
   title,
-  children
+  children,
 }: {
   title: string;
   children: React.ReactNode;
 }) => {
   return (
-    <section className="p-4 rounded-lg my-4 first:mt-0 dark:bg-zinc-700 bg-zinc-200 text-sm">
+    <CardInner className="my-4 first:mt-0 text-sm">
       <SearchSectionTitle title={title} />
       {children}
-    </section>
+    </CardInner>
   );
 };

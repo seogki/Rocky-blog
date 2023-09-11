@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import HomeSkeleton from "@/components/skeleton/home-skeleton";
 import PostTagLink from "@/components/post/contents/post-tag-link";
 import { toUniqueList } from "@/utils/list";
+import CardInner from "@/components/card/card-inner";
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -12,8 +13,8 @@ export const generateMetadata = (): Metadata => {
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
     openGraph: {
       title: `Rocky Blog - Home`,
-      description: `This is my Rocky Blog Home Page with recent posts and tags`
-    }
+      description: `This is my Rocky Blog Home Page with recent posts and tags`,
+    },
   };
 };
 
@@ -40,17 +41,18 @@ const MainContainer = async () => {
       <MainSection title={"Recent Posts"}>
         <>
           {posts.map((post) => (
-            <div
-              className="py-1 flex flex-row flex-wrap w-full"
+            <Link
               key={post.slug}
+              href={`/posts/${post.category}/${post!.slug}`}
+              className="w-full"
             >
-              <span className="grow-0">[{post.category}]</span>
-              <em className="truncate hover:text-teal-600 hover:dark:text-teal-400 mx-2 flex-1">
-                <Link href={`/posts/${post.category}/${post!.slug}`}>
+              <div className="text-base py-1.5 flex flex-row flex-wrap w-full">
+                <span className="grow-0">[{post.category}]</span>
+                <p className="px-2 truncate mx-2 flex-1 rounded-2xl hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50">
                   {post.title}
-                </Link>
-              </em>
-            </div>
+                </p>
+              </div>
+            </Link>
           ))}
         </>
       </MainSection>
@@ -72,11 +74,11 @@ type MainSectionProps = {
 
 const MainSection = ({ children, title }: MainSectionProps) => {
   return (
-    <section className="drop-shadow-lg dark:drop-shadow-none p-4 md:p-5 mx-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+    <CardInner>
       <h2 className="text-lg font-medium">{title}</h2>
       <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
         {children}
       </div>
-    </section>
+    </CardInner>
   );
 };
