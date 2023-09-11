@@ -1,5 +1,3 @@
-"use client";
-
 import useDebounce from "@/hooks/useDebounce";
 import { Post, PostByTitle } from "@/interface/posts.interface";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +16,7 @@ type Props = {
 
 export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   const [value, setValue] = useState("");
-  const [matchPosts, setMatchPosts] = useState<(Post | undefined)[]>([]);
+  const [matchPosts, setMatchPosts] = useState<Post[]>([]);
   const [matchTags, setMatchTags] = useState<string[]>([]);
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -29,24 +27,21 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   useEffect(() => {
     if (debouncedValue) {
       const list = toUniqueList(
-        debouncedValue.toLocaleLowerCase().split(" ")
-      ).filter((value) => value !== "");
+        debouncedValue.trim().toLocaleLowerCase().split(" ")
+      );
 
       if (!sortPosts) return;
 
-      const posts = list
-        .map((value) => {
-          const keys = Object.keys(sortPosts!!);
-          const regex = new RegExp(value, "gi");
-          const isValueInclude = keys.filter((key) => key.match(regex));
-          if (isValueInclude.length > 0) return isValueInclude;
-        })
-        .flat()
-        .filter((value) => value !== undefined)
-        .map((value) => sortPosts[value!!])
-        .flat();
+      const filterIncludeKeyByUserInput = (text: string) => {
+        const keys = Object.keys(sortPosts!!);
+        return keys.filter((key) => key.match(new RegExp(text, "gi")));
+      };
 
-      //   console.debug(posts);
+      const posts = list
+        .map((text) => filterIncludeKeyByUserInput(text))
+        .flat()
+        .map((value) => sortPosts[value])
+        .flat();
 
       const obj: any = {};
       let highestRank = 1;
@@ -66,32 +61,14 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         }
       }
 
-      // const tmpList: string[] = [];
+      const rankList: Post[] = Object.keys(obj)
+        .sort((a, b) => obj[b].num - obj[a].num)
+        .map((key) => obj[key].post);
 
-      let matchRankList: string[] = [];
+      const tags = toUniqueList(rankList.map((post) => post!.tags).flat());
 
-      // if (highestRank === 1) {
-      //   matchRankList = Object.keys(obj).filter(
-      //     (key) => obj[key].num === highestRank
-      //   );
-      // } else {
-      //   matchRankList = Object.keys(obj).filter(
-      //     (key) => obj[key].num === highestRank
-      //   );
-      // }
-      matchRankList = Object.keys(obj).filter((key) => obj[key].num);
-
-      console.debug(obj, matchRankList);
-
-      const rankList: Post[] = matchRankList.map((value) => obj[value].post);
-
-      const tags = Array.from(
-        new Set(rankList.map((post) => post!.tags).flat())
-      );
       setMatchPosts(rankList);
       setMatchTags(tags);
-
-      console.debug(rankList, tags);
     }
   }, [debouncedValue, sortPosts]);
 
@@ -123,7 +100,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         </header>
         <input
           ref={inputRef}
-          className="w-full py-2 px-4 outline outline-violet-500 outline-2 placeholder:italic text-base rounded-lg"
+          className="inline w-full py-2 px-4 outline outline-violet-500 outline-2 placeholder:italic text-base rounded-lg"
           placeholder="please type anything..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
