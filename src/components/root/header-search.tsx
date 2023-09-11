@@ -1,6 +1,6 @@
 "use client";
 
-import { sortPostsByTitle } from "@/data/client";
+import { sortPostsByTitle } from "@/data/sort";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import { Post, PostByTitle } from "@/interface/posts.interface";
 import { MdSearch } from "@react-icons/all-files/md/MdSearch";
@@ -45,13 +45,17 @@ export default function HeaderSearch({ posts }: Props) {
   return (
     <>
       <MdSearch
+        role="button"
         className="cursor-pointer ml-auto lg:ml-0 text-2xl mx-2 hover:text-teal-600 dark:hover:text-teal-400"
         onClick={() => {
           setOpenModal(true);
         }}
       />
       {openModal && (
-        <HeaderSearchModal sortPosts={sortPosts} close={() => closeModal()} />
+        <HeaderSearchModal
+          sortPosts={sortPosts}
+          closeModal={() => closeModal()}
+        />
       )}
     </>
   );
