@@ -26,7 +26,7 @@ export interface Category {
 
 export interface PostByTitle {
   [index: string]: Array<Post> | undefined;
-  posts?: Post[];
+  // posts: Post[];
 }
 
 export type Toc = {

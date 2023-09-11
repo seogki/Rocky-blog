@@ -18,25 +18,21 @@ const posts: Post[] = [
   }
 ];
 
-describe("header search test", () => {
-  test("should search button exists", async () => {
-    const { findByRole } = renderWithProviders(<HeaderSearch posts={posts} />);
+test("should search button exists", async () => {
+  const { findByRole } = renderWithProviders(<HeaderSearch posts={posts} />);
 
-    const searchBtn = await findByRole("button");
-    expect(searchBtn).toBeInTheDocument();
-  });
+  const searchBtn = await findByRole("button");
+  expect(searchBtn).toBeInTheDocument();
 });
 
-describe("header search test", () => {
-  test("should open dialog when click search button", async () => {
-    const { findByRole } = renderWithProviders(<HeaderSearch posts={posts} />);
+test("should open dialog when click search button", async () => {
+  const { findByRole } = renderWithProviders(<HeaderSearch posts={posts} />);
 
-    const searchBtn = await findByRole("button");
+  const searchBtn = await findByRole("button");
 
-    fireEvent.click(searchBtn);
+  fireEvent.click(searchBtn);
 
-    const modal = await findByRole("dialog");
+  const modal = await findByRole("dialog");
 
-    expect(modal).toBeInTheDocument();
-  });
+  expect(modal).toBeInTheDocument();
 });
