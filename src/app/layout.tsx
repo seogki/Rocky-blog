@@ -6,20 +6,9 @@ import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import GoogleAdsense from "@/components/google-adsense";
-import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   icons: {
-//     icon: "./favicon.ico",
-//     shortcut: "./favicon.ico",
-//     apple: "./apple-icon.png"
-//   }
-// };
 
 export default function RootLayout({
   children
@@ -30,7 +19,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <GoogleAnalytics />
-        {/* <GoogleAdsense /> */}
         <div className="w-full h-full">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReduxProvider>

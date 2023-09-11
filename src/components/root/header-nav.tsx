@@ -6,7 +6,7 @@ import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import {
   closeDrawer,
   closeMore,
-  openDrawer
+  openDrawer,
 } from "@/redux/features/headerSlice";
 import NavigationList from "@/components/navigation-list";
 import { Category } from "@/interface/posts.interface";
@@ -19,7 +19,7 @@ export default function HeaderNav({ categories }: { categories: Category[] }) {
   return (
     <>
       <MdMenu
-        className="text-2xl mr-2"
+        className="text-2xl mr-2 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400"
         onClick={() => {
           if (isMore) dispatch(closeMore());
           setTimeout(() => dispatch(openDrawer()), 50);

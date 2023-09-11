@@ -16,7 +16,6 @@ export default function HeaderTitle() {
       <Link
         href={"/"}
         onClick={() => closeAllDrawer()}
-        className={"hover:text-teal-600 dark:hover:text-teal-400"}
       >
         Rocky Blog
       </Link>

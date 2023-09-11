@@ -10,7 +10,7 @@ import { useMount } from "@/hooks/useMount";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
-  ssr: false
+  ssr: false,
 });
 
 type Props = {

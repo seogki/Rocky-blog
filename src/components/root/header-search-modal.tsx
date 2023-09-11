@@ -8,6 +8,8 @@ import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
+import CardInner from "../card/card-inner";
+import Card from "../card/card";
 
 type Props = {
   sortPosts?: PostByTitle;
@@ -44,7 +46,6 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         .flat();
 
       const obj: any = {};
-      // let highestRank = 1;
 
       for (const post of posts) {
         if (!post) continue;
@@ -54,11 +55,6 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         }
 
         obj[post.slug].num++;
-        const num = obj[post.slug].num;
-
-        // if (num > highestRank) {
-        //   highestRank = num;
-        // }
       }
 
       const rankList: Post[] = Object.keys(obj)
@@ -88,19 +84,19 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   return (
     <div
       role="dialog"
-      className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/50 flex justify-center items-start"
+      className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
-      <div className="w-[calc(100%-2rem)] max-w-screen-sm p-4 my-8 mx-4 mx-auto rounded-md border-2 dark:bg-zinc-800 bg-white border-zinc-500 dark:border-zinc-700">
-        <header className="flex flex-row justify-between align-center pb-2">
-          <h2 className="text-base">Search</h2>
+      <Card className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto">
+        <div className="flex flex-row justify-between align-center pb-2">
+          <h2 className="text-base font-bold">Search</h2>
           <MdClose
-            className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer rounded-full hover:bg-zinc-500/30"
+            className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer text-zinc-400 dark:text-zinc-600 hover:text-black hover:dark:text-white"
             onClick={() => closeModal()}
           />
-        </header>
+        </div>
         <input
           ref={inputRef}
-          className="inline w-full py-2 px-4 outline outline-violet-500 outline-2 placeholder:italic text-base rounded-lg"
+          className="inline w-full py-2 px-4 outline bg-zinc-200 placeholder-zinc-500 dark:bg-zinc-700 hover:outline-violet-500 focus:outline-violet-500 outline-2 outline-transparent placeholder:italic text-base rounded-lg"
           placeholder="please type anything..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -115,15 +111,15 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
               : `Search Result: ${value}`}
           </h3>
           {matchPosts.length > 0 && (
-            <SearchSection title={"by Titles"}>
+            <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
                 <p
                   key={idx}
-                  className="px-2 py-3 text-sm font-normal truncate mr-4 cursor-pointer hover:bg-zinc-500/50 rounded-2xl"
+                  className="px-2 py-1.5 font-normal dark:text-zinc-300 text-zinc-600 truncate cursor-pointer hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50 rounded-2xl"
                 >
                   <Link
                     href={{
-                      pathname: `/posts/${post?.category}/${post?.slug}`
+                      pathname: `/posts/${post?.category}/${post?.slug}`,
                     }}
                   >
                     {post?.title}
@@ -134,7 +130,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
           )}
           {matchTags.length > 0 && (
             <SearchSection title={"Title Tags"}>
-              <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
+              <div className="flex justify-start flex-wrap p-2">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink key={idx} tag={tag} />
                 ))}
@@ -142,26 +138,26 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
             </SearchSection>
           )}
         </main>
-      </div>
+      </Card>
     </div>
   );
 }
 
 const SearchSectionTitle = ({ title }: { title: string }) => {
-  return <h4 className="text-sm mb-2 font-normal">{title}</h4>;
+  return <h4 className="text-sm pb-2 font-normal font-semibold">{title}</h4>;
 };
 
 const SearchSection = ({
   title,
-  children
+  children,
 }: {
   title: string;
   children: React.ReactNode;
 }) => {
   return (
-    <section className="p-4 border-2 rounded-lg border-zinc-400 dark:border-zinc-600 my-4 first:mt-0 dark:bg-zinc-700 bg-zinc-300">
+    <CardInner className="my-4 last:mb-0 first:mt-0 text-sm">
       <SearchSectionTitle title={title} />
       {children}
-    </section>
+    </CardInner>
   );
 };
