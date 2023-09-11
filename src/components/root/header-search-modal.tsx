@@ -44,7 +44,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         .flat();
 
       const obj: any = {};
-      let highestRank = 1;
+      // let highestRank = 1;
 
       for (const post of posts) {
         if (!post) continue;
@@ -56,9 +56,9 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         obj[post.slug].num++;
         const num = obj[post.slug].num;
 
-        if (num > highestRank) {
-          highestRank = num;
-        }
+        // if (num > highestRank) {
+        //   highestRank = num;
+        // }
       }
 
       const rankList: Post[] = Object.keys(obj)
@@ -133,7 +133,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
             </SearchSection>
           )}
           {matchTags.length > 0 && (
-            <SearchSection title={"by Tags"}>
+            <SearchSection title={"Title Tags"}>
               <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink key={idx} tag={tag} />
