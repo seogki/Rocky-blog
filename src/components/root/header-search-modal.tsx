@@ -9,6 +9,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
+import Card from "../card/card";
 
 type Props = {
   sortPosts?: PostByTitle;
@@ -85,11 +86,11 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
       role="dialog"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
-      <div className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto rounded-lg dark:bg-zinc-800 bg-zinc-100">
+      <Card className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto">
         <div className="flex flex-row justify-between align-center pb-2">
           <h2 className="text-base font-bold">Search</h2>
           <MdClose
-            className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer rounded-full hover:bg-zinc-500/50"
+            className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer text-zinc-400 dark:text-zinc-600 hover:text-black hover:dark:text-white"
             onClick={() => closeModal()}
           />
         </div>
@@ -137,7 +138,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
             </SearchSection>
           )}
         </main>
-      </div>
+      </Card>
     </div>
   );
 }
@@ -154,7 +155,7 @@ const SearchSection = ({
   children: React.ReactNode;
 }) => {
   return (
-    <CardInner className="my-4 first:mt-0 text-sm">
+    <CardInner className="my-4 last:mb-0 first:mt-0 text-sm">
       <SearchSectionTitle title={title} />
       {children}
     </CardInner>
