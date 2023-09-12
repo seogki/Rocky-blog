@@ -51,7 +51,7 @@ export const getAllPostsOrderByDate = cachedFunc(async (limit = 0) => {
   const list: Post[] = [];
 
   for await (const category of categoryList) {
-    if (limit !== 0 && list.length >= 5) break;
+    // if (limit !== 0 && list.length >= 5) break;
     const posts = await getPostsByCategoryName(category.name, false);
     list.push(...posts);
   }
