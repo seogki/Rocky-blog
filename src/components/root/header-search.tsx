@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useMount } from "@/hooks/useMount";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
-import { motion } from "framer-motion";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
   ssr: false
@@ -38,19 +37,18 @@ export default function HeaderSearch({ posts }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!isMount)
+  if (!isMount) {
     return (
       <FaSpinner className="animate-spin ml-auto lg:ml-0 cursor-pointer mr-3 text-black/50 dark:text-white/50" />
     );
+  }
 
   return (
     <>
       <MdSearch
         role="button"
         className="ml-auto lg:ml-0 text-2xl mx-2 text-primary-hover"
-        onClick={() => {
-          setOpenModal(true);
-        }}
+        onClick={() => setOpenModal(true)}
       />
       {openModal && (
         <HeaderSearchModal
