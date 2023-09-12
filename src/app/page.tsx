@@ -13,8 +13,8 @@ export const generateMetadata = (): Metadata => {
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
     openGraph: {
       title: `Rocky Blog - Home`,
-      description: `This is my Rocky Blog Home Page with recent posts and tags`,
-    },
+      description: `This is my Rocky Blog Home Page with recent posts and tags`
+    }
   };
 };
 
@@ -33,7 +33,6 @@ export default function Home() {
 
 const MainContainer = async () => {
   const posts = await getAllPostsOrderByDate(5);
-
   const tags = toUniqueList(posts.map((post) => post.tags).flat());
 
   return (
@@ -48,7 +47,7 @@ const MainContainer = async () => {
             >
               <div className="text-base py-1.5 flex flex-row flex-wrap w-full">
                 <span className="grow-0">[{post.category}]</span>
-                <p className="px-2 truncate mx-2 flex-1 rounded-2xl hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50">
+                <p className="px-2 text-default truncate mx-2 flex-1 hover:text-black hover:dark:text-white">
                   {post.title}
                 </p>
               </div>
@@ -76,7 +75,7 @@ const MainSection = ({ children, title }: MainSectionProps) => {
   return (
     <CardInner>
       <h2 className="text-lg font-medium">{title}</h2>
-      <div className="flex justify-start flex-wrap text-sm p-2 md:mt-4">
+      <div className="flex justify-start flex-wrap text-sm p-2 md:mt-2">
         {children}
       </div>
     </CardInner>

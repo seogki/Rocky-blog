@@ -14,7 +14,7 @@ export default function PostItemAside({ toc }: Props) {
     <>
       <aside className="basis-3/12 hidden lg:block ml-4 border-l-2 border-zinc-100 dark:border-zinc-800">
         <div className="fixed mt-16 mr-4 drop-shadow-md">
-          <section className="text-zinc-700 dark:text-zinc-300 max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
+          <section className="text-default max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
             <h2 className="font-bold text-base border-b-2 border-zinc-200 dark:border-zinc-700 pb-1 w-fit">
               📄 Table of Contents
             </h2>
@@ -51,7 +51,7 @@ const TocList = ({ toc, pathname }: { toc: Toc[]; pathname: string }) => {
               role="paragraph"
               className={`${setIndent(
                 item.parent!!
-              )} py-1 my-2 hover:text-teal-600 hover:dark:text-teal-400`}
+              )} py-1 my-2 text-primary-hover`}
             >
               {addPrefix(item.parent!!, item.text)}
             </p>

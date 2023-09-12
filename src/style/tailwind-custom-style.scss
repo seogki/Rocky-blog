@@ -1,0 +1,22 @@
+@layer components {
+  .post-article {
+    a {
+      @apply break-all;
+    }
+  }
+
+  .text-default {
+    @apply text-zinc-800 dark:text-zinc-200;
+  }
+  .text-primary {
+    @apply text-teal-700 dark:text-teal-300;
+  }
+
+  .text-primary-hover {
+    @apply hover:text-teal-700 dark:hover:text-teal-300 cursor-pointer;
+  }
+
+  //   .text-secondary {
+  //     @apply text-violet-500;
+  //   }
+}

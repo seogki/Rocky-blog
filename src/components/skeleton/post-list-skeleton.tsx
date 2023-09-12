@@ -5,7 +5,7 @@ export default function PostListSkeleton() {
 
   return (
     <>
-      <Skeleton className="px-2 text-left mt-4 w-3/12" />
+      <Skeleton className="px-2 text-left mt-4 w-3/12 h-2" />
       {posts.map((post) => (
         <div
           key={post}

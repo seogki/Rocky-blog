@@ -40,20 +40,14 @@ export default async function PostList({ category, tag }: Props) {
   return (
     <>
       <ul className="flex flex-col w-full h-full px-2">
-        <li className="px-2 text-left mt-4 text-zinc-600 dark:text-zinc-300 font-medium">
+        <li className="px-2 text-left mt-4 text-default font-medium">
           Total {posts.length}
         </li>
         {posts.map((post) => (
           <li key={post.slug}>
             <Link
               href={{
-                pathname: `/posts/${
-                  tag
-                    ? post.category
-                    : category === "RECENT"
-                    ? post.category
-                    : category
-                }/${post.slug}`
+                pathname: `/posts/${post.category}/${post.slug}`
               }}
             >
               <div className="w-full h-auto p-2 my-3 sm:py-4 flex flex-col justify-between align-middle group">

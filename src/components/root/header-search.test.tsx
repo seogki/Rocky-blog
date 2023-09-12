@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import HeaderSearch from "./header-search";
+import HeaderSearch from "./HeaderSearch";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
 

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import "vscode-dark-theme.css";
-
+@import "tailwind-custom-style.scss";
 textarea {
   resize: none !important;
 }
@@ -15,12 +15,6 @@ textarea {
 
   header {
     @apply dark:bg-zinc-800/60 bg-white/60;
-  }
-
-  .post-article {
-    a {
-      @apply break-all;
-    }
   }
 
   ::-webkit-scrollbar {

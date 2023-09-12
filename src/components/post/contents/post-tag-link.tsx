@@ -16,7 +16,7 @@ export default function PostTagLink({ tag, onClick }: Props) {
       >
         <div
           key={tag}
-          className="py-1 px-3 rounded-2xl border-2 border-zinc-500 dark:text-zinc-300 hover:border-violet-500 hover:dark:border-violet-500 hover:bg-violet-500 hover:text-white text-zinc-800"
+          className="text-default py-1 px-3 rounded-2xl border-2 border-zinc-500 hover:border-violet-500 hover:dark:border-violet-500 hover:bg-violet-500 hover:text-white"
         >
           {tag}
         </div>
