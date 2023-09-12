@@ -1,22 +1,13 @@
 "use client";
-
 import { sortPostsByTitle } from "@/data/sort";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
-import { Post, PostByTitle } from "@/interface/posts.interface";
+import { PostByTitle } from "@/interface/posts.interface";
 import { MdSearch } from "@react-icons/all-files/md/MdSearch";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useMount } from "@/hooks/useMount";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 import { motion } from "framer-motion";
-
-const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
-  ssr: false
-});
-
-type Props = {
-  posts: Post[];
-};
+import { Props } from "./header-search";
 
 export default function HeaderSearch({ posts }: Props) {
   const [openModal, setOpenModal] = useState(false);
@@ -53,7 +44,7 @@ export default function HeaderSearch({ posts }: Props) {
         }}
       />
       {openModal && (
-        <HeaderSearchModal
+        <motion.HeaderSearchModal
           sortPosts={sortPosts}
           closeModal={() => closeModal()}
         />

@@ -4,7 +4,7 @@ import { getAllPostsOrderByDate, getCategories } from "@/data";
 import HeaderMore from "./header-more";
 import HeaderNav from "./header-nav";
 import HeaderTitle from "./header-title";
-import HeaderSearch from "./header-search";
+import HeaderSearch from "./HeaderSearch";
 
 type Props = {
   className?: string;

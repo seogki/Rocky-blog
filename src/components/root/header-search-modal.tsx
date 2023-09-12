@@ -16,6 +16,13 @@ type Props = {
   closeModal: () => void;
 };
 
+type DuplicatePost = {
+  [index: string]: {
+    num: number;
+    post: Post;
+  };
+};
+
 export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   const pathName = usePathname();
   const { isMount } = useMount();
@@ -37,29 +44,27 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
       if (!sortPosts) return;
 
       const filterIncludeKeyByUserInput = (text: string) => {
-        const keys = Object.keys(sortPosts!!);
-        return keys.filter((key) => key.match(new RegExp(text, "gi")));
+        return Object.keys(sortPosts!!).filter((key) =>
+          key.match(new RegExp(text, "gi"))
+        );
       };
 
+      const getPostsByKey = (key: string) => sortPosts[key]!!;
+
       const posts = list
-        .map((text) => filterIncludeKeyByUserInput(text))
+        .map(filterIncludeKeyByUserInput)
         .flat()
-        .map((value) => sortPosts[value])
+        .map(getPostsByKey)
         .flat();
 
-      const obj: any = {};
+      const obj: DuplicatePost = {};
 
       for (const post of posts) {
-        if (!post) continue;
-        if (!obj[post.slug]) {
-          obj[post.slug] = { num: 1, post: post };
-          continue;
-        }
-
-        obj[post.slug].num++;
+        const { slug } = post;
+        obj[slug] ? obj[slug].num++ : (obj[slug] = { num: 1, post: post });
       }
 
-      const rankList: Post[] = Object.keys(obj)
+      const rankList = Object.keys(obj)
         .sort((a, b) => obj[b].num - obj[a].num)
         .map((key) => obj[key].post);
 
