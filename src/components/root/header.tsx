@@ -6,13 +6,11 @@ import HeaderNav from "./header-nav";
 import HeaderTitle from "./header-title";
 import HeaderSearch from "./header-search";
 
-//헤더
-
-type Props = {
+type CacheProps = {
   className?: string;
 };
 
-export default async function MyHeader({ className = "" }: Props) {
+export default async function MyHeader({ className = "" }: CacheProps) {
   const categories = await getCategories();
   const posts = await getAllPostsOrderByDate();
 
