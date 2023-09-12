@@ -49,7 +49,6 @@ export default function HeaderSearch({ posts }: Props) {
       />
       {openModal && (
         <HeaderSearchModal
-          data-testid="header-search-modal"
           sortPosts={sortPosts}
           closeModal={() => setOpenModal(false)}
         ></HeaderSearchModal>

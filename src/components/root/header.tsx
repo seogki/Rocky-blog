@@ -6,6 +6,8 @@ import HeaderNav from "./header-nav";
 import HeaderTitle from "./header-title";
 import HeaderSearch from "./header-search";
 
+//헤더
+
 type Props = {
   className?: string;
 };
