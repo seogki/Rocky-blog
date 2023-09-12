@@ -1,0 +1,106 @@
+---
+title: Implement blog horizontal scrollbar animation in react by using Framer Motion
+date: "2023/09/12"
+description: This article implement horizontal scrollbar animation in react by using Framer Motion library
+tags: 'react,framer-motion,scrollbar-animation'
+published: true
+---
+
+## What is Framer Motion
+
+Framer Motion is very powerful library that handles various animations and gestures in react. 
+By wrapping **Motion** Component you are able to implement animations easily.
+
+You can control x, y, z transform, scroll event, layout, gestures and more..
+
+
+## Horizontal scrollbar animation
+
+Many Blogs has horizontal scrollbar on the top which acts as a vertical scrollbar. 
+I really liked this idea because vertical scrollbar wasn't that visible to me, 
+i had to look for vertical scrollbar to see how much contents are left
+
+I have searched for such kinds of scrollbar in google, and found out that framer motion can do such thing every easily
+
+## How to Implement
+
+### Install
+
+First you need to install **framer-motion** library
+
+```bash showLineNumbers
+npm install framer-motion
+yarn add framer-motion
+pnpm install framer-motion
+```
+
+### Scroll animations in Framer Motion
+
+There are two types of animations in framer-motion
+
+1. Track progress of scroll
+2. Act when contents enter scroll or leave scroll viewport
+
+We are going to handle first one 
+
+### Add useScroll, useSpring function to handle horizontal scrollbar
+
+By default **useScroll()** tracks page scroll
+
+```tsx:post-scroll.tsx showLineNumbers
+"use client";
+
+import { motion, useScroll, useSpring } from "framer-motion";
+
+export default function PostScroll() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1 bg-violet-500 origin-left"
+      style={{ scaleX }}
+    ></motion.div>
+  );
+}
+```
+
+**useScroll()** returns scrollYProgress variable, by using it we can show vertical scroll to horizontal scrollbar.
+Since we are going to animate scrollbar progress, we need to add one more function which is **useSpring()**.
+
+### So What is Spring?
+
+Spring is an animation that simulates spring physics for realistic motion works in default phyiscal values like x, y, scale and rotate.
+
+Just like the name of spring, it is easily movable and return to original shape after, 
+since it's affecting to force spring gets stretched and compressed.
+
+Now we know some basic concept of spring and why they named it as spring,
+let's find out some of options framer motion provide
+
+#### Some of Options in Spring
+
+- **Stiffness**: Sudden moventment of animation, higher the value more sudden movement will occur. default: 1000
+- **Damping**: Strengh of opposing force. default: 10
+- **restDelta**: When animation end, spring gets snapped to. default: 0.01
+
+You can find more options [here](https://www.framer.com/motion/transition/#spring)
+
+
+## Result
+
+As you can see everytime vertical scrollbar moves my purple horizontal scrollbar change as well.
+
+![horizontaScrollbarResult](/posts/REACT/framer-motion-scrollbar-animation-in-react/horizontal-scrollbar-result.png)
+
+
+
+Framer Motion is not only handles about scroll but also has many more animations we can check out!
+
+
+## Reference 🔗
+
+https://www.framer.com/motion<br/>

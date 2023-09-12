@@ -19,7 +19,7 @@ export function MdxCustomComponent() {
 
   const Strong = (props: any) => (
     <strong
-      className={`bg-zinc-200 dark:bg-zinc-700 rounded-lg px-3 py-1 my-1`}
+      className={`bg-zinc-200 dark:bg-zinc-800 rounded-lg px-3 py-1 my-1`}
       {...props}
     ></strong>
   );
