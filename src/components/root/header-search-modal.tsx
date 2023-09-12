@@ -90,7 +90,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
 
   return (
     <div
-      role="dialog"
+      data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
       <Card className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto">
