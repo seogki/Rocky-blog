@@ -26,13 +26,14 @@ test("should search button exists", async () => {
 });
 
 test("should open dialog when click search button", async () => {
-  const { findByRole } = renderWithProviders(<HeaderSearch posts={posts} />);
+  const { findByTestId } = renderWithProviders(<HeaderSearch posts={posts} />);
 
-  const searchBtn = await findByRole("button");
+  const searchBtn = await findByTestId("search-btn");
 
   fireEvent.click(searchBtn);
 
-  const modal = await findByRole("dialog");
+  const modal = await findByTestId("header-search-modal");
+  screen.debug();
 
   expect(modal).toBeInTheDocument();
 });
