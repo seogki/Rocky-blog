@@ -5,6 +5,7 @@ import PostCreateTime from "./contents/post-create-time";
 import PostReadMinute from "./contents/post-read-minute";
 import PostTags from "./contents/post-tags";
 import Link from "next/link";
+import PostScroll from "./contents/post-scroll";
 
 type Props = {
   category: string;
@@ -25,6 +26,7 @@ export default function PostItemArticle({
 
   return (
     <>
+      <PostScroll />
       <article
         className={`${className} post-article prose lg:prose-lg dark:prose-invert break-words max-w-max sm:mx-4 lg:prose-h1:text-4xl prose-h1:text-3xl`}
       >
