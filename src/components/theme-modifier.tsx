@@ -20,12 +20,12 @@ export default function ThemeModifier() {
     <>
       {currentTheme === "dark" ? (
         <FaMoon
-          className="hover:text-teal-600 dark:hover:text-teal-400 ml-2 cursor-pointer mr-3"
+          className="text-primary-hover ml-2 mr-3"
           onClick={() => setTheme("light")}
         />
       ) : (
         <FaSun
-          className="hover:text-teal-600 dark:hover:text-teal-400 ml-2 cursor-pointer mr-3"
+          className="text-primary-hover ml-2 mr-3"
           onClick={() => setTheme("dark")}
         />
       )}

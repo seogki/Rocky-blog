@@ -25,10 +25,7 @@ export default function HeaderMore() {
 
   return (
     <>
-      <MdMoreVert
-        className="cursor-pointer hover:text-teal-600 dark:hover:text-teal-400"
-        onClick={() => close()}
-      />
+      <MdMoreVert className="text-primary-hover" onClick={() => close()} />
       <Transition
         show={isMore}
         className="w-full h-[calc(100%-4rem)] fixed bottom-0 left-0 z-40 overflow-hidden"

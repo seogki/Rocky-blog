@@ -2,7 +2,6 @@ import useDebounce from "@/hooks/useDebounce";
 import { Post, PostByTitle } from "@/interface/posts.interface";
 import { useEffect, useRef, useState } from "react";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
-import Link from "next/link";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
@@ -10,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
+import PostTitleLink from "../post/contents/post-title-link";
 
 type Props = {
   sortPosts?: PostByTitle;
@@ -17,14 +17,16 @@ type Props = {
 };
 
 export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
+  const pathName = usePathname();
+  const { isMount } = useMount();
+
   const [value, setValue] = useState("");
   const [matchPosts, setMatchPosts] = useState<Post[]>([]);
   const [matchTags, setMatchTags] = useState<string[]>([]);
+  const [curPathName, setCurPathName] = useState(pathName);
+
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { isMount } = useMount();
-  const pathName = usePathname();
-  const [curPathName, setCurPathName] = useState(pathName);
 
   useEffect(() => {
     if (debouncedValue) {
@@ -96,8 +98,8 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         </div>
         <input
           ref={inputRef}
-          className="inline w-full py-2 px-4 outline bg-zinc-200 placeholder-zinc-500 dark:bg-zinc-700 hover:outline-violet-500 focus:outline-violet-500 outline-2 outline-transparent placeholder:italic text-base rounded-lg"
-          placeholder="please type anything..."
+          className="w-full py-2 px-4 outline bg-zinc-200 placeholder-zinc-500 dark:bg-zinc-700 hover:outline-violet-500 focus:outline-violet-500 outline-2 outline-zinc-400 dark:outline-zinc-600 placeholder:italic text-base rounded-lg"
+          placeholder="Search for anything..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -115,22 +117,16 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
               {matchPosts.map((post, idx) => (
                 <p
                   key={idx}
-                  className="px-2 py-1.5 font-normal dark:text-zinc-300 text-zinc-600 truncate cursor-pointer hover:bg-zinc-500/20 hover:dark:bg-zinc-500/50 rounded-2xl"
+                  className="py-1.5 font-medium text-default truncate cursor-pointer hover:text-black hover:dark:text-white"
                 >
-                  <Link
-                    href={{
-                      pathname: `/posts/${post?.category}/${post?.slug}`,
-                    }}
-                  >
-                    {post?.title}
-                  </Link>
+                  <PostTitleLink post={post} />
                 </p>
               ))}
             </SearchSection>
           )}
           {matchTags.length > 0 && (
             <SearchSection title={"Title Tags"}>
-              <div className="flex justify-start flex-wrap p-2">
+              <div className="flex justify-start flex-wrap py-1.5">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink key={idx} tag={tag} />
                 ))}
@@ -149,7 +145,7 @@ const SearchSectionTitle = ({ title }: { title: string }) => {
 
 const SearchSection = ({
   title,
-  children,
+  children
 }: {
   title: string;
   children: React.ReactNode;

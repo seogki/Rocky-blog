@@ -10,7 +10,7 @@ import { useMount } from "@/hooks/useMount";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
-  ssr: false,
+  ssr: false
 });
 
 type Props = {
@@ -46,7 +46,7 @@ export default function HeaderSearch({ posts }: Props) {
     <>
       <MdSearch
         role="button"
-        className="cursor-pointer ml-auto lg:ml-0 text-2xl mx-2 hover:text-teal-600 dark:hover:text-teal-400"
+        className="ml-auto lg:ml-0 text-2xl mx-2 text-primary-hover"
         onClick={() => {
           setOpenModal(true);
         }}

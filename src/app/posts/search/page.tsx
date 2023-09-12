@@ -1,7 +1,7 @@
-// import PostList from "@/components/post/post-list";
+import PostList from "@/components/post/post-list";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 type Props = {
   searchParams: {
@@ -25,10 +25,6 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
   };
 };
 
-const PostList = dynamic(() => import("@/components/post/post-list"), {
-  loading: () => <PostListSkeleton />
-});
-
 export default function PostSearchPage({ searchParams }: Props) {
   return (
     <>
@@ -36,7 +32,10 @@ export default function PostSearchPage({ searchParams }: Props) {
         <h1 className="text-2xl font-bold text-center my-2">
           {searchParams.tag && `TAG: ${searchParams.tag}`}
         </h1>
-        <PostList tag={searchParams.tag} />
+
+        <Suspense fallback={<PostListSkeleton />}>
+          <PostList tag={searchParams.tag} />
+        </Suspense>
       </section>
     </>
   );
