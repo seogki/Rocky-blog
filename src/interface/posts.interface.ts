@@ -25,11 +25,8 @@ export interface Category {
 }
 
 export interface PostByTitle {
-  [index: string]: Array<Post> | undefined;
-  // posts: Post[];
+  [index: string]: Post[] | undefined;
 }
-
-
 
 export type Toc = {
   href: string;

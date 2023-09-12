@@ -13,11 +13,11 @@ const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
   ssr: false
 });
 
-type Props = {
-  posts: Post[];
-};
+// type Props = {
+//   posts: Post[];
+// };
 
-export default function HeaderSearch({ posts }: Props) {
+export default function HeaderSearch({ posts }: { posts: Post[] }) {
   const [openModal, setOpenModal] = useState(false);
   const [sortPosts, setSortPosts] = useState<PostByTitle | undefined>(
     undefined
