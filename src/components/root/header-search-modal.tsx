@@ -1,6 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import { Post, PostByTitle } from "@/interface/posts.interface";
-import { useEffect, useRef, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useRef, useState } from "react";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
@@ -10,6 +10,8 @@ import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
+import { AnimatePresence, Reorder, motion } from "framer-motion";
+import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
 
 type Props = {
   sortPosts?: PostByTitle;
@@ -64,13 +66,13 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         obj[slug] ? obj[slug].num++ : (obj[slug] = { num: 1, post: post });
       }
 
-      const rankList = Object.keys(obj)
+      const ranks = Object.keys(obj)
         .sort((a, b) => obj[b].num - obj[a].num)
         .map((key) => obj[key].post);
 
-      const tags = toUniqueList(rankList.map((post) => post!.tags).flat());
+      const tags = toUniqueList(ranks.map((post) => post!.tags).flat());
 
-      setMatchPosts(rankList);
+      setMatchPosts(ranks);
       setMatchTags(tags);
     }
   }, [debouncedValue, sortPosts]);
@@ -89,11 +91,15 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   }, [pathName, closeModal, curPathName]);
 
   return (
-    <div
+    <motion.div
+      {...FadeTweenMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
-      <Card className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto">
+      <Card
+        {...ScaleTweenMotion}
+        className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto"
+      >
         <div className="flex flex-row justify-between align-center pb-2">
           <h2 className="text-base font-bold">Search</h2>
           <MdClose
@@ -120,12 +126,17 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
           {matchPosts.length > 0 && (
             <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
-                <p
-                  key={idx}
+                <motion.p
+                  {...EnterMotion}
+                  transition={{
+                    type: "tween",
+                    delay: 0.1 * idx
+                  }}
+                  key={post.title}
                   className="py-1.5 font-medium text-default truncate cursor-pointer hover:text-black hover:dark:text-white"
                 >
                   <PostTitleLink post={post} />
-                </p>
+                </motion.p>
               ))}
             </SearchSection>
           )}
@@ -133,14 +144,22 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
             <SearchSection title={"Title Tags"}>
               <div className="flex justify-start flex-wrap py-1.5">
                 {matchTags.map((tag, idx) => (
-                  <PostTagLink key={idx} tag={tag} />
+                  <PostTagLink
+                    {...EnterMotion}
+                    transition={{
+                      type: "tween",
+                      delay: 0.1 * idx
+                    }}
+                    key={tag}
+                    tag={tag}
+                  />
                 ))}
               </div>
             </SearchSection>
           )}
         </main>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 

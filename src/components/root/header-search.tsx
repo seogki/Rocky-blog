@@ -4,10 +4,11 @@ import { sortPostsByTitle } from "@/data/sort";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import { Post, PostByTitle } from "@/interface/posts.interface";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 import { useMount } from "@/hooks/useMount";
 import { MdSearch } from "@react-icons/all-files/md/MdSearch";
+import { AnimatePresence, motion } from "framer-motion";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
   ssr: false
@@ -30,7 +31,6 @@ export default function HeaderSearch({ posts }: Props) {
   useEffect(() => {
     const list = sortPostsByTitle(posts);
     setSortPosts(list);
-    console.debug(list, openModal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,12 +47,14 @@ export default function HeaderSearch({ posts }: Props) {
         className="ml-auto lg:ml-0 text-2xl mx-2 text-primary-hover"
         onClick={() => setOpenModal(true)}
       />
-      {openModal && (
-        <HeaderSearchModal
-          sortPosts={sortPosts}
-          closeModal={() => setOpenModal(false)}
-        ></HeaderSearchModal>
-      )}
+      <AnimatePresence initial={false}>
+        {openModal && (
+          <HeaderSearchModal
+            sortPosts={sortPosts}
+            closeModal={() => setOpenModal(false)}
+          ></HeaderSearchModal>
+        )}
+      </AnimatePresence>
     </>
   );
 }
