@@ -1,14 +1,22 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
+import React, { ForwardedRef } from "react";
 
 type Props = {
   tag: string;
   onClick?: React.MouseEventHandler;
 };
 
-export default function PostTagLink({ tag, onClick }: Props) {
+function PostTagLink(
+  { tag, onClick }: Props,
+  ref?: ForwardedRef<HTMLAnchorElement>
+) {
   return (
     <>
       <Link
+        ref={ref}
         key={tag}
         href={{ pathname: `/posts/search`, query: { tag } }}
         className="mx-1 my-1 first-of-type:ml-0 last-of-type:mr-0"
@@ -24,3 +32,5 @@ export default function PostTagLink({ tag, onClick }: Props) {
     </>
   );
 }
+
+export default motion(React.forwardRef<HTMLAnchorElement, Props>(PostTagLink));

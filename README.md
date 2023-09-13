@@ -14,6 +14,7 @@
 - react-testing-library (for unit test)
 - headlessui/react (for simple transition)
 - next-theme (for dark mode)
+- framer-motion
 - scss
 
 ---

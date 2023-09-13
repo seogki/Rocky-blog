@@ -9,7 +9,6 @@ import { ReduxProvider } from "@/redux/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export default function RootLayout({
   children
 }: {

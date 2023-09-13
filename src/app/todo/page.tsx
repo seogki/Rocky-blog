@@ -34,7 +34,9 @@ export default function TodoHomePage() {
         "When building my nextjs i expect to see one rehype-prism-plus bundle share between components",
       error:
         "I see two rehype-prism-plus bundled in two different js files of server side from @next/bundle-analyzer. I need to find out whether server side does not share components or i have implemented wrongly",
-      done: false
+      done: true,
+      result:
+        "Since each page has own html it's right to have multiple packages"
     },
     {
       expectation:
