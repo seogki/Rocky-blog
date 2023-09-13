@@ -35,13 +35,13 @@ export default function AboutMySelf() {
           <ul className="list-disc">
             <motion.li className="indent-2 pb-4">
               I am South Korean Front-End Engineer, who like to improve skills
-              progressively. It's been{" "}
+              progressively. It&apos;s been{" "}
               <span className="text-primary text-lg">six</span> years since i
               started to be a developer and I love to learn different languages
             </motion.li>
             <motion.li className="indent-2 py-4">
               I have started as Android developer, but after learning web
-              frontend, i decided to focus of web development skills.
+              frontend, i decided to focus on web development skills.
             </motion.li>
             <motion.li className="indent-2 py-4">
               Mainly developing Vue.js with Electron, and still learning about
