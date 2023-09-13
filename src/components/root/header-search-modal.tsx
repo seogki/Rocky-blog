@@ -109,7 +109,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
         </div>
         <input
           ref={inputRef}
-          className="w-full py-2 px-4 outline bg-zinc-200 placeholder-zinc-500 dark:bg-zinc-700 hover:outline-violet-500 focus:outline-violet-500 outline-2 outline-zinc-400 dark:outline-zinc-600 placeholder:italic text-base rounded-lg"
+          className="w-full py-2 px-4 outline bg-zinc-100 placeholder-zinc-500 dark:bg-zinc-700 hover:outline-violet-500 focus:outline-violet-500 outline-2 outline-zinc-400 dark:outline-zinc-600 placeholder:italic text-base rounded-lg"
           placeholder="Search for anything..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -130,10 +130,10 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
                   {...EnterMotion}
                   transition={{
                     type: "tween",
-                    delay: 0.1 * idx
+                    delay: 0.1 * idx,
                   }}
                   key={post.title}
-                  className="py-1.5 font-medium text-default truncate cursor-pointer hover:text-black hover:dark:text-white"
+                  className="py-1.5 font-medium text-default truncate cursor-pointer hover:text-black hover:dark:text-white hover:font-semibold"
                 >
                   <PostTitleLink post={post} />
                 </motion.p>
@@ -148,7 +148,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
                     {...EnterMotion}
                     transition={{
                       type: "tween",
-                      delay: 0.1 * idx
+                      delay: 0.1 * idx,
                     }}
                     key={tag}
                     tag={tag}
@@ -169,7 +169,7 @@ const SearchSectionTitle = ({ title }: { title: string }) => {
 
 const SearchSection = ({
   title,
-  children
+  children,
 }: {
   title: string;
   children: React.ReactNode;

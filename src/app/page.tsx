@@ -13,8 +13,8 @@ export const generateMetadata = (): Metadata => {
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
     openGraph: {
       title: `Rocky Blog - Home`,
-      description: `This is my Rocky Blog Home Page with recent posts and tags`
-    }
+      description: `This is my Rocky Blog Home Page with recent posts and tags`,
+    },
   };
 };
 
@@ -47,7 +47,7 @@ const MainContainer = async () => {
             >
               <div className="text-base py-1.5 flex flex-row flex-wrap w-full">
                 <span className="grow-0">[{post.category}]</span>
-                <p className="px-2 text-default truncate mx-2 flex-1 hover:text-black hover:dark:text-white">
+                <p className="px-2 text-default truncate mx-2 flex-1 hover:text-black hover:dark:text-white text-base hover:font-semibold">
                   {post.title}
                 </p>
               </div>

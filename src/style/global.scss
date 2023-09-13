@@ -10,11 +10,11 @@ textarea {
 
 @layer base {
   body {
-    @apply dark:bg-zinc-900 bg-white;
+    @apply dark:bg-zinc-900 bg-zinc-100;
   }
 
   header {
-    @apply dark:bg-zinc-800/60 bg-white/60;
+    @apply dark:bg-zinc-800/60 bg-zinc-100/60;
   }
 
   ::-webkit-scrollbar {
