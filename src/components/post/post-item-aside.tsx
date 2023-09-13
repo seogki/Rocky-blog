@@ -12,7 +12,7 @@ export default function PostItemAside({ toc }: Props) {
   const pathname = usePathname();
   return (
     <>
-      <aside className="basis-3/12 hidden lg:block ml-4 border-l-2 border-zinc-100 dark:border-zinc-800">
+      <aside className="basis-3/12 hidden lg:block ml-4 border-l-2 border-zinc-200 dark:border-zinc-800">
         <div className="fixed mt-16 mr-4 drop-shadow-md">
           <section className="text-default max-w-[250px] max-h-[350px] overscroll-contain rounded-b-lg py-2 overflow-auto px-4">
             <h2 className="font-bold text-base border-b-2 border-zinc-200 dark:border-zinc-700 pb-1 w-fit">
