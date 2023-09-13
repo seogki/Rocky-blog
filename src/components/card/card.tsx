@@ -13,7 +13,7 @@ function Card(
   return (
     <div
       ref={ref}
-      className={`${className} rounded-lg dark:bg-zinc-800 bg-white`}
+      className={`${className} rounded-lg dark:bg-zinc-800 bg-zinc-200`}
     >
       {children}
     </div>

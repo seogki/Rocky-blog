@@ -5,11 +5,11 @@ export default function PostListSkeleton() {
 
   return (
     <>
-      <Skeleton className="px-2 text-left mt-4 w-3/12 h-2" />
+      <Skeleton className="px-2 text-left mt-4 w-3/12 h-4" />
       {posts.map((post) => (
         <div
           key={post}
-          className="p-4 my-6 flex flex-col justify-between align-middle px-2"
+          className="p-4 first:p-0 my-6 flex flex-col justify-between align-middle px-2"
         >
           <Skeleton className="h-4 mb-2 w-full"></Skeleton>
           <Skeleton className="h-4 w-2/3 mt-0 sm:mt-2"></Skeleton>
