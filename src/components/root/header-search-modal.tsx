@@ -92,12 +92,12 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
 
   return (
     <motion.div
-      {...FadeTweenMotion}
+      // {...FadeTweenMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
       <Card
-        {...ScaleTweenMotion}
+        {...FadeTweenMotion}
         className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto"
       >
         <div className="flex flex-row justify-between align-center pb-2">
@@ -163,10 +163,6 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   );
 }
 
-const SearchSectionTitle = ({ title }: { title: string }) => {
-  return <h4 className="text-sm pb-2 font-normal font-semibold">{title}</h4>;
-};
-
 const SearchSection = ({
   title,
   children,
@@ -176,7 +172,7 @@ const SearchSection = ({
 }) => {
   return (
     <CardInner className="my-4 last:mb-0 first:mt-0 text-sm">
-      <SearchSectionTitle title={title} />
+      <h4 className="text-sm pb-2 font-normal font-semibold">{title}</h4>
       {children}
     </CardInner>
   );
