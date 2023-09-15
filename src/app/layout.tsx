@@ -18,6 +18,9 @@ export const metadata = {
       name: "Seogki Hong"
     }
   ],
+  openGraph: {
+    images: "/og.jpg"
+  },
   creator: "Seogki Hong",
   publisher: "Seogki Hong"
 };
