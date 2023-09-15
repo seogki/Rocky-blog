@@ -5,13 +5,17 @@ import PostCreateTime from "./contents/post-create-time";
 import PostReadMinute from "./contents/post-read-minute";
 import PostTags from "./contents/post-tags";
 import Link from "next/link";
-import PostScroll from "./contents/post-scroll";
+import dynamic from "next/dynamic";
 
 type Props = {
   category: string;
   obj: PostIndex | undefined;
   className?: string;
 };
+
+const PostScroll = dynamic(() => import("./contents/post-scroll"), {
+  ssr: false
+});
 
 export default function PostItemArticle({
   category,
