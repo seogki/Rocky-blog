@@ -1,5 +1,7 @@
 import PostList from "@/components/post/post-list";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
+import { getAllPostsOrderByDate } from "@/data";
+import { toUniqueList } from "@/utils/list";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -16,18 +18,27 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
     title: `Rocky Blog - Posts Search List [${tag}]`,
     description: `This is my Rocky Blog Search List of ${tag}`,
     alternates: {
-      canonical: tag ?? `${baseUrl}/posts/?tag=${tag}`
+      canonical: tag ?? `${baseUrl}/posts/search?tag=${tag}`
     },
     openGraph: {
       title: `Rocky Blog - Posts Search List [${tag}]`,
       description: `This is my Rocky Blog Search List of ${tag}`,
       siteName: "Rocky Blog",
       type: "article",
-      url: `${baseUrl}/posts/?tag=${tag}`,
+      url: `${baseUrl}/posts/search?tag=${tag}`,
       images: ["/og.jpg"]
     }
   };
 };
+
+export async function generateStaticParams() {
+  const posts = await getAllPostsOrderByDate(5);
+  const tags = toUniqueList(posts.map((post) => post.tags).flat());
+
+  return tags.map((tag) => ({
+    tag: tag
+  }));
+}
 
 export default function PostSearchPage({ searchParams }: Props) {
   return (
