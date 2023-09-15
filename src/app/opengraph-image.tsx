@@ -4,7 +4,7 @@ import { ImageResponse } from "next/server";
 //   runtime: "edge"
 // };
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export async function Image() {
   return new ImageResponse(
