@@ -24,7 +24,7 @@ Error: could not find react-redux context value; please ensure the component is 
 
 ### Redux general advice
 
-- Prefer writing intergration tests with everything work together, and use real redux logic
+- Prefer writing integration tests with everything work together, and use real redux logic
 - *If* needed, basic test as pure function such as complex reducers or selectors, still most of detail can be covered by integration tests
 - **Do not try to mock selector functions or react-redux hooks!** They say mocking imports from libraries is fragile, and doesn't give you confidence that your actual app code is working
 - Recommend using **React Testing Library (RTL)** to test react components
@@ -102,9 +102,9 @@ export function renderWithProviders(
 }
 ```
 
-### Benefit of seperate store creation
+### Benefit of separate store creation
 
-- Create a new Redux store everytime, and **PreloadedState** value that can be used for an intial value
+- Create a new Redux store every time, and **PreloadedState** value that can be used for an initial value
 - Still can pass already-created Redux store instance
 - Pass additional options to RTL's original render function 
 - Automatically wrap the component being tested with a `<Provider store={store}></Provider>`
