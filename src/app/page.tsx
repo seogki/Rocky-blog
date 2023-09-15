@@ -12,7 +12,9 @@ export const metadata = {
   description: `This is my Rocky Blog Home Page with recent posts and tags`,
   openGraph: {
     title: `Rocky Blog - Home`,
-    description: `This is my Rocky Blog Home Page with recent posts and tags`
+    description: `This is my Rocky Blog Home Page with recent posts and tags`,
+    siteName: "Rocky Blog",
+    images: ["/og.jpg"]
   }
 };
 
