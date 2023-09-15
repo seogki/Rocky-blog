@@ -212,6 +212,8 @@ export async function Image({ params }: Props) {
 }
 ```
 
+> Since you only need to use imageResponse in **edge** runtime, you cannot use default node modules such as **node:fs**, **node:stream** and more
+
 Create Image function and you can get params infomration of dynamic routes.
 From params i created simple open graph image with category and slug (this will be my title name).
 This **opengraph-image.tsx** file will be generated at build time or dynamically at request time, which automatically added in **head**.

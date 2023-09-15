@@ -38,7 +38,11 @@ export const generateMetadata = async ({
     description: post.description,
     openGraph: {
       title: `[${category}] ${post.title}`,
-      description: post.description
+      description: post.description,
+      siteName: "Rocky Blog",
+      type: "article",
+      url: `https://www.rockyblog.dev/posts/${category}/${post.slug}`,
+      images: ["/og.jpg"]
     }
   };
 };

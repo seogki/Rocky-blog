@@ -2,13 +2,13 @@ import AboutMySelf from "@/components/about-my-self";
 import { Metadata, NextPage } from "next";
 import Image from "next/image";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Rocky Blog - About",
   description: "This is my Rocky Blog About Page to describe myself",
   openGraph: {
     title: "Rocky Blog - About",
-    description: "This is my Rocky Blog About Page to describe myself",
-  },
+    description: "This is my Rocky Blog About Page to describe myself"
+  }
 };
 
 const About: NextPage = () => {

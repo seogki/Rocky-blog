@@ -18,7 +18,11 @@ export const generateMetadata = ({ params }: Props): Metadata => {
     description: `This is my Rocky Blog ${category} Posts Page`,
     openGraph: {
       title: `Rocky Blog - Posts [${category}]`,
-      description: `This is my Rocky Blog ${category} Posts Page`
+      description: `This is my Rocky Blog ${category} Posts Page`,
+      siteName: "Rocky Blog",
+      type: "article",
+      url: `https://www.rockyblog.dev/posts/${category}`,
+      images: ["/og.jpg"]
     }
   };
 };

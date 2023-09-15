@@ -8,7 +8,11 @@ export const metadata: Metadata = {
   description: `This is my Rocky Blog Recent Posts Page`,
   openGraph: {
     title: `Rocky Blog - Posts [RECENT]`,
-    description: `This is my Rocky Blog Recent Posts Page`
+    description: `This is my Rocky Blog Recent Posts Page`,
+    siteName: "Rocky Blog",
+    type: "article",
+    url: "https://www.rockyblog.dev/posts",
+    images: ["/og.jpg"]
   }
 };
 
