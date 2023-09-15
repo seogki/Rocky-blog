@@ -15,7 +15,6 @@ export const generateMetadata = (): Metadata => {
       title: `Rocky Blog - Home`,
       description: `This is my Rocky Blog Home Page with recent posts and tags`
     },
-    metadataBase: new URL("https://rockyblog.dev")
   };
 };
 
