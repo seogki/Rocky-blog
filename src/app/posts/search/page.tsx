@@ -19,7 +19,7 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 
   const baseUrl = "https://www.rockyblog.dev";
 
-  const obj = {
+  return {
     title: `Rocky Blog - Posts Search List [${tag}]`,
     description: `This is my Rocky Blog Search List of ${tag}`,
     alternates: {
@@ -34,8 +34,6 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
       images: ["/og.jpg"]
     }
   };
-
-  return obj;
 };
 
 export default function PostSearchPage({ searchParams }: Props) {

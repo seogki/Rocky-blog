@@ -10,7 +10,13 @@ import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
-import { AnimatePresence, Reorder, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  LazyMotion,
+  Reorder,
+  domAnimation,
+  motion
+} from "framer-motion";
 import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
 
 type Props = {

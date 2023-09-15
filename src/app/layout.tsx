@@ -30,7 +30,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <GoogleAnalytics />
         <div className="w-full h-full">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReduxProvider>
@@ -42,6 +41,7 @@ export default function RootLayout({
             </ReduxProvider>
           </ThemeProvider>
         </div>
+        <GoogleAnalytics />
         {/* analytics for vercel */}
         <Analytics />
       </body>
