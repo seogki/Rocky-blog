@@ -13,8 +13,9 @@ export const generateMetadata = (): Metadata => {
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
     openGraph: {
       title: `Rocky Blog - Home`,
-      description: `This is my Rocky Blog Home Page with recent posts and tags`,
+      description: `This is my Rocky Blog Home Page with recent posts and tags`
     },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!!)
   };
 };
 
