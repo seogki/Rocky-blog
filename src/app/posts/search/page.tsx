@@ -3,6 +3,7 @@ import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { getAllPostsOrderByDate } from "@/data";
 import { toUniqueList } from "@/utils/list";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {
@@ -13,12 +14,16 @@ type Props = {
 
 export const generateMetadata = ({ searchParams }: Props): Metadata => {
   const { tag } = searchParams;
+
+  if (!tag) return notFound();
+
   const baseUrl = "https://www.rockyblog.dev";
-  return {
+
+  const obj = {
     title: `Rocky Blog - Posts Search List [${tag}]`,
     description: `This is my Rocky Blog Search List of ${tag}`,
     alternates: {
-      canonical: tag ?? `${baseUrl}/posts/search?tag=${tag}`
+      canonical: `${baseUrl}/posts/search?tag=${tag}`
     },
     openGraph: {
       title: `Rocky Blog - Posts Search List [${tag}]`,
@@ -29,18 +34,13 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
       images: ["/og.jpg"]
     }
   };
+
+  return obj;
 };
 
-export async function generateStaticParams() {
-  const posts = await getAllPostsOrderByDate(5);
-  const tags = toUniqueList(posts.map((post) => post.tags).flat());
-
-  return tags.map((tag) => ({
-    tag: tag
-  }));
-}
-
 export default function PostSearchPage({ searchParams }: Props) {
+  if (!searchParams.tag) return notFound();
+
   return (
     <>
       <section className="w-full sm:w-2/3 max-w-screen-md mx-auto sm:mr-auto sm:ml-4 flex-1">
