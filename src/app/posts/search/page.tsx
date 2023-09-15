@@ -1,5 +1,7 @@
 import PostList from "@/components/post/post-list";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
+import { getAllPostsOrderByDate } from "@/data";
+import { toUniqueList } from "@/utils/list";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -28,6 +30,15 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
     }
   };
 };
+
+export async function generateStaticParams() {
+  const posts = await getAllPostsOrderByDate(5);
+  const tags = toUniqueList(posts.map((post) => post.tags).flat());
+
+  return tags.map((tag) => ({
+    tag: tag
+  }));
+}
 
 export default function PostSearchPage({ searchParams }: Props) {
   return (
