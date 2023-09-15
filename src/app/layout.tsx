@@ -9,6 +9,10 @@ import { ReduxProvider } from "@/redux/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  metadataBase: new URL("https://www.rockyblog.dev")
+};
+
 export default function RootLayout({
   children
 }: {
