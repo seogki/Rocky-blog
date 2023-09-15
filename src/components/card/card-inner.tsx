@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+// "use client";
 import React, { ForwardedRef } from "react";
 
 type Props = {
@@ -8,13 +6,9 @@ type Props = {
   className?: string;
 };
 
-function CardInner(
-  { className = "", children }: Props,
-  ref?: ForwardedRef<HTMLDivElement>
-) {
+function CardInner({ className = "", children }: Props) {
   return (
     <section
-      ref={ref}
       className={`${className} bg-zinc-200 dark:bg-zinc-700 border-2 border-zinc-300 dark:border-zinc-600 rounded-lg p-4`}
     >
       {children}
@@ -22,4 +16,6 @@ function CardInner(
   );
 }
 
-export default motion(React.forwardRef<HTMLDivElement, Props>(CardInner));
+export default CardInner;
+
+// export default motion(React.forwardRef<HTMLDivElement, Props>(CardInner));
