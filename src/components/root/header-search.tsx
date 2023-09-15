@@ -50,6 +50,7 @@ export default function HeaderSearch({ posts }: Props) {
       <AnimatePresence initial={false}>
         {openModal && (
           <HeaderSearchModal
+            data-testid="modal"
             sortPosts={sortPosts}
             closeModal={() => setOpenModal(false)}
           ></HeaderSearchModal>

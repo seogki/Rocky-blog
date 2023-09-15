@@ -1,4 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from "@testing-library/react";
 import HeaderSearch from "./header-search";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
@@ -30,9 +36,11 @@ test("should open dialog when click search button", async () => {
 
   const searchBtn = await findByTestId("search-btn");
 
-  fireEvent.click(searchBtn);
-
-  // const modal = await findByTestId("header-search-modal");
-
-  // expect(modal).toBeInTheDocument();
+  act(() => {
+    fireEvent.click(searchBtn);
+  });
+  await waitFor(async () => {
+    const modal = await findByTestId("header-search-modal");
+    expect(modal).toBeInTheDocument();
+  });
 });
