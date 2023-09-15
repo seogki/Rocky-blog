@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+// "use client";
 import React, { ForwardedRef } from "react";
 
 type Props = {
@@ -22,4 +20,6 @@ function CardInner(
   );
 }
 
-export default motion(React.forwardRef<HTMLDivElement, Props>(CardInner));
+export default CardInner;
+
+// export default motion(React.forwardRef<HTMLDivElement, Props>(CardInner));
