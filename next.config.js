@@ -5,6 +5,9 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     jest: true
+  },
+  images: {
+    unoptimized: false
   }
 };
 

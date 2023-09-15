@@ -8,7 +8,7 @@ import { forwardRef, useEffect, useState } from "react";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 import { useMount } from "@/hooks/useMount";
 import { MdSearch } from "@react-icons/all-files/md/MdSearch";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
   ssr: false

@@ -1,5 +1,4 @@
 import { getAllPostsOrderByDate } from "@/data";
-import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import HomeSkeleton from "@/components/skeleton/home-skeleton";
