@@ -9,6 +9,19 @@ import { ReduxProvider } from "@/redux/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  metadataBase: process.env.NEXT_PUBLIC_BASE_URL
+    ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
+    : null,
+  authors: [
+    {
+      name: "Seogki Hong"
+    }
+  ],
+  creator: "Seogki Hong",
+  publisher: "Seogki Hong"
+};
+
 export default function RootLayout({
   children
 }: {
