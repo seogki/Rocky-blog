@@ -20,7 +20,11 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
     },
     openGraph: {
       title: `Rocky Blog - Posts Search List [${tag}]`,
-      description: `This is my Rocky Blog Search List of ${tag}`
+      description: `This is my Rocky Blog Search List of ${tag}`,
+      siteName: "Rocky Blog",
+      type: "article",
+      url: `${baseUrl}/posts/?tag=${tag}`,
+      images: ["/og.jpg"]
     }
   };
 };

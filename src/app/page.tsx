@@ -14,6 +14,8 @@ export const metadata = {
     title: `Rocky Blog - Home`,
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
     siteName: "Rocky Blog",
+    type: "article",
+    url: "https://www.rockyblog.dev",
     images: ["/og.jpg"]
   }
 };
