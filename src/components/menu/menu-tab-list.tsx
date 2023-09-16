@@ -9,7 +9,6 @@ export default function MenuTabList() {
   const list = [
     { name: "Posts", link: "/posts" },
     { name: "Todo", link: "/todo" },
-    { name: "About", link: "/about" }
   ];
 
   const closeAllOpener = () => {
