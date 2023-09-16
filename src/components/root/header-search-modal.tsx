@@ -10,7 +10,13 @@ import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
-import { AnimatePresence, Reorder, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  LazyMotion,
+  Reorder,
+  domAnimation,
+  motion
+} from "framer-motion";
 import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
 
 type Props = {
@@ -130,7 +136,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
                   {...EnterMotion}
                   transition={{
                     type: "tween",
-                    delay: 0.1 * idx,
+                    delay: 0.1 * idx
                   }}
                   key={post.title}
                   className="py-1.5 font-medium text-default truncate cursor-pointer hover:text-black hover:dark:text-white hover:font-semibold"
@@ -148,7 +154,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
                     {...EnterMotion}
                     transition={{
                       type: "tween",
-                      delay: 0.1 * idx,
+                      delay: 0.1 * idx
                     }}
                     key={tag}
                     tag={tag}
@@ -165,7 +171,7 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
 
 const SearchSection = ({
   title,
-  children,
+  children
 }: {
   title: string;
   children: React.ReactNode;

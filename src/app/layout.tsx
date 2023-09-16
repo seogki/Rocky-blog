@@ -9,6 +9,19 @@ import { ReduxProvider } from "@/redux/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  metadataBase: process.env.NEXT_PUBLIC_BASE_URL
+    ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
+    : null,
+  authors: [
+    {
+      name: "Seogki Hong"
+    }
+  ],
+  creator: "Seogki Hong",
+  publisher: "Seogki Hong"
+};
+
 export default function RootLayout({
   children
 }: {
@@ -17,7 +30,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <GoogleAnalytics />
         <div className="w-full h-full">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReduxProvider>
@@ -29,6 +41,7 @@ export default function RootLayout({
             </ReduxProvider>
           </ThemeProvider>
         </div>
+        <GoogleAnalytics />
         {/* analytics for vercel */}
         <Analytics />
       </body>

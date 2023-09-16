@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   description: "This is my Rocky Blog Todo Page of what i need to do",
   openGraph: {
     title: "Rocky Blog - Todo",
-    description: "This is my Rocky Blog Todo Page of what i need to do"
+    description: "This is my Rocky Blog Todo Page of what i need to do",
+    siteName: "Rocky Blog",
+    type: "article",
+    url: "https://www.rockyblog.dev/todo",
+    images: ["/og.jpg"]
   }
 };
 

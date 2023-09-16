@@ -1,5 +1,4 @@
 import { getAllPostsOrderByDate } from "@/data";
-import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import HomeSkeleton from "@/components/skeleton/home-skeleton";
@@ -7,15 +6,17 @@ import PostTagLink from "@/components/post/contents/post-tag-link";
 import { toUniqueList } from "@/utils/list";
 import CardInner from "@/components/card/card-inner";
 
-export const generateMetadata = (): Metadata => {
-  return {
+export const metadata = {
+  title: `Rocky Blog - Home`,
+  description: `This is my Rocky Blog Home Page with recent posts and tags`,
+  openGraph: {
     title: `Rocky Blog - Home`,
     description: `This is my Rocky Blog Home Page with recent posts and tags`,
-    openGraph: {
-      title: `Rocky Blog - Home`,
-      description: `This is my Rocky Blog Home Page with recent posts and tags`,
-    },
-  };
+    siteName: "Rocky Blog",
+    type: "article",
+    url: "https://www.rockyblog.dev",
+    images: ["/og.jpg"]
+  }
 };
 
 export default function Home() {

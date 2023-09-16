@@ -5,7 +5,7 @@ import { stringToDate } from "@/utils/date";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.rockyblog.dev";
 
-  const sitemapList = [
+  const sitemapList: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
