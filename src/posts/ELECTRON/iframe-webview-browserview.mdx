@@ -1,0 +1,98 @@
+---
+title: Iframe, webview and browserView in electron
+date: "2023/09/18"
+description: describe about basic concept iframe, webview and browserview in electron. and which one can makes your app better
+tags: 'electron,iframe,webview,browserview' 
+published: true
+---
+
+
+In Electron there are three ways to embed web link in app.
+
+1. Iframe 
+2. Webview
+3. BrowserView
+
+
+Let's find out one by one
+
+
+## Iframe 
+
+Iframe is a HTML element specified an inline frame, it embed another HTML page into current one,
+and you can also pass data between iframe opened document to your window. 
+
+Global properties are given to manipulate iframe contents such as **allowfullscreen**, **allowpaymentrequest**, **referrerpolicy**, **sandbox** and more.
+
+- allowfullscreen: it allows fullscreen
+- allowpaymentrequest: it allow payment api
+- referrerpolicy: specifies referrer information to send when fetching iframe
+- sandbox: enable restrictions for contents in iframe
+
+
+```html showLineNumbers
+<iframe width=500px height=500px src="https://www.google.com">
+```
+
+## Webview
+
+> Webview is currently not recommended by Electron Team, because chrome.webviewTag is deperecated Use it as own risk!
+
+Webview tag is based on **Chromium's webview** runs in separate process than your app 
+which is similar to iframe but has more options to customize. 
+Your app can control appearance of the **webview** and add interaction to it.
+
+For example you can add css to it's contents, 
+handle navigation and excute browser event such as undo, redo, cut, copy, print, zoom and etc. More information can be found in [Electron Webview](https://www.electronjs.org/docs/latest/api/webview-tag#webviewgeturl)
+
+
+```html showLineNumbers
+<webview width=500px height=500px src="https://www.google.com"></webview>
+```
+
+
+## BrowserView
+
+**BrowserView** is also one of the options to embed web link inside electron, 
+unlike iframe and webview, you have to define in main process.
+
+This view runs on like a child window of current **BrowserWindow**, it positioned relative to parent window.
+
+Electron Team says this is alternative to **webview** tag, 
+but it can be right and can be wrong, the main difference between **BrowserView** and **webview** is whether to handle web contents on top of the app, or inside html tag.
+
+This can be alternative if you only want manipulate options just like webivew, but this cannot be alternative if you want to handle inside HTML tag, than the alternative will be **iframe** only.
+
+
+```ts:main-process.ts showLineNumbers
+// In the main process.
+const { app, BrowserView, BrowserWindow } = require('electron')
+
+app.whenReady().then(() => {
+  const win = new BrowserWindow({ width: 800, height: 600 })
+
+  const view = new BrowserView()
+  win.setBrowserView(view)
+  view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
+  view.webContents.loadURL('https://electronjs.org')
+})
+```
+
+You need to add into main process, because it only work inside main process, 
+therefore you will have to pass initial options by using **ipcRenderer** function. More options can found in [Electron BrowserView](https://www.electronjs.org/docs/latest/api/browser-view)
+
+
+So now we learned about basic usage about iframe, webview and browserView.
+
+It's always better to understand the concept before implementing web link, some apps only need to show web link, but the other apps may need to handle navigation inside web link.
+That's why **reading documents** is always important before you actually begin write code. 
+
+
+
+
+## Reference 
+
+https://www.w3schools.com/tags/tag_iframe.ASP<br/>
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attributes<br/>
+https://www.electronjs.org/docs/latest/api/webview-tag#webviewgeturl<br/>
+https://www.electronjs.org/docs/latest/api/browser-view<br/>
