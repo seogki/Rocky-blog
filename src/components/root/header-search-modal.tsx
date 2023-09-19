@@ -1,5 +1,5 @@
 import useDebounce from "@/hooks/useDebounce";
-import { Post, PostByTitle } from "@/interface/posts.interface";
+import { Post, PairedPostsByTitle } from "@/interface/posts.interface";
 import {
   ForwardedRef,
   forwardRef,
@@ -27,7 +27,7 @@ import {
 import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
 
 type Props = {
-  sortPosts?: PostByTitle;
+  postsPairedByTitle?: PairedPostsByTitle;
   closeModal: () => void;
 };
 
@@ -38,7 +38,10 @@ type DuplicatePost = {
   };
 };
 
-export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
+export default function HeaderSearchModal({
+  postsPairedByTitle,
+  closeModal
+}: Props) {
   const pathName = usePathname();
   const { isMount } = useMount();
 
@@ -52,22 +55,22 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
 
   const getPostsByKey = useCallback(
     (key: string) => {
-      return sortPosts!![key]!!;
+      return postsPairedByTitle!![key]!!;
     },
-    [sortPosts]
+    [postsPairedByTitle]
   );
 
   const filterIncludeKeyByUserInput = useCallback(
     (text: string) => {
-      return Object.keys(sortPosts!!).filter((key) =>
+      return Object.keys(postsPairedByTitle!!).filter((key) =>
         key.match(new RegExp(text, "gi"))
       );
     },
-    [sortPosts]
+    [postsPairedByTitle]
   );
 
   useEffect(() => {
-    if (!sortPosts || !debouncedValue) return;
+    if (!postsPairedByTitle || !debouncedValue) return;
 
     const inputSplitList = toUniqueList(
       debouncedValue.trim().toLocaleLowerCase().split(" ")
@@ -94,7 +97,12 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
 
     setMatchPosts(postsByRank);
     setMatchTags(tags);
-  }, [debouncedValue, sortPosts, getPostsByKey, filterIncludeKeyByUserInput]);
+  }, [
+    debouncedValue,
+    postsPairedByTitle,
+    getPostsByKey,
+    filterIncludeKeyByUserInput
+  ]);
 
   useEffect(() => {
     if (isMount && inputRef.current) {

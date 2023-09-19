@@ -1,8 +1,8 @@
 "use client";
 
-import { sortPostsByTitle } from "@/data/sort";
+import { splitPostsByTitle } from "@/data/split";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
-import { Post, PostByTitle } from "@/interface/posts.interface";
+import { Post } from "@/interface/posts.interface";
 import dynamic from "next/dynamic";
 import { forwardRef, useEffect, useMemo, useState } from "react";
 import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
@@ -21,8 +21,8 @@ type Props = {
 export default function HeaderSearch({ posts }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
-  const list = useMemo(() => {
-    return sortPostsByTitle(posts);
+  const postsPairedByTitle = useMemo(() => {
+    return splitPostsByTitle(posts);
   }, [posts]);
 
   useToggleScrollbar(openModal);
@@ -46,7 +46,7 @@ export default function HeaderSearch({ posts }: Props) {
         {openModal && (
           <HeaderSearchModal
             data-testid="modal"
-            sortPosts={list}
+            postsPairedByTitle={postsPairedByTitle}
             closeModal={() => setOpenModal(false)}
           ></HeaderSearchModal>
         )}

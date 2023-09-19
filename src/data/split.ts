@@ -1,9 +1,9 @@
-import { Post, PostByTitle } from "@/interface/posts.interface";
+import { Post, PairedPostsByTitle } from "@/interface/posts.interface";
 import { toUniqueList } from "@/utils/list";
 import { isAlphaNumeric } from "@/utils/regex";
 
-export const sortPostsByTitle = (posts: Post[]) => {
-  const obj: PostByTitle = {};
+export const splitPostsByTitle = (posts: Post[]) => {
+  const obj: PairedPostsByTitle = {};
 
   posts.forEach((post) => {
     const spList = post.title
