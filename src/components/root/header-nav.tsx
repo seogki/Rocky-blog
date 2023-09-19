@@ -10,6 +10,7 @@ import {
 } from "@/redux/features/headerSlice";
 import NavigationList from "@/components/navigation-list";
 import { Category } from "@/interface/posts.interface";
+import ModalRoot from "../modal/modal-root";
 
 export default function HeaderNav({ categories }: { categories: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);

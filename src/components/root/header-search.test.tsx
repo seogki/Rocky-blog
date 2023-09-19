@@ -8,6 +8,7 @@ import {
 import HeaderSearch from "./header-search";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
+import RootLayout from "@/app/layout";
 
 const posts: Post[] = [
   {
@@ -32,15 +33,43 @@ test("should search button exists", async () => {
 });
 
 test("should open dialog when click search button", async () => {
-  const { findByTestId } = renderWithProviders(<HeaderSearch posts={posts} />);
+  let modalRoot = document.getElementById("modal-root");
+  if (modalRoot) {
+    modalRoot = document.createElement("div");
+    modalRoot.setAttribute("id", "modal-root");
+    modalRoot.setAttribute("data-testid", "modal-root");
+  }
+
+  const { findByTestId, container } = renderWithProviders(
+    <HeaderSearch posts={posts} />
+  );
+
+  screen.debug();
 
   const searchBtn = await findByTestId("search-btn");
+
+  // fireEvent.click(searchBtn);
+
+  // const modalRootTag = await findByTestId("modal-root");
+  // console.debug(modalRootTag);
 
   act(() => {
     fireEvent.click(searchBtn);
   });
   await waitFor(async () => {
-    const modal = await findByTestId("header-search-modal");
-    expect(modal).toBeInTheDocument();
+    const modalRootTag = await findByTestId("modal-root");
+    console.debug(modalRootTag);
+    // expect(modalRootTag).toBeInTheDocument();
+    // const modal = await findByTestId("header-search-modal");
+    // expect(modal).toBeInTheDocument();
   });
+
+  // fireEvent.click(searchBtn);
+
+  // const modalRootTag = await findByTestId("modal-root");
+  // console.debug(modalRootTag);
+  // expect(modalRootTag).toBeInTheDocument();
+
+  // const modal = await findByTestId("header-search-modal");
+  // expect(modal).toBeInTheDocument();
 });

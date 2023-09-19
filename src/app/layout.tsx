@@ -42,7 +42,11 @@ export default function RootLayout({
           </ThemeProvider>
         </div>
         {/* modal창 사용 */}
-        <div id="modal-root" />
+        <div
+          id="modal-root"
+          className="absolute z-50"
+          data-testid="modal-root"
+        />
         <GoogleAnalytics />
         {/* analytics for vercel */}
         <Analytics />

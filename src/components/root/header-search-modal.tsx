@@ -118,7 +118,7 @@ export default function HeaderSearchModal({
   }, [pathName, closeModal, curPathName]);
 
   return (
-    <motion.div
+    <div
       // {...FadeTweenMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
@@ -186,7 +186,7 @@ export default function HeaderSearchModal({
           )}
         </main>
       </Card>
-    </motion.div>
+    </div>
   );
 }
 

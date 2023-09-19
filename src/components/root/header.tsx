@@ -17,7 +17,7 @@ export default async function MyHeader({ className = "" }: CacheProps) {
   return (
     <>
       <header
-        className={`${className} h-16 w-full shadow-lg px-4 py-4 sticky top-0 text-xl md:text-lg`}
+        className={`${className} h-16 w-full shadow-lg px-4 py-4 sticky z-10 top-0 text-xl md:text-lg`}
       >
         <div className="max-w-screen-xl flex justify-start items-center mx-auto">
           <div className="sm:hidden">
