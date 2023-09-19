@@ -1,3 +1,5 @@
+"use client";
+
 import { Toc } from "@/interface/posts.interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
