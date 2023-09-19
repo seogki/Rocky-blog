@@ -9,6 +9,7 @@ import { FaSpinner } from "@react-icons/all-files/fa/FaSpinner";
 import { useMount } from "@/hooks/useMount";
 import { MdSearch } from "@react-icons/all-files/md/MdSearch";
 import { AnimatePresence } from "framer-motion";
+import ModalRoot from "../modal/ModalRoot";
 
 const HeaderSearchModal = dynamic(() => import("./header-search-modal"), {
   ssr: false
@@ -43,13 +44,15 @@ export default function HeaderSearch({ posts }: Props) {
         onClick={() => setOpenModal(true)}
       />
       <AnimatePresence initial={false}>
-        {openModal && (
+        {/* {openModal && ( */}
+        <ModalRoot mounted={openModal}>
           <HeaderSearchModal
             data-testid="modal"
             postsPairedByTitle={postsPairedByTitle}
             closeModal={() => setOpenModal(false)}
           ></HeaderSearchModal>
-        )}
+        </ModalRoot>
+        {/* )} */}
       </AnimatePresence>
     </>
   );
