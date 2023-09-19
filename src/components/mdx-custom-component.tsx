@@ -5,10 +5,12 @@ export function MdxCustomComponent() {
     <Image
       className="rounded-lg border-2 border-zinc-600 dark:border-zinc-400"
       alt={props.alt}
-      width={0}
+      width={1920}
       height={0}
-      sizes="100vw"
-      style={{ width: "auto", height: "auto" }}
+      // fill
+      quality={85}
+      // sizes="100vw"
+      // style={{ width: "100%", height: "auto" }}
       {...props}
     />
   );

@@ -1,0 +1,81 @@
+---
+title: Setup incoming webhook to railway through slack
+date: "2023/09/19"
+description: describe how to setup incoming webhook to railway through slack api
+tags: 'slack,webhook,railway'
+published: true
+---
+ 
+## Webhook
+
+**Webhook** is a simple ways to post message of external information to slack app, data is being passed to http response with json payload.
+Json contains message that need to pass and some of other detail option.
+
+By registering webhook to railway through slack you will able to check deployment status from railway.
+
+
+## Start Creating Incoming Webhook
+
+We will going to find out how to integrate webhook link to railway.
+
+1. Create Slack App
+2. Enable Incoming Webhook
+3. Add Incoming Webhook to Railway
+
+
+## Create Slack App
+
+> i will be considered that you have already registered slack, if not please create new account in order to continue from [slack](https://slack.com/)
+
+![regist](/posts/RAILWAY/setup-incoming-webhook-railway-slack/slack-app.jpg)
+
+Once you have account created, you have to create your [slack app](https://api.slack.com/messaging/webhooks#create_a_webhook).
+
+![regist](/posts/RAILWAY/setup-incoming-webhook-railway-slack/slack-app-scratch.jpg)
+
+When you press **Create App** button you will find Create New App popup, and from there start creating app from scratch.
+Add a app name that may fits you and workspace folder if you have multiple workspaces.
+
+
+## Enable Incoming Webhook
+
+After creating app, you can find **Incoming Webhooks** on your left. 
+
+
+![regist](/posts/RAILWAY/setup-incoming-webhook-railway-slack/enable-webhook.jpg)
+
+From incoming webhooks section, you need to enable incoming webhooks and register which channel you want send.
+
+If you finished registering webhook to your channel, just copy&paste somewhere for railway integration.
+
+## Add Incoming Webhook to Railway
+
+Now we have incoming webhook link ready. 
+
+All we need to do is to tell Railway to pass deployment status by using webhook link.
+
+![regist](/posts/RAILWAY/setup-incoming-webhook-railway-slack/railway-dashboard.jpg)
+
+From your **Railway** dashboard go to setting.
+
+Under Webhook section you need to add webhook link and save it and that it.
+
+Railway will send to slack through incoming webhook link of deployment status changes. It will be executed across all environments in the project.
+
+
+## Slack Result
+
+![regist](/posts/RAILWAY/setup-incoming-webhook-railway-slack/webhook-result.jpg)
+
+
+
+
+
+
+
+
+
+## Reference 🔗
+
+https://api.slack.com/messaging/webhooks#create_a_webhook<br/>
+https://docs.railway.app/diagnose/webhooks<br/>
