@@ -13,7 +13,7 @@ export interface Post {
   body: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
-export interface PostIndex {
+export interface PostHolder {
   current?: Post;
   prev?: Post;
   next?: Post;
