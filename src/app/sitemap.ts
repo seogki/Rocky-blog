@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllPostsOrderByDate, getCategories } from "@/data";
 import { stringToDate } from "@/utils/date";
+import { toUniqueList } from "@/utils/list";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.rockyblog.dev";
@@ -33,12 +34,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const posts = await getAllPostsOrderByDate();
 
+  const tags = toUniqueList(posts.map((post) => post.tags).flat());
+
+  for (const tag of tags) {
+    sitemapList.push({
+      url: `${baseUrl}/posts/search?tag=${tag}`,
+      changeFrequency: "weekly",
+      lastModified: new Date(),
+      priority: 0.4
+    });
+  }
+
   for (const post of posts) {
     if (!post || post === null) continue;
 
     sitemapList.push({
       url: `${baseUrl}/posts/${post.category}/${post.slug}`,
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       lastModified: stringToDate(post.date, "DD/MM/YYYY"),
       priority: 0.5
     });
