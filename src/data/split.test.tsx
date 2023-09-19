@@ -1,5 +1,5 @@
 import { Post } from "@/interface/posts.interface";
-import { sortPostsByTitle } from "./sort";
+import { splitPostsByTitle } from "./split";
 
 const posts: Post[] = [
   {
@@ -17,7 +17,7 @@ const posts: Post[] = [
 ];
 
 test("should return array of title key and value post", () => {
-  const result = sortPostsByTitle(posts);
+  const result = splitPostsByTitle(posts);
   const post = posts[0];
 
   expect(result).toStrictEqual({

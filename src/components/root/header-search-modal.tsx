@@ -1,6 +1,13 @@
 import useDebounce from "@/hooks/useDebounce";
-import { Post, PostByTitle } from "@/interface/posts.interface";
-import { ForwardedRef, forwardRef, useEffect, useRef, useState } from "react";
+import { Post, PairedPostsByTitle } from "@/interface/posts.interface";
+import {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
@@ -20,7 +27,7 @@ import {
 import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
 
 type Props = {
-  sortPosts?: PostByTitle;
+  postsPairedByTitle?: PairedPostsByTitle;
   closeModal: () => void;
 };
 
@@ -31,7 +38,10 @@ type DuplicatePost = {
   };
 };
 
-export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
+export default function HeaderSearchModal({
+  postsPairedByTitle,
+  closeModal
+}: Props) {
   const pathName = usePathname();
   const { isMount } = useMount();
 
@@ -43,45 +53,56 @@ export default function HeaderSearchModal({ sortPosts, closeModal }: Props) {
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    if (debouncedValue) {
-      const list = toUniqueList(
-        debouncedValue.trim().toLocaleLowerCase().split(" ")
+  const getPostsByKey = useCallback(
+    (key: string) => {
+      return postsPairedByTitle!![key]!!;
+    },
+    [postsPairedByTitle]
+  );
+
+  const filterIncludeKeyByUserInput = useCallback(
+    (text: string) => {
+      return Object.keys(postsPairedByTitle!!).filter((key) =>
+        key.match(new RegExp(text, "gi"))
       );
+    },
+    [postsPairedByTitle]
+  );
 
-      if (!sortPosts) return;
+  useEffect(() => {
+    if (!postsPairedByTitle || !debouncedValue) return;
 
-      const filterIncludeKeyByUserInput = (text: string) => {
-        return Object.keys(sortPosts!!).filter((key) =>
-          key.match(new RegExp(text, "gi"))
-        );
-      };
+    const inputSplitList = toUniqueList(
+      debouncedValue.trim().toLocaleLowerCase().split(" ")
+    );
 
-      const getPostsByKey = (key: string) => sortPosts[key]!!;
+    const posts = inputSplitList
+      .map(filterIncludeKeyByUserInput)
+      .flat()
+      .map(getPostsByKey)
+      .flat();
 
-      const posts = list
-        .map(filterIncludeKeyByUserInput)
-        .flat()
-        .map(getPostsByKey)
-        .flat();
+    const obj: DuplicatePost = {};
 
-      const obj: DuplicatePost = {};
-
-      for (const post of posts) {
-        const { slug } = post;
-        obj[slug] ? obj[slug].num++ : (obj[slug] = { num: 1, post: post });
-      }
-
-      const ranks = Object.keys(obj)
-        .sort((a, b) => obj[b].num - obj[a].num)
-        .map((key) => obj[key].post);
-
-      const tags = toUniqueList(ranks.map((post) => post!.tags).flat());
-
-      setMatchPosts(ranks);
-      setMatchTags(tags);
+    for (const post of posts) {
+      const { slug } = post;
+      obj[slug] ? obj[slug].num++ : (obj[slug] = { num: 1, post: post });
     }
-  }, [debouncedValue, sortPosts]);
+
+    const postsByRank = Object.keys(obj)
+      .sort((a, b) => obj[b].num - obj[a].num)
+      .map((key) => obj[key].post);
+
+    const tags = toUniqueList(postsByRank.map((post) => post!.tags).flat());
+
+    setMatchPosts(postsByRank);
+    setMatchTags(tags);
+  }, [
+    debouncedValue,
+    postsPairedByTitle,
+    getPostsByKey,
+    filterIncludeKeyByUserInput
+  ]);
 
   useEffect(() => {
     if (isMount && inputRef.current) {

@@ -4,7 +4,7 @@ import { Post } from "@/interface/posts.interface";
 
 test("should display empty description when data is empty", async () => {
   const { findByText } = render(
-    <PostItem category={"MARKDOWN"} obj={undefined} />
+    <PostItem category={"MARKDOWN"} holder={undefined} />
   );
 
   expect(await findByText("Post is not available")).not.toBeNull();
@@ -37,7 +37,7 @@ test("should display available contents description when data is not empty", asy
   };
 
   const { findByRole, findByText } = render(
-    <PostItem category={"MARKDOWN"} obj={postObj} />
+    <PostItem category={"MARKDOWN"} holder={postObj} />
   );
 
   expect(await findByRole("heading", { level: 1 })).not.toBeNull();

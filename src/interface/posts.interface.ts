@@ -24,7 +24,7 @@ export interface Category {
   name: string;
 }
 
-export interface PostByTitle {
+export interface PairedPostsByTitle {
   [index: string]: Post[] | undefined;
 }
 
