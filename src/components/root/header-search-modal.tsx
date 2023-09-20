@@ -118,7 +118,7 @@ export default function HeaderSearchModal({
   }, [pathName, closeModal, curPathName]);
 
   return (
-    <motion.div
+    <div
       // {...FadeTweenMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
@@ -130,6 +130,7 @@ export default function HeaderSearchModal({
         <div className="flex flex-row justify-between align-center pb-2">
           <h2 className="text-base font-bold">Search</h2>
           <MdClose
+            data-testid="modal-close-btn"
             className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer text-zinc-400 dark:text-zinc-600 hover:text-black hover:dark:text-white"
             onClick={() => closeModal()}
           />
@@ -186,7 +187,7 @@ export default function HeaderSearchModal({
           )}
         </main>
       </Card>
-    </motion.div>
+    </div>
   );
 }
 

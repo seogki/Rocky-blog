@@ -41,6 +41,12 @@ export default function RootLayout({
             </ReduxProvider>
           </ThemeProvider>
         </div>
+        {/* modal창 사용 */}
+        <div
+          id="modal-root"
+          className="absolute z-50"
+          data-testid="modal-root"
+        />
         <GoogleAnalytics />
         {/* analytics for vercel */}
         <Analytics />

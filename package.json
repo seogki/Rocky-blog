@@ -16,6 +16,7 @@
     "@next/bundle-analyzer": "^13.4.19",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/user-event": "^14.5.1",
     "@vercel/analytics": "^1.0.2",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",

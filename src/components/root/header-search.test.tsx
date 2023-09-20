@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import HeaderSearch from "./header-search";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
@@ -32,15 +26,22 @@ test("should search button exists", async () => {
 });
 
 test("should open dialog when click search button", async () => {
-  const { findByTestId } = renderWithProviders(<HeaderSearch posts={posts} />);
+  const { findByTestId, container, rerender } = renderWithProviders(
+    <HeaderSearch posts={posts} />
+  );
+
+  const modalRootTag = document.createElement("div");
+  modalRootTag.setAttribute("id", "modal-root");
+
+  container.appendChild(modalRootTag);
 
   const searchBtn = await findByTestId("search-btn");
+  await userEvent.click(searchBtn);
 
-  act(() => {
-    fireEvent.click(searchBtn);
-  });
-  await waitFor(async () => {
-    const modal = await findByTestId("header-search-modal");
-    expect(modal).toBeInTheDocument();
-  });
+  rerender(<HeaderSearch posts={posts} />);
+
+  const modal = await findByTestId("header-search-modal");
+  expect(modal).toBeInTheDocument();
 });
+
+afterEach(() => jest.resetAllMocks());
