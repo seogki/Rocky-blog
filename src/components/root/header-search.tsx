@@ -45,7 +45,6 @@ export default function HeaderSearch({ posts }: Props) {
       />
       <ModalRoot isMount={openModal}>
         <HeaderSearchModal
-          data-testid="modal"
           postsPairedByTitle={postsPairedByTitle}
           closeModal={() => setOpenModal(false)}
         ></HeaderSearchModal>

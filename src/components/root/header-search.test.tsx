@@ -5,10 +5,12 @@ import {
   screen,
   waitFor
 } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import HeaderSearch from "./header-search";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
 import RootLayout from "@/app/layout";
+import React from "react";
 
 const posts: Post[] = [
   {
@@ -33,43 +35,22 @@ test("should search button exists", async () => {
 });
 
 test("should open dialog when click search button", async () => {
-  let modalRoot = document.getElementById("modal-root");
-  if (modalRoot) {
-    modalRoot = document.createElement("div");
-    modalRoot.setAttribute("id", "modal-root");
-    modalRoot.setAttribute("data-testid", "modal-root");
-  }
-
-  const { findByTestId, container } = renderWithProviders(
+  const { findByTestId, container, rerender } = renderWithProviders(
     <HeaderSearch posts={posts} />
   );
 
-  screen.debug();
+  const modalRootTag = document.createElement("div");
+  modalRootTag.setAttribute("id", "modal-root");
+
+  container.appendChild(modalRootTag);
 
   const searchBtn = await findByTestId("search-btn");
+  await userEvent.click(searchBtn);
 
-  // fireEvent.click(searchBtn);
+  rerender(<HeaderSearch posts={posts} />);
 
-  // const modalRootTag = await findByTestId("modal-root");
-  // console.debug(modalRootTag);
-
-  act(() => {
-    fireEvent.click(searchBtn);
-  });
-  await waitFor(async () => {
-    const modalRootTag = await findByTestId("modal-root");
-    console.debug(modalRootTag);
-    // expect(modalRootTag).toBeInTheDocument();
-    // const modal = await findByTestId("header-search-modal");
-    // expect(modal).toBeInTheDocument();
-  });
-
-  // fireEvent.click(searchBtn);
-
-  // const modalRootTag = await findByTestId("modal-root");
-  // console.debug(modalRootTag);
-  // expect(modalRootTag).toBeInTheDocument();
-
-  // const modal = await findByTestId("header-search-modal");
-  // expect(modal).toBeInTheDocument();
+  const modal = await findByTestId("header-search-modal");
+  expect(modal).toBeInTheDocument();
 });
+
+afterEach(() => jest.resetAllMocks());
