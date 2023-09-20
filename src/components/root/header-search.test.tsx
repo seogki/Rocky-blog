@@ -1,16 +1,7 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HeaderSearch from "./header-search";
 import { renderWithProviders } from "@/test/test-utils";
 import { Post } from "@/interface/posts.interface";
-import RootLayout from "@/app/layout";
-import React from "react";
 
 const posts: Post[] = [
   {

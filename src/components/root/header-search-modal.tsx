@@ -130,6 +130,7 @@ export default function HeaderSearchModal({
         <div className="flex flex-row justify-between align-center pb-2">
           <h2 className="text-base font-bold">Search</h2>
           <MdClose
+            data-testid="modal-close-btn"
             className="text-2xl text-zinc-600 dark:text-zinc-300 sm:text-3xl cursor-pointer text-zinc-400 dark:text-zinc-600 hover:text-black hover:dark:text-white"
             onClick={() => closeModal()}
           />

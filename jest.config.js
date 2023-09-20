@@ -18,7 +18,7 @@ const config = {
   },
   collectCoverage: true,
   collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
+    "src/**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!jest.config.js",
     "!**/node_modules/**"
