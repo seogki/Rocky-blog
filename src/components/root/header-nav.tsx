@@ -1,6 +1,6 @@
 "use client";
+
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
-import { Transition } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import {
@@ -8,9 +8,13 @@ import {
   closeMore,
   openDrawer
 } from "@/redux/features/headerSlice";
-import NavigationList from "@/components/navigation-list";
 import { Category } from "@/interface/posts.interface";
-import ModalRoot from "../modal/modal-root";
+import dynamic from "next/dynamic";
+import { Transition } from "@headlessui/react";
+
+const NavigationList = dynamic(() => import("@/components/navigation-list"), {
+  ssr: false
+});
 
 export default function HeaderNav({ categories }: { categories: Category[] }) {
   const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);
@@ -27,6 +31,27 @@ export default function HeaderNav({ categories }: { categories: Category[] }) {
         }}
       />
 
+      {/* <LayoutGroup>
+        <BackDropRoot isMount={isDrawerOpen}>
+          <motion.div
+            {...FadeMotion}
+            className="fixed left-0 top-0 w-full h-full bg-zinc-800/50 overflow-hidden"
+            onClick={() => dispatch(closeDrawer())}
+          ></motion.div>
+        </BackDropRoot>
+
+        <ModalRoot isMount={isDrawerOpen}>
+          <NavigationList
+            initial={{ translateX: "-100%" }}
+            animate={{ translateX: "0" }}
+            exit={{ translateX: "-100%" }}
+            transition={{ type: "tween" }}
+            className="fixed top-0 left-0 h-full w-2/3 dark:bg-zinc-800 bg-white overflow-auto"
+            list={categories}
+            stopPropagation={(e) => e.stopPropagation()}
+          />
+        </ModalRoot>
+      </LayoutGroup> */}
       <Transition
         show={isDrawerOpen}
         className="w-full h-full fixed top-0 left-0 overflow-hidden"
@@ -55,7 +80,7 @@ export default function HeaderNav({ categories }: { categories: Category[] }) {
           <NavigationList
             className="h-screen w-2/3 dark:bg-zinc-800 bg-white overflow-auto"
             list={categories}
-            onClick={(e) => e.stopPropagation()}
+            stopPropagation={(e) => e.stopPropagation()}
           />
         </Transition.Child>
       </Transition>

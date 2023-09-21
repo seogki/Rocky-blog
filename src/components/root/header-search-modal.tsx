@@ -17,14 +17,8 @@ import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
-import {
-  AnimatePresence,
-  LazyMotion,
-  Reorder,
-  domAnimation,
-  motion
-} from "framer-motion";
-import { EnterMotion, FadeTweenMotion, ScaleTweenMotion } from "@/data/motion";
+import { motion } from "framer-motion";
+import { ContentsPopupMotion } from "@/data/motion";
 
 type Props = {
   postsPairedByTitle?: PairedPostsByTitle;
@@ -119,12 +113,14 @@ export default function HeaderSearchModal({
 
   return (
     <div
-      // {...FadeTweenMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
       <Card
-        {...FadeTweenMotion}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
+        transition={{ type: "tween" }}
         className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto"
       >
         <div className="flex flex-row justify-between align-center pb-2">
@@ -155,7 +151,7 @@ export default function HeaderSearchModal({
             <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
                 <motion.p
-                  {...EnterMotion}
+                  {...ContentsPopupMotion}
                   transition={{
                     type: "tween",
                     delay: 0.1 * idx
@@ -173,7 +169,7 @@ export default function HeaderSearchModal({
               <div className="flex justify-start flex-wrap py-1.5">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink
-                    {...EnterMotion}
+                    {...ContentsPopupMotion}
                     transition={{
                       type: "tween",
                       delay: 0.1 * idx

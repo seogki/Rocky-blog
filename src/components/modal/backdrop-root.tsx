@@ -3,24 +3,24 @@
 import { AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 
-const ROOT_ID = "modal-root";
+const ROOT_ID = "backdrop-root";
 
 type Props = {
   children: React.ReactNode;
   isMount: boolean;
 };
 
-export default function ModalRoot({ children, isMount }: Props) {
+export default function BackDropRoot({ children, isMount }: Props) {
   if (typeof window === "undefined") return <></>;
 
-  const modalRoot = document.getElementById(ROOT_ID);
+  const backdropRoot = document.getElementById(ROOT_ID);
 
-  if (modalRoot === null) return <></>;
+  if (backdropRoot === null) return <></>;
 
   return createPortal(
     <AnimatePresence initial={false} mode="popLayout">
       {isMount && children}
     </AnimatePresence>,
-    modalRoot
+    backdropRoot
   );
 }
