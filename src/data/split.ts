@@ -5,19 +5,22 @@ import { isAlphaNumeric } from "@/utils/regex";
 export const splitPostsByTitle = (posts: Post[]) => {
   const obj: PairedPostsByTitle = {};
 
+  const getUniqueAlphaNumericTitles = (str: string) => {
+    return toUniqueList(
+      str
+        .toLocaleLowerCase()
+        .replace(/[-.]/g, " ")
+        .split(" ")
+        .filter((title) => isAlphaNumeric(title))
+    );
+  };
+
+  const setPostByTitle = (title: string, post: Post) =>
+    obj[title] ? obj[title]!!.push(post) : (obj[title] = [post]);
+
   posts.forEach((post) => {
-    const spList = post.title
-      .toLocaleLowerCase()
-      .replaceAll("-", " ")
-      .replaceAll(".", " ")
-      .split(" ");
-    toUniqueList(spList).forEach((title) => {
-      if (isAlphaNumeric(title)) {
-        const list = obj[title] ?? [];
-        list.push(post);
-        obj[title] = list;
-      }
-    });
+    const titles = getUniqueAlphaNumericTitles(post.title);
+    titles.forEach((title) => setPostByTitle(title, post));
   });
 
   return obj;
