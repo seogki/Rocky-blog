@@ -40,9 +40,9 @@ export default async function PostList({ category, tag }: Props) {
   return (
     <>
       <ul className="flex flex-col w-full h-full px-2">
-        <li className="px-2 text-left mt-4 text-default font-medium">
+        <h2 className="px-2 text-left mt-4 text-default font-medium">
           Total {posts.length}
-        </li>
+        </h2>
         {posts.map((post) => (
           <li key={post.slug}>
             <Link

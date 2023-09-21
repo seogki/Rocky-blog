@@ -54,7 +54,7 @@ export default function RootLayout({
         />
         <GoogleAnalytics />
         {/* analytics for vercel */}
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   );
