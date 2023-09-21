@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
   metadataBase: process.env.NEXT_PUBLIC_BASE_URL
