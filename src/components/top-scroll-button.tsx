@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MdArrowUpward } from "@react-icons/all-files/md/MdArrowUpward";
 import useScrollPosition from "@/hooks/useScrollPosition";
 import { AnimatePresence, motion } from "framer-motion";
-import { FadeTweenMotion } from "@/data/motion";
+import { FadeMotion } from "@/data/motion";
 
 export default function TopScrollButton() {
   const [showScroll, setShowScroll] = useState(false);
@@ -27,7 +27,7 @@ export default function TopScrollButton() {
       {showScroll && (
         <div className="sticky bottom-8 float-right text-lg">
           <motion.button
-            {...FadeTweenMotion}
+            {...FadeMotion}
             className="p-4 rounded-full bg-zinc-500/50"
             onClick={() => scrollToTop()}
           >
