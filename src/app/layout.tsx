@@ -43,8 +43,13 @@ export default function RootLayout({
         </div>
         {/* modal창 사용 */}
         <div
+          id="backdrop-root"
+          className="fixed left-0 top-0 z-40 overflow-hidden"
+          data-testid="backdrop-root"
+        />
+        <div
           id="modal-root"
-          className="absolute z-50"
+          className="fixed left-0 top-0 z-50 overflow-hidden"
           data-testid="modal-root"
         />
         <GoogleAnalytics />

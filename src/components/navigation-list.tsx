@@ -5,10 +5,12 @@ import { closeDrawer } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Category } from "@/interface/posts.interface";
+import React, { ForwardedRef } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   className?: string;
-  onClick?: React.MouseEventHandler;
+  stopPropagation?: React.MouseEventHandler;
   list?: Category[];
 };
 
@@ -16,16 +18,16 @@ type LinkProps = {
   children: React.ReactNode;
   href: string;
   isActive: boolean;
-  onClick?: React.MouseEventHandler;
+  closeOpenDrawer?: React.MouseEventHandler;
 };
 
-const NavLink = ({ children, onClick, href, isActive }: LinkProps) => {
+const NavLink = ({ children, closeOpenDrawer, href, isActive }: LinkProps) => {
   return (
     <li
       className={`text-primary-hover text-sm p-2 m-4 ml-2 sm:m-2 font-bold ${
         isActive ? "text-primary" : "text-default"
       }`}
-      onClick={onClick}
+      onClick={closeOpenDrawer}
     >
       <Link href={href}>
         <p className={`pr-1`}>{children}</p>
@@ -34,37 +36,47 @@ const NavLink = ({ children, onClick, href, isActive }: LinkProps) => {
   );
 };
 
-export default function NavigationList({ className, onClick, list }: Props) {
+function NavigationList(
+  { className, stopPropagation, list }: Props,
+  ref?: ForwardedRef<HTMLElement>
+) {
   const { isDrawerOpen } = useAppSelector(({ header }) => header);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
 
-  const handleClick = () => {
+  const closeOpenDrawer = () => {
     if (isDrawerOpen) dispatch(closeDrawer());
   };
 
   return (
-    <nav className={`${className}`} onClick={onClick}>
+    <nav
+      ref={ref}
+      className={`${className}`}
+      onClick={stopPropagation}
+      key={"navigation-list"}
+    >
       <ul className="sm:fixed">
         <NavLink
           key={"RECENT"}
           href={`/posts`}
           isActive={pathname === `/posts`}
-          onClick={() => handleClick()}
+          closeOpenDrawer={() => closeOpenDrawer()}
         >
-          RECENT ({list?.reduce((a, b) => a + b.length, 0)})
+          RECENT ({list?.reduce((a, b) => a + b.length, 0) || 0})
         </NavLink>
-        {list?.map((item, idx) => (
+        {list?.map(({ name, length }, idx) => (
           <NavLink
             key={idx}
-            href={`/posts/${item.name}`}
-            isActive={pathname === `/posts/${item.name}`}
-            onClick={() => handleClick()}
+            href={`/posts/${name}`}
+            isActive={pathname === `/posts/${name}`}
+            closeOpenDrawer={() => closeOpenDrawer()}
           >
-            {item.name} ({item.length})
+            {name} ({length})
           </NavLink>
         ))}
       </ul>
     </nav>
   );
 }
+
+export default motion(React.forwardRef<HTMLElement, Props>(NavigationList));
