@@ -1,7 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPostsOrderByDate, getCategories } from "@/data";
 import { stringToDate } from "@/utils/date";
-import { toUniqueList } from "@/utils/list";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.rockyblog.dev";
@@ -52,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/posts/${post.category}/${post.slug}`,
       changeFrequency: "always",
       lastModified: stringToDate(post.date, "DD/MM/YYYY"),
-      priority: 0.7
+      priority: 0.9
     });
   }
 
