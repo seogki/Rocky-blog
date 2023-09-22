@@ -36,32 +36,25 @@ export default function HeaderSearchModal({
   postsPairedByTitle,
   closeModal
 }: Props) {
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
-
   const { isMount } = useMount();
 
   const [value, setValue] = useState("");
   const [matchPosts, setMatchPosts] = useState<Post[]>([]);
   const [matchTags, setMatchTags] = useState<string[]>([]);
-  const [curPathName, setCurPathName] = useState(pathName);
 
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const getPostsByKey = useCallback(
-    (key: string) => {
-      return postsPairedByTitle!![key]!!;
-    },
+    (key: string) => postsPairedByTitle!![key]!!,
     [postsPairedByTitle]
   );
 
   const filterIncludeKeyByUserInput = useCallback(
-    (text: string) => {
-      return Object.keys(postsPairedByTitle!!).filter((key) =>
+    (text: string) =>
+      Object.keys(postsPairedByTitle!!).filter((key) =>
         key.match(new RegExp(text, "gi"))
-      );
-    },
+      ),
     [postsPairedByTitle]
   );
 
@@ -106,18 +99,6 @@ export default function HeaderSearchModal({
     }
   }, [isMount]);
 
-  useEffect(() => {
-    const tag = searchParams.get("tag");
-    if (pathName !== curPathName) {
-      setCurPathName(`${pathName}${tag ? "tag=" + tag : ""}`);
-      closeModal();
-    }
-  }, [pathName, closeModal, curPathName, searchParams]);
-
-  // useEffect(() => {
-  //   console.debug(searchParams.get("tag"));
-  // }, [searchParams]);
-
   return (
     <motion.div
       {...FadeMotion}
@@ -156,6 +137,7 @@ export default function HeaderSearchModal({
             <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
                 <motion.p
+                  onClick={() => closeModal()}
                   {...ContentsPopupMotion}
                   transition={{
                     type: "tween",
@@ -174,6 +156,7 @@ export default function HeaderSearchModal({
               <div className="flex justify-start flex-wrap py-1.5">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink
+                    onClick={() => closeModal()}
                     {...ContentsPopupMotion}
                     transition={{
                       type: "tween",
