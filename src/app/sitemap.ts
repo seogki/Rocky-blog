@@ -34,16 +34,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const posts = await getAllPostsOrderByDate();
 
-  const tags = toUniqueList(posts.map((post) => post.tags).flat());
+  // const tags = toUniqueList(posts.map((post) => post.tags).flat());
 
-  for (const tag of tags) {
-    sitemapList.push({
-      url: `${baseUrl}/posts?tag=${tag}`,
-      changeFrequency: "weekly",
-      lastModified: new Date(),
-      priority: 0.4
-    });
-  }
+  // for (const tag of tags) {
+  //   sitemapList.push({
+  //     url: `${baseUrl}/posts?tag=${tag}`,
+  //     changeFrequency: "weekly",
+  //     lastModified: new Date(),
+  //     priority: 0.4
+  //   });
+  // }
 
   for (const post of posts) {
     if (!post || post === null) continue;
