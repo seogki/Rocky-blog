@@ -18,9 +18,7 @@ export default function ModalRoot({ children, isMount }: Props) {
   if (modalRoot === null) return <></>;
 
   return createPortal(
-    <AnimatePresence initial={false} mode="popLayout">
-      {isMount && children}
-    </AnimatePresence>,
+    <AnimatePresence>{isMount && children}</AnimatePresence>,
     modalRoot
   );
 }

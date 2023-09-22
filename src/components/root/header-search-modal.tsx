@@ -12,13 +12,13 @@ import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
 import { motion } from "framer-motion";
-import { ContentsPopupMotion } from "@/data/motion";
+import { ContentsPopupMotion, FadeMotion, ScaleMotion } from "@/data/motion";
 
 type Props = {
   postsPairedByTitle?: PairedPostsByTitle;
@@ -37,6 +37,8 @@ export default function HeaderSearchModal({
   closeModal
 }: Props) {
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+
   const { isMount } = useMount();
 
   const [value, setValue] = useState("");
@@ -105,22 +107,25 @@ export default function HeaderSearchModal({
   }, [isMount]);
 
   useEffect(() => {
+    const tag = searchParams.get("tag");
     if (pathName !== curPathName) {
-      setCurPathName(pathName);
+      setCurPathName(`${pathName}${tag ? "tag=" + tag : ""}`);
       closeModal();
     }
-  }, [pathName, closeModal, curPathName]);
+  }, [pathName, closeModal, curPathName, searchParams]);
+
+  // useEffect(() => {
+  //   console.debug(searchParams.get("tag"));
+  // }, [searchParams]);
 
   return (
-    <div
+    <motion.div
+      {...FadeMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
       <Card
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0 }}
-        transition={{ type: "tween" }}
+        {...ScaleMotion}
         className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto"
       >
         <div className="flex flex-row justify-between align-center pb-2">
@@ -183,7 +188,7 @@ export default function HeaderSearchModal({
           )}
         </main>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 
