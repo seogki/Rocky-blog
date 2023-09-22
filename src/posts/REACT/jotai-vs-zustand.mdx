@@ -1,0 +1,220 @@
+---
+title: Jotai vs Zustand
+date: "2023/09/22"
+description: describe information of state management. and how jotai state and zustand state is different.
+tags: 'jotai,zustand'
+published: true 
+---
+
+State managment libraries have increasing tremendous amount for last couple of years,
+and more state management libraries are getting improved by itself. **Redux** is one of them and **recoil**, **jotai**, **zustand** and etc...
+
+## What is State Management
+
+As the project grows up we need to manage our changed state significantly, 
+by managing our state fluently project become more sturctured and readable.
+
+You may not want redundant state in multiple components, you may want to keep states globally to use it whenever you needed,
+**useState**, **context api**, **useReducer** can be the alternative, hence using those api is totally fine, until you find out those api is not enough.
+
+Redux is one of most famous state management library, a lot of people are using it with almost 60k git stars.
+As the time goes more **redux** user starting question about it's structure, 
+because **redux** has way too many boilerplate codes that they had to write just for simple global state management,
+and decided look around to see if there are alternative, that's where **jotai**, **zustand**, **recoil** popup.
+
+## What is Zotai
+
+**Jotai** is atomic approach to global React state managment with 15k git stars, so what is atomic here means?
+
+
+### Atomic Approach
+
+**atom** usually means a value or component which can't be break down anymore. If you know information about **atomic design** you might understand it.
+In **jotai** single state is called **atom**, and create function by using this atom which is derivated function.
+
+In Result you can use it just like **useState** hook.
+
+```tsx:example.tsx showLineNumbers
+import { atom, useAtom } from 'jotai'
+
+// define atom
+const textAtom = atom('hello') // atom
+const uppercaseAtom = atom( //derivated function
+  (get) => get(textAtom).toUpperCase()
+)
+
+// implement defined atom
+const Input = () => {
+    const [text, setText] = useAtom(textAtom);
+    const [uppercase] = useAtom(uppercaseAtom);
+
+    return <>
+        {text}
+        {uppercase}
+    </>
+}
+```
+
+### Features
+
+- Minial core api is 2kb
+- Based on typescript
+- Support nextjs, gatsby, remix, and react native
+- React Fast Refresh with swc and babel plugins
+
+
+### Check How Atom Work
+
+If you see imported primitive atom from **jotai** you can see it returns 
+primitiveAtom withInitialValue type.
+
+I have extracted some important types.
+
+```ts:atom.ts showLineNumbers
+export function atom<Value>(
+  initialValue: Value
+): PrimitiveAtom<Value> & WithInitialValue<Value>
+
+
+
+//primitiveAtom has value and setValue type
+export type PrimitiveAtom<Value> = WritableAtom<
+  Value,
+  [SetStateAction<Value>],
+  void
+>
+
+type WithInitialValue<Value> = {
+  init: Value
+}
+
+export interface WritableAtom<Value, Args extends unknown[], Result>
+  extends Atom<Value> {
+  read: Read<Value, SetAtom<Args, Result>>
+  write: Write<Args, Result>
+  onMount?: OnMount<Args, Result>
+}
+
+```
+
+Since Atom returns Value and SetValue type, we can use it as **useState** like function.
+
+
+When single atom create, each atom gets unqiue key which is globally increasing by 1,
+by determining whether function or not state being management properly inside config object.
+
+Since atom create own key, 
+we don't have to define key that give us less boilerplate code by little amount.
+
+This is part of github code how atom is being created.
+
+```ts:atom.ts showLineNumbers
+let keyCount = 0 // global key count for all atoms
+
+export function atom<Value, Args extends unknown[], Result>(
+  read: Value | Read<Value, SetAtom<Args, Result>>,
+  write?: Write<Args, Result>
+) {
+  const key = `atom${++keyCount}`
+  const config = {
+    toString: () => key,
+  } as WritableAtom<Value, Args, Result> & { init?: Value }
+  if (typeof read === 'function') {
+    config.read = read as Read<Value, SetAtom<Args, Result>>
+  } else {
+    config.init = read
+    config.read = (get) => get(config)
+    config.write = ((get: Getter, set: Setter, arg: SetStateAction<Value>) =>
+      set(
+        config as unknown as PrimitiveAtom<Value>,
+        typeof arg === 'function'
+          ? (arg as (prev: Value) => Value)(get(config))
+          : arg
+      )) as unknown as Write<Args, Result>
+  }
+  if (write) {
+    config.write = write
+  }
+  return config
+}
+```
+
+
+## What is Zustand
+
+**Zustand** is one of state management library with around 35k git stars, which use flux patterns just like **redux**. 
+It is simpler than redux like jotai but define state as object.
+
+```ts:zustand.ts showLineNumbers
+import { create } from 'zustand'
+
+const useStore = create((set) => ({
+  bears: 0,
+  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  removeAllBears: () => set({ bears: 0 }),
+}))
+```
+
+Store state by using create function. Each store can store primitive value, objects, functions and more,
+**set** parameter which passed from create will be merge state.
+
+```ts:zustand.ts showLineNumbers
+function BearCounter() {
+  const bears = useStore((state) => state.bears)
+  return <h1>{bears} around here...</h1>
+}
+
+function Controls() {
+  const increasePopulation = useStore((state) => state.increasePopulation)
+  return <button onClick={increasePopulation}>one up</button>
+}
+```
+
+After initializing store, we can use it just like redux.
+
+## Jotai Vs Zustand
+
+Let's find out pros and cons of these two library
+
+### Jotai
+
+#### Pros
+
+1. Simple.
+2. Key is being generated own (we don't have to deal with it).
+
+#### Cons
+
+1. having problems with async (has alternative but code can be ugly)
+2. May sufficient for small state manage (when comes to complex state hard to manage)
+3. Since less structured than redux and zustand, which might hard to predict state update.
+
+### Zustand
+
+#### Pros
+
+1. Flux patterns like Redux. (if you know redux, it's easy to implement)
+2. Good for complex state manage
+3. Support middleware and DevTools
+
+#### Cons
+
+1. Code is not much different to redux because it's flux pattern.
+2. 
+
+Since jotai and zustand all made by same people with to solve different problem,
+it will be our choice to choose whether to use jotai or zustand based on our taste.
+
+Both of them is meant to handle state, which can be occur in local client side. 
+If you want to deal with api, it will be better to use **swr**, **react-query** which has more features like caching.
+
+Lastly this is trending npm donwload package of state management library.
+
+![trend](/posts/REACT/jotai-vs-zustand/state-management-trend.png)
+ 
+
+## Reference 🔗
+
+https://jotai.org/<br/>
+https://github.com/pmndrs/jotai<br/>
+https://docs.pmnd.rs/zustand<br/>
