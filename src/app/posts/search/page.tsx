@@ -23,7 +23,7 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
     title: `Rocky Blog - Posts Search List [${tag}]`,
     description: `This is my Rocky Blog Search List of ${tag}`,
     alternates: {
-      canonical: `${baseUrl}/posts/search`
+      canonical: `${baseUrl}/posts`
     },
     openGraph: {
       title: `Rocky Blog - Posts Search List [${tag}]`,
