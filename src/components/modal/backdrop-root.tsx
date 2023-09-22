@@ -18,9 +18,7 @@ export default function BackDropRoot({ children, isMount }: Props) {
   if (backdropRoot === null) return <></>;
 
   return createPortal(
-    <AnimatePresence initial={false} mode="popLayout">
-      {isMount && children}
-    </AnimatePresence>,
+    <AnimatePresence>{isMount && children}</AnimatePresence>,
     backdropRoot
   );
 }

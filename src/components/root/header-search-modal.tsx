@@ -12,13 +12,13 @@ import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { useMount } from "@/hooks/useMount";
 import PostTagLink from "../post/contents/post-tag-link";
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { toUniqueList } from "@/utils/list";
 import CardInner from "../card/card-inner";
 import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
 import { motion } from "framer-motion";
-import { ContentsPopupMotion } from "@/data/motion";
+import { ContentsPopupMotion, FadeMotion, ScaleMotion } from "@/data/motion";
 
 type Props = {
   postsPairedByTitle?: PairedPostsByTitle;
@@ -36,30 +36,25 @@ export default function HeaderSearchModal({
   postsPairedByTitle,
   closeModal
 }: Props) {
-  const pathName = usePathname();
   const { isMount } = useMount();
 
   const [value, setValue] = useState("");
   const [matchPosts, setMatchPosts] = useState<Post[]>([]);
   const [matchTags, setMatchTags] = useState<string[]>([]);
-  const [curPathName, setCurPathName] = useState(pathName);
 
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const getPostsByKey = useCallback(
-    (key: string) => {
-      return postsPairedByTitle!![key]!!;
-    },
+    (key: string) => postsPairedByTitle!![key]!!,
     [postsPairedByTitle]
   );
 
   const filterIncludeKeyByUserInput = useCallback(
-    (text: string) => {
-      return Object.keys(postsPairedByTitle!!).filter((key) =>
+    (text: string) =>
+      Object.keys(postsPairedByTitle!!).filter((key) =>
         key.match(new RegExp(text, "gi"))
-      );
-    },
+      ),
     [postsPairedByTitle]
   );
 
@@ -104,23 +99,14 @@ export default function HeaderSearchModal({
     }
   }, [isMount]);
 
-  useEffect(() => {
-    if (pathName !== curPathName) {
-      setCurPathName(pathName);
-      closeModal();
-    }
-  }, [pathName, closeModal, curPathName]);
-
   return (
-    <div
+    <motion.div
+      {...FadeMotion}
       data-testid="header-search-modal"
       className="overflow-y-auto h-full w-full fixed mx-auto top-0 left-0 bg-zinc-800/70 dark:bg-zinc-500/70 flex justify-center items-start"
     >
       <Card
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0 }}
-        transition={{ type: "tween" }}
+        {...ScaleMotion}
         className="w-[calc(100%-2rem)] min-h-[300px] max-w-screen-sm p-4 my-8 mx-4 mx-auto"
       >
         <div className="flex flex-row justify-between align-center pb-2">
@@ -151,6 +137,7 @@ export default function HeaderSearchModal({
             <SearchSection title={"Post Titles"}>
               {matchPosts.map((post, idx) => (
                 <motion.p
+                  onClick={() => closeModal()}
                   {...ContentsPopupMotion}
                   transition={{
                     type: "tween",
@@ -169,6 +156,7 @@ export default function HeaderSearchModal({
               <div className="flex justify-start flex-wrap py-1.5">
                 {matchTags.map((tag, idx) => (
                   <PostTagLink
+                    onClick={() => closeModal()}
                     {...ContentsPopupMotion}
                     transition={{
                       type: "tween",
@@ -183,7 +171,7 @@ export default function HeaderSearchModal({
           )}
         </main>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 

@@ -18,6 +18,16 @@ const posts: Post[] = [
   }
 ];
 
+jest.mock("next/navigation", () => {
+  const actual = jest.requireActual("next/navigation");
+  return {
+    ...actual,
+    useSearchParams: jest.fn(() => ({
+      get: (key: string) => jest.fn()
+    }))
+  };
+});
+
 test("should search button exists", async () => {
   const { findByTestId } = renderWithProviders(<HeaderSearch posts={posts} />);
 

@@ -18,7 +18,7 @@ function PostTagLink(
       <Link
         ref={ref}
         key={tag}
-        href={{ pathname: `/posts/search`, query: { tag } }}
+        href={{ pathname: `/posts`, query: { tag } }}
         className="mx-1 my-1 first-of-type:ml-0 last-of-type:mr-0"
         onClick={onClick}
       >

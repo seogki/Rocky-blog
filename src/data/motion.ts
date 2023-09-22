@@ -5,6 +5,13 @@ export const FadeMotion = {
   transition: { type: "tween" }
 };
 
+export const ScaleMotion = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+  exit: { scale: 0 },
+  transition: { type: "tween" }
+};
+
 export const ContentsPopupMotion = {
   initial: { opacity: 0, translateX: "20px" },
   animate: { opacity: 1, translateX: "0%" },
