@@ -21,6 +21,7 @@ type Props = {
 export default function HeaderSearch({ posts }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
+  // for performance i might need to use minisearch or fuse.js search library
   const postsPairedByTitle = useMemo(() => {
     return splitPostsByTitle(posts);
   }, [posts]);
