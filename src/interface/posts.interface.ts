@@ -10,23 +10,22 @@ export interface Post {
   minutesRead: string;
   tags: string[];
   toc: Toc[];
-  body: ReactElement<any, string | JSXElementConstructor<any>>;
+  body: MdxContents;
 }
 
-export interface PostHolder {
-  current?: Post;
-  prev?: Post;
-  next?: Post;
-}
+export type MdxContents = ReactElement<
+  any,
+  string | JSXElementConstructor<any>
+>;
 
-export interface Category {
+export type PostHolder = { current?: Post; prev?: Post; next?: Post };
+
+export type Category = {
   length: number;
   name: string;
-}
+};
 
-export interface PairedPostsByTitle {
-  [index: string]: Post[] | undefined;
-}
+export type PairedPostsByTitle = { [index: string]: Post[] | undefined };
 
 export type Toc = {
   href: string;
