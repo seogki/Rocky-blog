@@ -8,6 +8,15 @@ const nextConfig = {
   },
   images: {
     unoptimized: false
+  },
+  async redirects() {
+    return [
+      {
+        source: "/posts/search:path*",
+        destination: "/posts:path*",
+        permanent: true
+      }
+    ];
   }
 };
 

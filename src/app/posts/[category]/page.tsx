@@ -42,14 +42,14 @@ export default function PostListPage({ params, searchParams }: Props) {
   const { category } = params;
   if (!category) return notFound();
 
-  const { tag } = searchParams;
-  if (tag) {
-    redirect(`/posts?tag=${tag}`);
-  }
+  // const { tag } = searchParams;
+  // if (tag) {
+  //   redirect(`/posts?tag=${tag}`);
+  // }
 
-  if (category === "search") {
-    redirect("/posts");
-  }
+  // if (category === "search") {
+  //   redirect("/posts");
+  // }
 
   return (
     <>
