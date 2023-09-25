@@ -1,5 +1,5 @@
 import { Post } from "@/interface/posts.interface";
-import { splitPostsByTitle } from "./split";
+import { splitPostsByTitle } from "./fn";
 
 const posts: Post[] = [
   {

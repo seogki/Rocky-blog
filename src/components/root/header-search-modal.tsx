@@ -19,6 +19,7 @@ import Card from "../card/card";
 import PostTitleLink from "../post/contents/post-title-link";
 import { motion } from "framer-motion";
 import { ContentsPopupMotion, FadeMotion, ScaleMotion } from "@/data/motion";
+import { splitStr } from "@/data/fn";
 
 type Props = {
   postsPairedByTitle?: PairedPostsByTitle;
@@ -45,11 +46,6 @@ export default function HeaderSearchModal({
   const debouncedValue = useDebounce(value, 300);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const getPostsByKey = useCallback(
-    (key: string) => postsPairedByTitle!![key]!!,
-    [postsPairedByTitle]
-  );
-
   const filterIncludeKeyByUserInput = useCallback(
     (text: string) =>
       Object.keys(postsPairedByTitle!!).filter((key) =>
@@ -61,19 +57,18 @@ export default function HeaderSearchModal({
   useEffect(() => {
     if (!postsPairedByTitle || !debouncedValue) return;
 
-    const inputSplitList = toUniqueList(
-      debouncedValue.trim().toLocaleLowerCase().split(" ")
-    );
+    const inputSplitList = splitStr(debouncedValue, { uniqueOnly: true });
 
     const posts = inputSplitList
       .map(filterIncludeKeyByUserInput)
       .flat()
-      .map(getPostsByKey)
+      .map((key: string) => postsPairedByTitle[key])
       .flat();
 
     const obj: DuplicatePost = {};
 
     for (const post of posts) {
+      if (!post) continue;
       const { slug } = post;
       obj[slug] ? obj[slug].num++ : (obj[slug] = { num: 1, post: post });
     }
@@ -86,12 +81,7 @@ export default function HeaderSearchModal({
 
     setMatchPosts(postsByRank);
     setMatchTags(tags);
-  }, [
-    debouncedValue,
-    postsPairedByTitle,
-    getPostsByKey,
-    filterIncludeKeyByUserInput
-  ]);
+  }, [debouncedValue, postsPairedByTitle, filterIncludeKeyByUserInput]);
 
   useEffect(() => {
     if (isMount && inputRef.current) {
