@@ -1,13 +1,16 @@
 import PostList from "@/components/post/post-list";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import PostListSkeleton from "@/components/skeleton/post-list-skeleton";
 import { getCategories } from "@/data";
 
 type Props = {
   params: {
     category: string;
+  };
+  searchParams: {
+    tag?: string;
   };
 };
 
@@ -35,9 +38,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function PostListPage({ params }: Props) {
+export default function PostListPage({ params, searchParams }: Props) {
   const { category } = params;
   if (!category) return notFound();
+
+  const { tag } = searchParams;
+  if (tag) {
+    redirect(`/posts?tag=${tag}`);
+  }
+
+  if (category === "search") {
+    redirect("/posts");
+  }
 
   return (
     <>
