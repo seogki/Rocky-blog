@@ -7,16 +7,13 @@ import Link from "next/link";
 export default function HeaderTitle() {
   const dispatch = useAppDispatch();
 
-  const closeAllDrawer = () => {
-    dispatch(closeAll());
-  };
+  // const closeAllDrawer = () => {
+  //   dispatch(closeAll());
+  // };
 
   return (
     <>
-      <Link
-        href={"/"}
-        onClick={() => closeAllDrawer()}
-      >
+      <Link href={"/"} onClick={() => dispatch(closeAll())}>
         Rocky Blog
       </Link>
     </>

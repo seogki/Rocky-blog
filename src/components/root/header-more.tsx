@@ -6,9 +6,6 @@ import MenuTabs from "@/components/menu/menu-tab-list";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import { closeDrawer, closeMore, openMore } from "@/redux/features/headerSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { AnimatePresence, motion } from "framer-motion";
-import ModalRoot from "../modal/modal-root";
-import { EnterFromBottomMotion } from "@/data/motion";
 
 export default function HeaderMore() {
   const { isMore, isDrawerOpen } = useAppSelector(({ header }) => header);

@@ -1,6 +1,6 @@
 "use client";
 
-import { splitPostsByTitle } from "@/data/split";
+import { splitPostsByTitle } from "@/data/fn";
 import useToggleScrollbar from "@/hooks/useToggleScrollbar";
 import { Post } from "@/interface/posts.interface";
 import dynamic from "next/dynamic";
