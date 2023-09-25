@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Post, PostHolder } from "@/interface/posts.interface";
+import { Post, PostNavContainer } from "@/interface/posts.interface";
 import PostBodySkeleton from "../skeleton/post-item-article-skeleton";
 import PostCreateTime from "./contents/post-create-time";
 import PostReadMinute from "./contents/post-read-minute";
@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 
 type Props = {
   category: string;
-  holder: PostHolder | undefined;
+  container: PostNavContainer | undefined;
   className?: string;
 };
 
@@ -22,14 +22,14 @@ const PostItemMore = dynamic(() => import("./post-item-more"), {
 
 export default function PostItemArticle({
   category,
-  holder,
+  container,
   className = ""
 }: Props) {
-  if (!holder || !holder?.current || holder.current === null) {
+  if (!container || !container?.current || container.current === null) {
     return <p>Post is not available</p>;
   }
 
-  const { prev, current, next } = holder;
+  const { prev, current, next } = container;
 
   return (
     <>

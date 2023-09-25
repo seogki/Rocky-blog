@@ -2,7 +2,12 @@ import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
 import { cache } from "react";
-import { Frontmatter, Post, Category } from "../interface/posts.interface";
+import {
+  Frontmatter,
+  Post,
+  Category,
+  PostNavContainer
+} from "../interface/posts.interface";
 import remarkGfm from "remark-gfm";
 import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
@@ -142,7 +147,7 @@ export const getPost = async (slug: string, categoryName: string) => {
   return posts.find((post) => post?.slug === slug);
 };
 
-export const getPostWithPrevAndNext = async (
+export const getPostNavContainer = async (
   slug: string,
   categoryName: string
 ) => {
@@ -158,5 +163,5 @@ export const getPostWithPrevAndNext = async (
     prev: postIdx - 1 >= 0 ? posts[postIdx - 1] : undefined,
     current: posts[postIdx],
     next: postIdx + 1 < posts.length ? posts[postIdx + 1] : undefined
-  };
+  } as PostNavContainer;
 };

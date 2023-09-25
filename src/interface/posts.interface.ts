@@ -18,7 +18,7 @@ export type MdxContents = ReactElement<
   string | JSXElementConstructor<any>
 >;
 
-export type PostHolder = { current?: Post; prev?: Post; next?: Post };
+export type PostNavContainer = { current?: Post; prev?: Post; next?: Post };
 
 export type Category = {
   length: number;
