@@ -15,6 +15,11 @@ const nextConfig = {
         source: "/posts/search:path*",
         destination: "/posts:path*",
         permanent: true
+      },
+      {
+        source: "/posts/search",
+        destination: "/posts",
+        permanent: true
       }
     ];
   }
