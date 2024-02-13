@@ -6,6 +6,7 @@ import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/google-analytics";
 import { ReduxProvider } from "@/redux/redux-provider";
+import GoogleAdsense from "@/components/google-adsense";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <div className="w-full h-full">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReduxProvider>
+              {/* @ts-expect-error Async Server Component */}
               <MyHeader />
               <main className="w-full min-h-[calc(100%-4rem)] p-4 pb-8 max-w-screen-xl mx-auto relative">
                 {children}
@@ -53,6 +55,7 @@ export default function RootLayout({
           data-testid="modal-root"
         />
         <GoogleAnalytics />
+        <GoogleAdsense />
         {/* analytics for vercel */}
         {/* <Analytics /> */}
       </body>
